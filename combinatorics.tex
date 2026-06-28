@@ -1,0 +1,473 @@
+\chapter{Комбинаторика}
+
+\section{Принцип Дирихле и экстремальный принцип}
+
+\subsection{Усиленный принцип Дирихле}
+\begin{itemize}
+  \item \textbf{Формулировка.} $n$ объектов в $k$ ящиков $\Rightarrow$ есть ящик с $\ge\lceil n/k\rceil$ объектами. Усреднение: $\max a_i\ge S/n$, $\min a_i\le S/n$.
+  \item \textbf{Когда.} Нужно гарантировать существование элемента или подструктуры с заданным свойством; избыток объектов над числом классов.
+  \item \textbf{Идея.} От противного: если все ящики содержат $<\lceil n/k\rceil$, сумма меньше $n$.
+\end{itemize}
+
+\subsection{Экстремальный принцип (принцип крайнего)}
+\begin{itemize}
+  \item \textbf{Формулировка.} На конечном множестве конфигураций существуют минимизирующая и максимизирующая заданную функцию. Выбрать в классе плохих конфигурацию с минимальным/максимальным значением, локально варьировать $	o$ противоречие.
+  \item \textbf{Когда.} Задачи на существование, минимальный контрпример, бесконечный спуск.
+  \item \textbf{Идея.} Функция $\Phi:\mathcal{X}\to\mathbb{R}$ на конечном $\mathcal{X}$ достигает экстремума. Изучить структуру экстремальной конфигурации.
+\end{itemize}
+
+\subsection{Теорема Эрдеша–Секереша}
+\begin{itemize}
+  \item \textbf{Формулировка.} Последовательность из $N\ge (r-1)(s-1)+1$ различных чисел содержит возрастающую длины $r$ или убывающую длины $s$. Граница точна.
+  \item \textbf{Когда.} Задачи на монотонные подпоследовательности.
+  \item \textbf{Идея.} Сопоставить каждому элементу пару (длины макс. возр. и убыв. подпосл., оканчивающихся в нём). Все пары различны $	o$ принцип Дирихле.
+\end{itemize}
+
+\subsection{Теоремы Дилуорта и Мирски}
+\begin{itemize}
+  \item \textbf{Формулировка.} В конечном poset: минимальное число цепей, покрывающих $P$, равно ширине $w(P)$ (Дилуорт). Минимальное число антицепей, покрывающих $P$, равно высоте $h(P)$ (Мирски). Следствие: $|P|\ge ab+1$ $\Rightarrow$ цепь длины $a+1$ или антицепь размера $b+1$.
+  \item \textbf{Когда.} Разбиение на цепи/антицепи, приложение к последовательностям.
+  \item \textbf{Идея.} Дилуорт: индукция по $|P|$ с выделением максимальной антицепи. Мирски: уровни по длине максимальной цепи.
+\end{itemize}
+
+\subsection{Теорема Эрдеша–Ко–Радо}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\mathcal{F}\subseteq\binom{[n]}{k}$ — пересекающееся семейство, $n\ge 2k$ $\Rightarrow$ $|\mathcal{F}|\le\binom{n-1}{k-1}$. Равенство на звезде (все $k$-множества, содержащие фиксированный элемент).
+  \item \textbf{Когда.} Пересекающиеся семейства одинакового размера.
+  \item \textbf{Идея.} Метод сдвигов Франкла или циклический аргумент Катоны.
+\end{itemize}
+
+\subsection{Неравенство Боллобаша}
+\begin{itemize}
+  \item \textbf{Формулировка.} Пары $(A_i,B_i)$ с $A_i\cap B_i=\emptyset$ и $A_i\cap B_j\ne\emptyset$ при $i\ne j$: $\sum_i\binom{|A_i|+|B_i|}{|A_i|}^{-1}\le 1$.
+  \item \textbf{Когда.} Задачи о покрытиях, пары множеств с разделением.
+  \item \textbf{Идея.} Случайный порядок; события «все $A_i$ перед $B_i$» попарно несовместны.
+\end{itemize}
+
+\subsection{Теорема Шура}
+\begin{itemize}
+  \item \textbf{Формулировка.} $N\ge S(r)$ $\Rightarrow$ любая $r$-раскраска $\{1,\dots,N\}$ содержит одноцветную $x+y=z$.
+  \item \textbf{Когда.} Аддитивные тройки, раскраски.
+  \item \textbf{Идея.} Свести к теореме Рамсея: ребро $\{i,j\}$ красится цветом $|i-j|$.
+\end{itemize}
+
+\subsection{Теорема Рамсея (биномиальная оценка)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $R(s,t)\le R(s-1,t)+R(s,t-1)$, откуда $R(s,t)\le\binom{s+t-2}{s-1}$ и $R(s,s)\le 4^{s-1}$.
+  \item \textbf{Когда.} Нижние/верхние оценки чисел Рамсея.
+  \item \textbf{Идея.} Выделить вершину с достаточным числом соседей одного цвета $	o$ индукция.
+\end{itemize}
+
+\medskip
+
+\section{Вероятностный метод}
+
+\subsection{Линейность ожидания}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\mathbb{E}[\sum X_i]=\sum\mathbb{E}[X_i]$ для любых (зависимых) интегрируемых $X_i$. Главный приём: $X=\sum\mathbb{1}_{A_i}$, тогда $\mathbb{E}[X]=\sum P(A_i)$.
+  \item \textbf{Когда.} Любая задача, где целевую статистику можно разложить в сумму индикаторов.
+  \item \textbf{Идея.} Интеграл Лебега линеен.
+\end{itemize}
+
+\subsection{Метод первого момента}
+\begin{itemize}
+  \item \textbf{Формулировка.} $X\ge 0$, $\mathbb{E}[X]<1$ $\Rightarrow$ $P(X=0)>0$ (существование). $\mathbb{E}[X]>0$ $\Rightarrow$ $P(X\ge 1)>0$.
+  \item \textbf{Когда.} Доказательство существования объекта с положительной вероятностью.
+  \item \textbf{Идея.} Неравенство Маркова.
+\end{itemize}
+
+\subsection{Метод изменения/удаления (alteration)}
+\begin{itemize}
+  \item \textbf{Формулировка.} Случайная конструкция $C$ почти хороша. Удаляем дефекты. Получаем чистую конструкцию размера $\ge\mathbb{E}[|C|]-\mathbb{E}[Y]$, где $Y$ — число дефектов.
+  \item \textbf{Когда.} Прямая случайная конструкция даёт много дефектов, но каждый дефект устраним удалением $O(1)$ элементов.
+  \item \textbf{Идея.} Линейность + удаление.
+\end{itemize}
+
+\subsection{Локальная лемма Ловаса (LLL)}
+\begin{itemize}
+  \item \textbf{Формулировка.} События $A_i$, $P(A_i)\le p$, каждое зависит от $\le d$ других, $ep(d+1)\le 1$ $\Rightarrow$ $P(\bigcap\overline{A_i})>0$.
+  \item \textbf{Когда.} Редкие зависимости, не перекрывающиеся события, «локальные» конфликты.
+  \item \textbf{Идея.} Индукция: $P(\overline{A_i}\mid\bigcap_{j\in S}\overline{A_j})\ge 1-ep$ для $i\notin S$.
+\end{itemize}
+
+\subsection{Метод второго момента}
+\begin{itemize}
+  \item \textbf{Формулировка.} $P(X=0)\le\frac{\mathrm{Var}(X)}{(\mathbb{E}[X])^2}$. Если $\mathrm{Var}(X)=o((\mathbb{E}[X])^2)$, то $X>0$ с вероятностью $\to 1$.
+  \item \textbf{Когда.} Нужна концентрация, а не просто существование.
+  \item \textbf{Идея.} Коши–Буняковский: $(\mathbb{E}[X])^2\le\mathbb{E}[X^2]P(X>0)$.
+\end{itemize}
+
+\subsection{Случайная нижняя оценка чисел Рамсея}
+\begin{itemize}
+  \item \textbf{Формулировка.} $R(k,k) > 2^{k/2}$ для $k\ge 3$ (Эрдёш, 1947). Улучшение удалением: $\frac{k}{e\sqrt{2}}2^{k/2}$.
+  \item \textbf{Когда.} Нижние оценки экстремальных чисел.
+  \item \textbf{Идея.} Случайная 2-раскраска $K_n$, $X$ — число монохромных $K_k$. $\mathbb{E}[X]=\binom{n}{k}2^{1-\binom{k}{2}}<1$ $\Rightarrow$ $R(k,k)>n$.
+\end{itemize}
+
+\subsection{Свободные от сумм множества (Эрдёш)}
+\begin{itemize}
+  \item \textbf{Формулировка.} Любое $A\subset\mathbb{Z}_{>0}$, $|A|=n$, содержит sum-free $B$ с $|B|>n/3$.
+  \item \textbf{Когда.} Подмножества целых чисел без решений $x+y=z$.
+  \item \textbf{Идея.} $B_x=\{a\in A:\{ax\}\in(1/3,2/3)\}$ для $x\in[0,1]$; $\mathbb{E}|B_x|=n/3$.
+\end{itemize}
+
+\subsection{Неравенство Чернова–Хеффдинга}
+\begin{itemize}
+  \item \textbf{Формулировка.} $X_i\in[a_i,b_i]$ независимы, $S=\sum X_i$: $P(|S-\mathbb{E}[S]|\ge t)\le 2\exp(-2t^2/\sum(b_i-a_i)^2)$.
+  \item \textbf{Когда.} Концентрация суммы независимых случайных величин.
+  \item \textbf{Идея.} Экспоненциальный момент + неравенство Маркова.
+\end{itemize}
+
+\medskip
+
+\section{Биективные аргументы и двойной счёт}
+
+\subsection{Двойной счёт (матрица инцидентности)}
+\begin{itemize}
+  \item \textbf{Формулировка.} Для $R\subseteq X\times Y$: $|R|=\sum_x|\{y\}|=\sum_y|\{x\}|$. Следствия: $\sum\deg v=2|E|$, тождество Вандермонда, хоккейная клюшка.
+  \item \textbf{Когда.} Любая задача, где одно множество можно подсчитать двумя способами.
+  \item \textbf{Идея.} Подсчёт пар $(x,y)$.
+\end{itemize}
+
+\subsection{Инволюция со сменой знака}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\iota:X\to X$ — инволюция, меняющая знак вне неподвижных точек $\Rightarrow$ $|X^+|-|X^-|=|\mathrm{Fix}\cap X^+|-|\mathrm{Fix}\cap X^-|$.
+  \item \textbf{Когда.} Доказательство тождеств, сокращение парных слагаемых.
+  \item \textbf{Идея.} Пары $\{x,\iota(x)\}$ сокращаются; остаётся вклад неподвижных точек.
+\end{itemize}
+
+\subsection{Неравенство LYM и теорема Шпернера}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\mathcal{F}\subseteq 2^{[n]}$ — антицепь $\Rightarrow$ $\sum_{F\in\mathcal{F}}1/\binom{n}{|F|}\le 1$. Следствие: $|\mathcal{F}|\le\binom{n}{\lfloor n/2\rfloor}$.
+  \item \textbf{Когда.} Максимальная антицепь, семейства по включению.
+  \item \textbf{Идея.} Двойной счёт максимальных цепочек: каждая цепочка содержит $\le 1$ элемент антицепи.
+\end{itemize}
+
+\subsection{Лемма Бернсайда}
+\begin{itemize}
+  \item \textbf{Формулировка.} Конечная группа $G$ действует на $X$ $\Rightarrow$ число орбит $=\frac{1}{|G|}\sum_{g\in G}|X^g|$.
+  \item \textbf{Когда.} Подсчёт конфигураций с точностью до симметрии.
+  \item \textbf{Идея.} Двойной счёт пар $(g,x)$ с $gx=x$.
+\end{itemize}
+
+\subsection{Теорема Холла (о паросочетаниях)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $A_1,\dots,A_n$ имеют СДР $\iff$ для всех $S\subseteq[n]$: $|\bigcup_{i\in S}A_i|\ge|S|$.
+  \item \textbf{Когда.} Существование различных представителей, паросочетания в двудольных графах.
+  \item \textbf{Идея.} Индукция: либо везде строгий запас, либо есть критическое $S$ с равенством.
+\end{itemize}
+
+\subsection{Формула Кэли и код Прюфера}
+\begin{itemize}
+  \item \textbf{Формулировка.} Число помеченных деревьев на $n$ вершинах $=n^{n-2}$.
+  \item \textbf{Когда.} Подсчёт деревьев, комбинаторные биекции.
+  \item \textbf{Идея.} Биекция с последовательностями длины $n-2$: удалять лист с минимальной меткой, записывать его соседа.
+\end{itemize}
+
+\subsection{Циклическая лемма (Дворецкий–Моцкин)}
+\begin{itemize}
+  \item \textbf{Формулировка.} В круговой последовательности из $a$ единиц и $b$ минус единиц с $a-b=k>0$ ровно $k$ сдвигов дают все частичные суммы строго положительными.
+  \item \textbf{Когда.} Пути Дика ($k=1$), числа Каталана, задача об избирательном бюллетене.
+  \item \textbf{Идея.} Единственный сдвиг из минимума частичной суммы делает все префиксы положительными.
+\end{itemize}
+
+\subsection{Лемма Линдстрёма–Гесселя–Вьенно (LGV)}
+\begin{itemize}
+  \item \textbf{Формулировка.} В ациклическом орграфе $\det[e(A_i,B_j)]=\sum_{\text{непересек. пути}}\operatorname{sgn}(\sigma)\prod w(P_i)$, где $e(A_i,B_j)$ — сумма весов путей.
+  \item \textbf{Когда.} Счёт непересекающихся путей, определители через комбинаторику.
+  \item \textbf{Идея.} Знакообращающая инволюция на пересекающихся наборах путей.
+\end{itemize}
+
+\medskip
+
+\section{Линейно-алгебраическая комбинаторика}
+
+\subsection{Аргумент размерности}
+\begin{itemize}
+  \item \textbf{Формулировка.} $v_1,\dots,v_m$ линейно независимы в $V$ размерности $n$ $\Rightarrow$ $m\le n$. Выбор поля критичен.
+  \item \textbf{Когда.} Оценки на число объектов через линейную независимость их векторов/полиномов.
+  \item \textbf{Идея.} $\dim\mathrm{span}\{v_i\}=m\le\dim V$.
+\end{itemize}
+
+\subsection{Диагональный признак независимости}
+\begin{itemize}
+  \item \textbf{Формулировка.} Если $f_i(x_j)\ne 0$ при $i=j$ и $=0$ при $i\ne j$, то $f_i$ линейно независимы.
+  \item \textbf{Когда.} Доказательство независимости функций/полиномов.
+  \item \textbf{Идея.} Подстановка $x_1$ даёт $c_1=0$, индукция.
+\end{itemize}
+
+\subsection{Oddtown (нечётный город)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $A_i\subseteq[n]$, $|A_i|$ нечётны, $|A_i\cap A_j|$ чётны при $i\ne j$ $\Rightarrow$ $m\le n$.
+  \item \textbf{Когда.} Семейства с чётными/нечётными пересечениями.
+  \item \textbf{Идея.} Над $\mathbb{F}_2$ характеристические векторы ортонормированы $\Rightarrow$ независимы.
+\end{itemize}
+
+\subsection{Eventown (чётный город)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $|A_i|$ и $|A_i\cap A_j|$ чётны для всех $i,j$ $\Rightarrow$ $m\le 2^{\lfloor n/2\rfloor}$.
+  \item \textbf{Когда.} Все пересечения чётны (включая диагональ).
+  \item \textbf{Идея.} Подпространство $\mathrm{span}\{v_{A_i}\}$ изотропно по стандартной форме $\mathbb{F}_2^n$ $\Rightarrow$ $\dim\le\lfloor n/2\rfloor$.
+\end{itemize}
+
+\subsection{Неравенство Фишера}
+\begin{itemize}
+  \item \textbf{Формулировка.} $A_i\subseteq[n]$, $|A_i\cap A_j|=\lambda\ge 1$ при $i\ne j$ $\Rightarrow$ $m\le n$.
+  \item \textbf{Когда.} Блок-дизайны, семейства с постоянным пересечением.
+  \item \textbf{Идея.} Матрица Грама $D+\lambda J$ положительно определена $\Rightarrow$ $\mathrm{rank}=m\le n$.
+\end{itemize}
+
+\subsection{Теорема Рэя-Чаудхури–Уилсона (Франкла–Уилсона)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\mathcal{F}\subseteq\binom{[n]}{k}$, $|A_i\cap A_j|\in L$, $|L|=s$, $k\notin L$ $\Rightarrow$ $m\le\binom{n}{s}$.
+  \item \textbf{Когда.} Ограниченные пересечения, модулярные условия.
+  \item \textbf{Идея.} Полиномы $f_i(x)=\prod_{\ell\in L}(\langle x,v_{A_i}\rangle-\ell)$ линейно независимы, степень $\le s$.
+\end{itemize}
+
+\subsection{Комбинаторный Nullstellensatz (Алон)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $f\in\mathbb{F}[x_1,\dots,x_n]$ степени $d=\sum t_i$, коэффициент при $\prod x_i^{t_i}\ne 0$. $S_i\subseteq\mathbb{F}$, $|S_i|>t_i$ $\Rightarrow$ $\exists s\in\prod S_i$ с $f(s)\ne 0$.
+  \item \textbf{Когда.} Существование раскраски или конфигурации с ненулевым полиномом.
+  \item \textbf{Идея.} Если $f$ обнуляется на всём $\prod S_i$, то он в идеале, порождённом $\prod_{s\in S_i}(x_i-s)$.
+\end{itemize}
+
+\subsection{Множества двух расстояний (Блокхёйс)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $S\subset\mathbb{R}^n$ с ровно двумя значениями попарных расстояний $\Rightarrow$ $|S|\le\binom{n+2}{2}$.
+  \item \textbf{Когда.} Экстремальные конфигурации точек, две дистанции.
+  \item \textbf{Идея.} Полиномы $f_i(x)=(\|x-v_i\|^2-a^2)(\|x-v_i\|^2-b^2)$ независимы; живут в пространстве размерности $\binom{n+2}{2}$.
+\end{itemize}
+
+\medskip
+
+\section{Производящие функции (OGF и EGF)}
+
+\subsection{Основные операции}
+\begin{itemize}
+  \item \textbf{OGF.} $A(x)=\sum a_n x^n$: $AB$ — свёртка, $x A$ — сдвиг, $A'$ — $ (n+1)a_{n+1}$, $A/(1-x)$ — частичные суммы.
+  \item \textbf{EGF.} $\hat A(x)=\sum a_n x^n/n!$: произведение даёт биномиальную свёртку $\sum\binom{n}{k}a_k b_{n-k}$, производная — $a_{n+1}$.
+  \item \textbf{Когда.} Работа с рекуррентами, суммами, перечислением.
+\end{itemize}
+
+\subsection{Фильтр по корням из единицы}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\sum_{n\equiv r\pmod m}a_n x^n=\frac1m\sum_{j=0}^{m-1}\omega^{-jr}A(\omega^j x)$ с $\omega=e^{2\pi i/m}$. При $x=1$: сумма подпоследовательности.
+  \item \textbf{Когда.} Суммы по индексам, кратным $m$, делимость на $m$.
+  \item \textbf{Идея.} ДПФ на $\mathbb{Z}/m$.
+\end{itemize}
+
+\subsection{Линейные рекурренты с постоянными коэффициентами}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\sum c_i a_{n+i}=0$ $\Rightarrow$ $A(x)=P(x)/Q(x)$, где $Q(x)=c_k+\dots+c_0x^k=\prod(1-\alpha_j x)^{m_j}$. Тогда $a_n=\sum Q_j(n)\alpha_j^n$.
+  \item \textbf{Когда.} Любая линейная рекуррента (Фибоначчи и т.д.).
+  \item \textbf{Идея.} Умножить рекурренту на $x^n$ и просуммировать $	o$ рациональная OGF.
+\end{itemize}
+
+\subsection{Числа Каталана}
+\begin{itemize}
+  \item \textbf{Формулировка.} $C_{n+1}=\sum C_k C_{n-k}$, $C_0=1$ $\Rightarrow$ $C(x)=1+x C(x)^2$, $C(x)=\frac{1-\sqrt{1-4x}}{2x}$, $C_n=\frac1{n+1}\binom{2n}{n}$.
+  \item \textbf{Когда.} Пути Дика, бинарные деревья, скобки, триангуляции.
+  \item \textbf{Идея.} Декомпозиция через первое возвращение в ноль.
+\end{itemize}
+
+\subsection{Формула обращения Лагранжа}
+\begin{itemize}
+  \item \textbf{Формулировка.} $w=x\phi(w)$, $\phi(0)\ne 0$ $\Rightarrow$ $[x^n]H(w)=\frac1n[t^{n-1}] H'(t)\phi(t)^n$. $H(t)=t$: $[x^n]w=\frac1n[t^{n-1}]\phi(t)^n$.
+  \item \textbf{Когда.} Неявные уравнения, деревья, числа Фусса–Каталана.
+  \item \textbf{Идея.} Формальный вычет.
+\end{itemize}
+
+\subsection{Экспоненциальная формула}
+\begin{itemize}
+  \item \textbf{Формулировка.} Помеченный класс $\mathcal{F}$ = неупорядоченное разбиение носителя на $\mathcal{C}$-блоки $\Rightarrow$ $\hat F(x)=\exp(\hat C(x))$. Для $k$ компонент: $[x^n/n!]\hat C(x)^k/k!$.
+  \item \textbf{Когда.} Разбиения множеств, числа Белла, Стирлинга.
+  \item \textbf{Идея.} Биномиальная свёртка + симметризация $k!$.
+\end{itemize}
+
+\subsection{Эйлерово произведение для разбиений}
+\begin{itemize}
+  \item \textbf{Формулировка.} $P(q)=\sum p(n)q^n=\prod_{k\ge1}\frac1{1-q^k}$. С различными частями: $\prod(1+q^k)$. С нечётными: $\prod\frac1{1-q^{2k-1}}$.
+  \item \textbf{Когда.} Разбиения чисел.
+  \item \textbf{Идея.} Множитель $1/(1-q^k)=1+q^k+q^{2k}+\dots$ кодирует кратность части $k$.
+\end{itemize}
+
+\subsection{Метод змеиного масла (snake oil)}
+\begin{itemize}
+  \item \textbf{Формулировка.} Для суммы $S(n)=\sum_k f(n,k)$ образуем $F(x)=\sum S(n)x^n$, меняем порядок суммирования, вычисляем внутреннюю сумму.
+  \item \textbf{Когда.} Закрытая форма для сумм с биномиальными коэффициентами.
+  \item \textbf{Идея.} Смена порядка суммирования в формальных рядах.
+\end{itemize}
+
+\medskip
+
+\section{Рекуррентные соотношения и закрытые формы}
+
+\subsection{Замкнутая форма линейной рекурренты}
+\begin{itemize}
+  \item \textbf{Формулировка.} $a_n=\sum c_i a_{n-i}$, корни $\lambda_i$ кратности $m_i$ $\Rightarrow$ $a_n=\sum P_i(n)\lambda_i^n$, $\deg P_i\le m_i-1$. Неоднородный случай: частное решение $n^s R(n)\mu^n$ с $s$ — кратность $\mu$ как корня характеристического.
+  \item \textbf{Когда.} Любая линейная рекуррента.
+  \item \textbf{Идея.} Пространство решений размерности $k$; $n^j\lambda_i^n$ — базис.
+\end{itemize}
+
+\subsection{Сопровождающая матрица и степени}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\mathbf v_n=C\mathbf v_{n-1}$, $\chi_C(\lambda)=\chi(\lambda)$. $C^n$ вычисляется за $O(\log n)$ умножений $k\times k$.
+  \item \textbf{Когда.} Быстрое вычисление $n$-го члена, тождества (Кассини).
+  \item \textbf{Идея.} $C$ — матрица сдвига; теорема Гамильтона–Кэли.
+\end{itemize}
+
+\subsection{Рациональность OGF}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\{a_n\}$ конечно-рекуррентна $\iff$ $A(x)=P(x)/Q(x)$, $\deg P<\deg Q$. $\chi(\lambda)=\lambda^k Q(1/\lambda)$.
+  \item \textbf{Когда.} Связь рекуррент и производящих функций.
+  \item \textbf{Идея.} Умножение $A(x)$ на $1-c_1x-\dots-c_k x^k$ обнуляет коэффициенты выше $(k-1)$.
+\end{itemize}
+
+\subsection{Числа беспорядков (derangements)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $D_n=n!\sum_{k=0}^n(-1)^k/k!$, $D_n=nD_{n-1}+(-1)^n$, $D_n=(n-1)(D_{n-1}+D_{n-2})$. ЭПФ: $e^{-x}/(1-x)$.
+  \item \textbf{Когда.} Перестановки без неподвижных точек.
+  \item \textbf{Идея.} Включения-исключения по множеству неподвижных точек.
+\end{itemize}
+
+\subsection{Числа Стирлинга 2-го рода}
+\begin{itemize}
+  \item \textbf{Формулировка.} $S(n,k)=kS(n-1,k)+S(n-1,k-1)$. $S(n,k)=\frac1{k!}\sum_{j=0}^k(-1)^j\binom{k}{j}(k-j)^n$. ЭПФ: $(e^x-1)^k/k!$.
+  \item \textbf{Когда.} Разбиения $n$-множества на $k$ блоков, сюръекции.
+  \item \textbf{Идея.} Биективная рекуррента (отдельный блок или подложить в существующий).
+\end{itemize}
+
+\subsection{Тождества Фибоначчи (Кассини, Каталан, д'Окань)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $F_{n-1}F_{n+1}-F_n^2=(-1)^n$, $F_n^2-F_{n-r}F_{n+r}=(-1)^{n-r}F_r^2$, $F_{m+n}=F_mF_{n+1}+F_{m-1}F_n$. Следствие: $\gcd(F_m,F_n)=F_{\gcd(m,n)}$.
+  \item \textbf{Идея.} Сопровождающая матрица $A^n=\begin{pmatrix}F_{n+1}&F_n\\F_n&F_{n-1}\end{pmatrix}$, $\det A^n=(-1)^n$.
+\end{itemize}
+
+\subsection{Теорема Акра–Бацци (Akra–Bazzi)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $T(n)=g(n)+\sum a_i T(b_i n+h_i(n))$, $\sum a_i b_i^p=1$ $\Rightarrow$ $T(n)=\Theta(n^p(1+\int_1^n g(u)/u^{p+1}du))$.
+  \item \textbf{Когда.} Рекурренты «разделяй-и-властвуй» с подзадачами разных размеров.
+  \item \textbf{Идея.} Преобразование Меллина.
+\end{itemize}
+
+\medskip
+
+\section{Теория графов}
+
+\subsection{Характеризации дерева}
+\begin{itemize}
+  \item \textbf{Формулировка.} Для $G$ на $n$ вершинах эквивалентны: (1) дерево, (2) связен + $|E|=n-1$, (3) ацикличен + $|E|=n-1$, (4) единственный путь между любыми вершинами, (5) удаление любого ребра разрывает, (6) добавление ребра даёт ровно один цикл.
+  \item \textbf{Когда.} Базовые аргументы о связности.
+\end{itemize}
+
+\subsection{Теорема Кирхгофа (matrix-tree)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\tau(G)=\det\widetilde L_{ii}=\frac1n\lambda_2\cdots\lambda_n$, где $L=D-A$ — лапласиан, $\lambda_i$ — собственные значения. Для $K_n$: $\tau=n^{n-2}$ (Кэли).
+  \item \textbf{Когда.} Число остовных деревьев.
+  \item \textbf{Идея.} $L=MM^\top$, формула Коши–Бине: $\det\widetilde L_{ii}=\sum\det(\widetilde M_S)^2$, ненулевой только для остовных деревьев.
+\end{itemize}
+
+\subsection{Эйлеров обход (теорема Эйлера)}
+\begin{itemize}
+  \item \textbf{Формулировка.} Связный граф имеет эйлеров цикл $\iff$ все степени чётны. Путь: ровно 0 или 2 нечётных. Для орграфа: $\deg^+=\deg^-$ во всех вершинах + слабая связность.
+  \item \textbf{Когда.} Задачи на покрытие рёбер, обходы.
+  \item \textbf{Идея.} Необходимость — очевидна. Достаточность — алгоритм Хирхольцера (вшивание циклов).
+\end{itemize}
+
+\subsection{Спектры стандартных графов}
+\begin{itemize}
+  \item \textbf{Формулировка.} $K_n$: $n-1$ (1), $-1$ ($n-1$). $K_{m,n}$: $\pm\sqrt{mn}$, $0$ ($m+n-2$). $C_n$: $2\cos(2\pi k/n)$. $P_n$: $2\cos(\pi k/(n+1))$. $Q_d$: $d-2k$ с кратностью $\binom{d}{k}$.
+  \item \textbf{Когда.} Вычисления через спектр, алгебраическая теория графов.
+\end{itemize}
+
+\subsection{Граница Хоффмана для $\alpha(G)$}
+\begin{itemize}
+  \item \textbf{Формулировка.} $G$ — $k$-регулярный на $n$ вершинах, $\lambda_n$ — минимальное собственное значение $\Rightarrow$ $\alpha(G)\le\frac{-n\lambda_n}{k-\lambda_n}$.
+  \item \textbf{Когда.} Верхняя оценка числа независимости регулярного графа.
+  \item \textbf{Идея.} Использовать матрицу $M=A-\lambda_n I+\frac{\lambda_n-k}{n}J$.
+\end{itemize}
+
+\subsection{Граница Уилфа для $\chi(G)$}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\chi(G)\le 1+\lambda_1(G)$.
+  \item \textbf{Когда.} Верхняя оценка хроматического числа.
+  \item \textbf{Идея.} Жадная раскраска в порядке удаления вершины с минимальной степенью.
+\end{itemize}
+
+\subsection{Теорема BEST (подсчёт эйлеровых обходов)}
+\begin{itemize}
+  \item \textbf{Формулировка.} Для эйлерова орграфа: $ec(G)=t_w(G)\cdot\prod_v(\deg^+(v)-1)!$, где $t_w(G)$ — число arborescences с корнем $w$.
+  \item \textbf{Когда.} Подсчёт эйлеровых обходов, де-брёйновские последовательности.
+  \item \textbf{Идея.} Биекция: arborescence + порядок исходящих рёбер.
+\end{itemize}
+
+\subsection{Условия гамильтоновости (Дирак, Оре, Хватал–Эрдёш)}
+\begin{itemize}
+  \item \textbf{Формулировки.} Дирак: $\delta\ge n/2$ $\Rightarrow$ гамильтонов. Оре: $\deg u+\deg v\ge n$ для любых несмежных $u,v$ $\Rightarrow$ гамильтонов. Хватал–Эрдёш: $\kappa(G)\ge\alpha(G)$ $\Rightarrow$ гамильтонов.
+  \item \textbf{Когда.} Проверка гамильтоновости плотного графа.
+  \item \textbf{Идея.} Замыкание Бонди–Хватала: добавлять рёбра, пока условие Оре выполняется; итог — $K_n$.
+\end{itemize}
+
+\subsection{Теорема Холла (повторение, см. 3.5)}
+\begin{itemize}
+  \item \textbf{Формулировка.} Двудольный граф $G=(X\cup Y,E)$ имеет паросочетание, насыщающее $X$ $\iff$ $|N(S)|\ge|S|$ для всех $S\subseteq X$.
+  \item \textbf{Когда.} Паросочетания в двудольных графах.
+  \item \textbf{Идея.} Расширяющие пути.
+\end{itemize}
+
+\medskip
+
+\section{Формула включений-исключений и обращение Мёбиуса}
+
+\subsection{Формула включений-исключений (ФВИ)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $|\bigcup A_i|=\sum_{k=1}^n(-1)^{k+1}S_k$, $|\bigcap\overline{A_i}|=\sum_{k=0}^n(-1)^k S_k$, где $S_k=\sum_{|I|=k}|\bigcap_{i\in I}A_i|$. Работает для меры/вероятности.
+  \item \textbf{Когда.} Подсчёт объединения, пересечения дополнений, просеивание.
+  \item \textbf{Идея.} $\mathbb{1}_{\bigcap\overline{A_i}}=\prod(1-\mathbb{1}_{A_i})$, раскрытие скобок.
+\end{itemize}
+
+\subsection{Неравенства Бонферрони}
+\begin{itemize}
+  \item \textbf{Формулировка.} Чётное усечение $m=2r$: $|\bigcup A_i|\ge\sum_{k=1}^{2r}(-1)^{k+1}S_k$. Нечётное $m=2r+1$: $|\bigcup A_i|\le\sum_{k=1}^{2r+1}(-1)^{k+1}S_k$.
+  \item \textbf{Когда.} Приближение, когда точная сумма не сворачивается.
+  \item \textbf{Идея.} Частичная сумма $\sum_{k=1}^m(-1)^{k+1}\binom{j}{k}=1-(-1)^m\binom{j-1}{m}$.
+\end{itemize}
+
+\subsection{Обращение Мёбиуса}
+\begin{itemize}
+  \item \textbf{Формулировка.} На локально конечном poset: $g(y)=\sum_{x\le y}f(x)$ $\iff$ $f(y)=\sum_{x\le y}\mu(x,y)g(x)$. Булева решётка: $\mu(I,J)=(-1)^{|J\setminus I|}$. Решётка делителей: $\mu(d,n)=\mu(n/d)$.
+  \item \textbf{Когда.} Обобщение ФВИ, теория чисел, решётки.
+  \item \textbf{Идея.} Матрица $\zeta(x,y)=\mathbb{1}[x\le y]$; $\mu$ — её обратная.
+\end{itemize}
+
+\subsection{Функция Эйлера $\varphi$}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\varphi(n)=n\prod_{p\mid n}(1-1/p)=\sum_{d\mid n}\mu(d)n/d$. Обращение: $\sum_{d\mid n}\varphi(d)=n$.
+  \item \textbf{Когда.} Взаимно простые числа, круговые многочлены.
+  \item \textbf{Идея.} ФВИ по простым делителям.
+\end{itemize}
+
+\subsection{Многочлены ладей (rook polynomials)}
+\begin{itemize}
+  \item \textbf{Формулировка.} $B\subseteq[n]\times[n]$ — запрет; $r_k(B)$ — число расстановок $k$ ладей на $B$. Тогда $N(B)=\sum_{k=0}^n(-1)^k r_k(B)(n-k)!$ — число перестановок без запретов.
+  \item \textbf{Когда.} Перестановки с запрещёнными позициями.
+  \item \textbf{Идея.} ФВИ по событиям $\{\sigma(i)=j\}$ для $(i,j)\in B$.
+\end{itemize}
+
+\subsection{Хроматический многочлен}
+\begin{itemize}
+  \item \textbf{Формулировка.} $P(G,x)=\sum_{S\subseteq E}(-1)^{|S|}x^{c(V,S)}$, где $c(V,S)$ — число компонент $(V,S)$. Рекурсия удаление-стягивание: $P(G,x)=P(G\setminus e,x)-P(G/e,x)$.
+  \item \textbf{Когда.} Число правильных раскрасок графа.
+  \item \textbf{Идея.} ФВИ по рёбрам: $A_e=\{\text{концы }e\text{ одного цвета}\}$.
+\end{itemize}
+
+\subsection{Формула Райзера для перманента}
+\begin{itemize}
+  \item \textbf{Формулировка.} $\mathrm{per}(A)=(-1)^n\sum_{S\subseteq[n]}(-1)^{|S|}\prod_{i=1}^n\sum_{j\in S}a_{ij}$. Сложность $O(2^n n)$.
+  \item \textbf{Когда.} Вычисление перманента, подсчёт паросочетаний.
+  \item \textbf{Идея.} ФВИ по столбцам; остаются только биекции.
+\end{itemize}
+
+\medskip
+
+\textit{Составлено по материалам восьми разделов. Удалены конкретные ссылки на IMC/Putnam задачи, self-test и излишние примеры. Оставлена только суть — определения, формулировки, условия применимости и ключевая идея каждого метода.}

@@ -1,0 +1,455 @@
+\chapter{Вещественный анализ (одномерный)}
+
+\section{Пределы последовательностей и функций}
+
+\subsection{Теорема Штольца–Чезаро (Stolz–Cesàro)}
+
+\textit{Формулировка.} $b_n$ строго возрастает к $+\infty$ (или $a_n,b_n\to0$, $b_n$ строго убывает). Если $\displaystyle\lim_{n\to\infty}\frac{a_{n+1}-a_n}{b_{n+1}-b_n}=L$, то $\displaystyle\lim_{n\to\infty}\frac{a_n}{b_n}=L$.
+
+\textit{Когда использовать.} Пределы вида $\frac{\infty}{\infty}$ или $\frac{0}{0}$ с разностями. Вычисление $\lim \frac{\ln n}{n}$, $\lim \frac{n}{\sqrt[n]{n!}}$ и т.д.
+
+\textit{Идея.} Зажать отношение $(a_n-a_m)/(b_n-b_m)$ через inf/sup отношения разностей на хвосте.
+
+\textit{Следствия.} Среднее Чезаро: $a_n\to L\;\Rightarrow\; \frac1n\sum_{k\leq n}a_k\to L$. Геометрическое: $a_{n+1}/a_n\to L\;\Rightarrow\;\sqrt[n]{a_n}\to L$.
+
+\medskip
+
+\section{Теоремы о среднем, Тейлор, правило Лопиталя}
+
+\subsection{Ролль, Лагранж, Коши (MVT)}
+
+\textit{Формулировка.} $f,g\in C[a,b]$, дифференцируемы на $(a,b)$.
+\begin{itemize}
+  \item \textit{Ролль:} $f(a)=f(b)\;\Rightarrow\;\exists\xi\in(a,b): f'(\xi)=0$.
+  \item \textit{Лагранж:} $f(b)-f(a)=f'(\xi)(b-a)$.
+  \item \textit{Коши:} $(f(b)-f(a))g'(\xi)=(g(b)-g(a))f'(\xi)$.
+\end{itemize}
+
+\textit{Когда использовать.} Оценка приращений, доказательство существования точек с заданным свойством производной, основа для Тейлора и Лопиталя.
+
+\textit{Идея.} Ролль: Вейерштрасс + Ферма. Лагранж: Ролль для $f$ минус линейная функция. Коши: Ролль для комбинации $f,g$.
+
+\medskip
+
+\subsection{Формула Тейлора (Taylor)}
+
+\textit{Формулировка.} $f(x)=\sum_{k=0}^n\frac{f^{(k)}(a)}{k!}(x-a)^k+R_n(x)$.
+
+Формы остатка:
+\begin{itemize}
+  \item \textit{Лагранж:} $R_n=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-a)^{n+1}$.
+  \item \textit{Коши:} $R_n=\frac{f^{(n+1)}(\xi)}{n!}(x-\xi)^n(x-a)$.
+  \item \textit{Интегральная:} $R_n=\frac1{n!}\int_a^x (x-t)^n f^{(n+1)}(t)\,dt$.
+  \item \textit{Пеано:} $R_n=o((x-a)^n)$ при $x\to a$.
+\end{itemize}
+
+\textit{Когда использовать.} Оценки через производные, асимптотики, неравенства, экстремумы.
+
+\textit{Выбор формы.} Лагранж — для неравенств. Интегральная — $L^p$-оценки. Пеано — локальные асимптотики.
+
+\medskip
+
+\subsection{Правило Лопиталя (L'Hôpital)}
+
+\textit{Формулировка.} $f,g$ дифференцируемы близ $a$, $g'(x)\neq0$. Если $\lim f/g$ вида $\frac00$ или $\frac{*}{\infty}$ и $\lim f'/g'=L$, то $\lim f/g=L$.
+
+\textit{Когда использовать.} Раскрытие неопределённостей.
+
+\textit{Важно.} Необходимо существование предела $f'/g'$ (обратное неверно). Работает и для $*/\infty$ (без требования $f\to\infty$).
+
+\medskip
+
+\subsection{Теорема Дарбу}
+
+\textit{Формулировка.} Производная $f'$ (даже разрывная) обладает свойством промежуточного значения: если $f$ дифференцируема на $[a,b]$, то $f'$ принимает все значения между $f'(a)$ и $f'(b)$.
+
+\textit{Когда использовать.} Доказательство, что производная не может иметь разрывов первого рода; существование точек с заданной производной.
+
+\textit{Идея.} Свести к $f'(a)<0<f'(b)$ — тогда $f$ имеет внутренний минимум, где $f'=0$ (Ферма).
+
+\medskip
+
+\subsection{Метод вспомогательной функции}
+
+\textit{Принцип.} Чтобы доказать $\exists\xi:\Phi(\xi,f,f',\ldots)=0$, построить $g$ с $g(a)=g(b)$ (или $g(a)g(b)<0$) такую, что $g'=0\Leftrightarrow\Phi=0$, и применить Ролля.
+
+\textit{Типовые шаблоны:}
+\begin{itemize}
+  \item $f'-\lambda f=0$ $\to$ $g=f e^{-\lambda x}$
+  \item $f'+\lambda f=0$ $\to$ $g=f e^{\lambda x}$
+  \item $f'-f/x=0$ $\to$ $g=f(x)/x$
+  \item $f^{(n+1)}-f=0$ $\to$ $g=(f+f'+\cdots+f^{(n)})e^{-x}$
+\end{itemize}
+
+\medskip
+
+\section{Неравенства}
+
+\subsection{AM–GM (о средних)}
+
+\textit{Формулировка.} $\frac{x_1+\cdots+x_n}{n}\geq\sqrt[n]{x_1\cdots x_n}$ для $x_i\geq0$. Равенство при $x_1=\cdots=x_n$.
+
+Взвешенное: $\sum w_i x_i\geq\prod x_i^{w_i}$ при $\sum w_i=1$.
+
+\textit{Когда использовать.} Повсеместно в олимпиадных неравенствах.
+
+\textit{Идея.} Логарифмирование + Йенсен для $\ln$ (вогнут). Или индукция Коши «вперёд-назад».
+
+\medskip
+
+\subsection{Коши–Буняковского–Шварца (Cauchy–Schwarz)}
+
+\textit{Формулировка.} $(\sum a_i b_i)^2\leq(\sum a_i^2)(\sum b_i^2)$. Интегрально: $(\int fg)^2\leq\int f^2\int g^2$. Равенство при $a_i=\lambda b_i$.
+
+\textit{Форма Энгеля (Titu):} $\sum\frac{a_i^2}{b_i}\geq\frac{(\sum a_i)^2}{\sum b_i}$ при $b_i>0$.
+
+\textit{Когда использовать.} Сведение произведения к норме; оценка сумм и интегралов.
+
+\textit{Идея.} Квадратный трёхчлен $\sum(a_i+tb_i)^2\geq0$ имеет неотрицательный дискриминант.
+
+\medskip
+
+\subsection{Йенсен (Jensen)}
+
+\textit{Формулировка.} Для выпуклой $f$: $f(\sum w_i x_i)\leq\sum w_i f(x_i)$ при $\sum w_i=1$. Для вогнутой — обратный знак.
+
+Интегрально: $f(\int x\,d\mu)\leq\int f\,d\mu$.
+
+\textit{Когда использовать.} Любая выпуклая/вогнутая функция в неравенстве; доказательство AM–GM, Гёльдера, и др.
+
+\textit{Идея.} Опорная прямая в точке $x_0=\sum w_i x_i$: $f(x)\geq f(x_0)+c(x-x_0)$. Усреднение даёт $\sum w_i f(x_i)\geq f(x_0)$.
+
+\medskip
+
+\subsection{Гёльдер и степенное среднее (Hölder, Power mean)}
+
+\textit{Формулировка (Гёльдер).} При $1/p+1/q=1$: $\sum|a_i b_i|\leq(\sum|a_i|^p)^{1/p}(\sum|b_i|^q)^{1/q}$. Интегрально: $\|fg\|_1\leq\|f\|_p\|g\|_q$.
+
+\textit{Степенное среднее.} $M_r(x;w)=(\sum w_i x_i^r)^{1/r}$ строго возрастает по $r$ (если не все $x_i$ равны). $M_0=\prod x_i^{w_i}$.
+
+\textit{Когда использовать.} Произведение сумм; интерполяция $L^p$-норм.
+
+\textit{Идея.} Из неравенства Юнга $ab\leq a^p/p+b^q/q$ после нормировки.
+
+\medskip
+
+\subsection{Юнга (Young)}
+
+\textit{Формулировка.} $ab\leq\frac{a^p}{p}+\frac{b^q}{q}$ при $1/p+1/q=1$, $a,b\geq0$. Равенство при $a^p=b^q$.
+
+\textit{$\varepsilon$-версия:} $ab\leq\varepsilon a^p/p+\varepsilon^{-q/p}b^q/q$.
+
+\textit{Когда использовать.} Фундамент Гёльдера и Минковского; поглощение слагаемых.
+
+\textit{Идея.} Выпуклость $\exp$: $ab=\exp(\frac1p\ln a^p+\frac1q\ln b^q)\leq\frac{a^p}{p}+\frac{b^q}{q}$.
+
+\medskip
+
+\subsection{Минковский (Minkowski)}
+
+\textit{Формулировка.} $(\sum(a_i+b_i)^p)^{1/p}\leq(\sum a_i^p)^{1/p}+(\sum b_i^p)^{1/p}$ для $p\geq1$. Интегрально: $\|f+g\|_p\leq\|f\|_p+\|g\|_p$.
+
+\textit{Когда использовать.} Треугольное неравенство в $L^p$.
+
+\textit{Идея.} $\sum(a+b)^p=\sum a(a+b)^{p-1}+\sum b(a+b)^{p-1}$ + Гёльдер.
+
+\medskip
+
+\subsection{Перестановочное (Rearrangement) и Чебышёв}
+
+\textit{Формулировка.} Для $a_1\leq\cdots\leq a_n$, $b_1\leq\cdots\leq b_n$ и перестановки $\sigma$:
+$$\sum a_i b_{n+1-i}\leq\sum a_i b_{\sigma(i)}\leq\sum a_i b_i.$$
+
+\textit{Чебышёв:} $n\sum a_i b_i\geq(\sum a_i)(\sum b_i)$ для одинаково упорядоченных.
+Интегрально: $(b-a)\int_a^b fg\geq\int_a^b f\int_a^b g$ при одинаковой монотонности.
+
+\textit{Когда использовать.} Симметризация сумм; контроль смешанных произведений.
+
+\textit{Идея.} Тождество $n\sum a_i b_i-\sum a_i\sum b_i=\frac12\sum_{i,j}(a_i-a_j)(b_i-b_j)$.
+
+\medskip
+
+\subsection{Харди (Hardy)}
+
+\textit{Формулировка.} Для $p>1$, $A_n=\frac1n\sum_{k=1}^n a_k$: $\sum A_n^p\leq\bigl(\frac{p}{p-1}\bigr)^p\sum a_n^p$.
+
+Интегрально: $\int_0^\infty\bigl(\frac1x\int_0^x f\bigr)^p dx\leq\bigl(\frac{p}{p-1}\bigr)^p\int_0^\infty f^p$.
+
+\textit{Когда использовать.} Средние арифметические; оценка последовательностей через $L^p$-нормы.
+
+\textit{Идея.} Интегрирование по частям с весом $x^{1-p}$ + Гёльдер.
+
+\medskip
+
+\subsection{Карлеман (Carleman)}
+
+\textit{Формулировка.} $\sum_{n=1}^\infty (a_1\cdots a_n)^{1/n}\leq e\sum_{n=1}^\infty a_n$, $a_n\geq0$. Константа $e$ точна.
+
+\textit{Когда использовать.} Произведение в сумму; предельный случай Харди при $p\to\infty$.
+
+\textit{Идея.} Веса $c_n=(n+1)^n/n^{n-1}$ + взвешенный AM–GM + телескоп.
+
+\medskip
+
+\subsection{Карамата (Karamata, майоризация)}
+
+\textit{Формулировка.} Пусть $x_1\geq\cdots\geq x_n$, $y_1\geq\cdots\geq y_n$ и $(x)\succ(y)$ (мажорирует). Для любой выпуклой $f$: $\sum f(x_i)\geq\sum f(y_i)$.
+
+\textit{Когда использовать.} Симметричные неравенства с фиксированной суммой; экстремумы выпуклых функций.
+
+\textit{Идея.} Опорные наклоны $c_i\in\partial f(y_i)$ + преобразование Абеля.
+
+\medskip
+
+\subsection{Выпуклость: характеризации и свойства}
+
+\textit{Эквивалентные определения.} $f$ выпукла на $I$:
+\begin{enumerate}
+  \item $f(\lambda x+(1-\lambda)y)\leq\lambda f(x)+(1-\lambda)f(y)$.
+  \item Секущие монотонны: $\frac{f(b)-f(a)}{b-a}\leq\frac{f(c)-f(a)}{c-a}\leq\frac{f(c)-f(b)}{c-b}$ при $a<b<c$.
+  \item Опорная прямая в каждой внутренней точке.
+  \item $f'$ не убывает ($f''\geq0$ при $C^2$).
+\end{enumerate}
+
+\textit{Следствие.} Выпуклая на интервале непрерывна внутри, имеет односторонние производные.
+
+\medskip
+
+\subsection{Неравенство Эрмита–Адамара (Hermite–Hadamard)}
+
+\textit{Формулировка.} Для выпуклой $f$ на $[a,b]$: $f\bigl(\frac{a+b}{2}\bigr)\leq\frac1{b-a}\int_a^b f\leq\frac{f(a)+f(b)}{2}$.
+
+\textit{Когда использовать.} Оценка интеграла через значения в концах и середине.
+
+\medskip
+
+\subsection{Неравенство Шура (Schur) и SOS}
+
+\textit{Формулировка (Шур).} $x^t(x-y)(x-z)+y^t(y-z)(y-x)+z^t(z-x)(z-y)\geq0$ при $x,y,z\geq0$, $t\geq0$. Чаще всего $t=1,2$.
+
+\textit{Метод SOS.} Представить симметричную форму как $\sum_{i<j}(x_i-x_j)^2 Q_{ij}$ с $Q_{ij}\geq0$.
+
+\medskip
+
+\subsection{Неравенство Штеффенсена (Steffensen)}
+
+\textit{Формулировка.} $f$ убывает, $0\leq g\leq1$, $\lambda=\int_a^b g$. Тогда $\int_{b-\lambda}^b f\leq\int_a^b fg\leq\int_a^{a+\lambda} f$.
+
+\medskip
+
+\section{Функциональные уравнения на $\mathbb{R}$}
+
+\subsection{Уравнение Коши (аддитивное)}
+
+\textit{Утверждение.} $f(x+y)=f(x)+f(y)$. При любой регулярности (непрерывность в точке, монотонность, ограниченность на множестве положительной меры, измеримость, свойство Дарбу): $f(x)=cx$, $c=f(1)$.
+
+\textit{Без регулярности.} Существуют разрывные аддитивные функции (через базис Гамеля). Их график плотен в $\mathbb{R}^2$.
+
+\textit{Идея.} Из уравнения: $f(qx)=qf(x)$ для $q\in\mathbb{Q}$. Регулярность + теорема Штейнгауза $\to$ локальная ограниченность $\to$ непрерывность $\to$ $f(x)=cx$.
+
+\medskip
+
+\subsection{Уравнения-спутники Коши}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Уравнение & Решение \\
+\hline
+$f(x+y)=f(x)f(y)$ & $f\equiv0$ или $f(x)=e^{cx}$ \\
+$f(xy)=f(x)+f(y)$ на $\mathbb{R}_{>0}$ & $f(x)=c\ln x$ \\
+$f(xy)=f(x)f(y)$ на $\mathbb{R}_{>0}$, $f>0$ & $f(x)=x^c$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textit{Метод.} Сведение к Коши через $\ln$ или $\exp$.
+
+\medskip
+
+\subsection{Уравнение Йенсена}
+
+\textit{Утверждение.} $f\bigl(\frac{x+y}{2}\bigr)=\frac{f(x)+f(y)}{2}$. При непрерывности: $f(x)=ax+b$.
+
+\textit{Идея.} $g(x)=f(x)-f(0)$. Подстановка $y=0$ даёт $g(x/2)=g(x)/2$, затем $g(x+y)=g(x)+g(y)$ — Коши.
+
+\medskip
+
+\subsection{Уравнение Даламбера (косинусное)}
+
+\textit{Утверждение.} $f(x+y)+f(x-y)=2f(x)f(y)$, $f\not\equiv0$. При непрерывности: $f(x)=\cos(\alpha x)$ или $f(x)=\cosh(\alpha x)$. $f(0)=1$.
+
+\textit{Идея.} Чётность; дифференцирование по $y$ при $y=0$ даёт $f''=cf$.
+
+\medskip
+
+\subsection{Квадратичное уравнение}
+
+\textit{Утверждение.} $f(x+y)+f(x-y)=2f(x)+2f(y)$. При непрерывности: $f(x)=cx^2$.
+
+\textit{Идея.} $f(0)=0$, $f(nx)=n^2 f(x)$, $f(qx)=q^2 f(x)$ для $q\in\mathbb{Q}$. Непрерывность $\to$ $f(x)=cx^2$.
+
+\medskip
+
+\subsection{Приёмы: подстановки, сдвиг, сжатие}
+
+\textit{Подстановки.} $x=y=0$ (найти $f(0)$), $y=x$ (связь $f(2x)$ с $f(x)$), $y=-x$ (чётность), $y=$ корень (изолировать слагаемое), симметрия $P(x,y)$ и $P(y,x)$.
+
+\textit{Усиление сдвигом.} Из $f(x+a)\leq f(x)-c$ итерация даёт $f(x+na)\to-\infty$ — противоречие с $f\geq0$ или ограниченностью.
+
+\textit{Сжатие.} $|f(x)-f(y)|\leq c\cdot q^n$, $q<1$, для всех $n$ $\to$ $f\equiv\text{const}$.
+
+\medskip
+
+\section{Lipschitz, сжатия, неподвижные точки}
+
+\subsection{Принцип сжимающих отображений (Banach)}
+
+\textit{Формулировка.} $X$ полно, $T:X\to X$, $d(Tx,Ty)\leq k\,d(x,y)$ с $k<1$. Тогда: единственная неподвижная точка $x^*$, итерации $x_{n+1}=Tx_n$ сходятся со скоростью $d(x_n,x^*)\leq\frac{k^n}{1-k}d(x_1,x_0)$.
+
+\textit{Апостериорная оценка.} $d(x_n,x^*)\leq\frac{k}{1-k}d(x_n,x_{n-1})$.
+
+\textit{Когда использовать.} Существование и единственность решений уравнений/ОДУ/интегральных уравнений.
+
+\medskip
+
+\subsection{Сжатие в степени}
+
+\textit{Формулировка.} Если $T^n$ — сжатие для некоторого $n\geq1$, то $T$ имеет единственную неподвижную точку (сам $T$ не обязан быть сжатием).
+
+\medskip
+
+\subsection{Теорема Эдельштейна}
+
+\textit{Формулировка.} $X$ компактно, $T:X\to X$, $d(Tx,Ty)<d(x,y)$ для $x\neq y$ $\Rightarrow$ единственная неподвижная точка, итерации сходятся (без геометрической оценки).
+
+\medskip
+
+\section{Гамма-функция, бета-функция, специальные интегралы}
+
+\subsection{Гамма-функция}
+
+\textit{Определение.} $\Gamma(s)=\int_0^\infty t^{s-1}e^{-t}\,dt$ ($\operatorname{Re}s>0$). $\Gamma(s+1)=s\Gamma(s)$. $\Gamma(n+1)=n!$, $\Gamma(1/2)=\sqrt\pi$.
+
+\subsection{Бета-функция}
+
+\textit{Определение и формы.} $B(p,q)=\int_0^1 t^{p-1}(1-t)^{q-1}\,dt=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}$.
+
+Тригонометрическая: $B(p,q)=2\int_0^{\pi/2}\sin^{2p-1}\theta\cos^{2q-1}\theta\,d\theta$.
+
+Рациональная: $B(p,q)=\int_0^\infty\frac{u^{p-1}}{(1+u)^{p+q}}\,du$.
+
+\medskip
+
+\subsection{Формула отражения Эйлера}
+
+\textit{Формулировка.} $\Gamma(x)\Gamma(1-x)=\frac{\pi}{\sin\pi x}$ для $x\notin\mathbb{Z}$. Следствие: $B(x,1-x)=\pi/\sin\pi x$.
+
+\medskip
+
+\subsection{Формула удвоения Лежандра}
+
+\textit{Формулировка.} $\Gamma(z)\Gamma(z+\tfrac12)=2^{1-2z}\sqrt\pi\,\Gamma(2z)$.
+
+\medskip
+
+\subsection{Интеграл Фруллани (Frullani)}
+
+\textit{Формулировка.} $f$ непрерывна, $A=f(0^+)$, $B=\lim_{x\to\infty}f(x)$. Тогда для $a,b>0$:
+$$\int_0^\infty\frac{f(ax)-f(bx)}{x}\,dx=(A-B)\ln\frac{b}{a}.$$
+
+\medskip
+
+\subsection{Дифференцирование по параметру (Лейбниц/Фейнман)}
+
+\textit{Формулировка.} $\frac{d}{dt}\int_{a(t)}^{b(t)} f(x,t)\,dx = f(b(t),t)\,b'(t)-f(a(t),t)\,a'(t)+\int_{a(t)}^{b(t)}\partial_t f(x,t)\,dx$.
+
+\medskip
+
+\subsection{Периодическое усреднение}
+
+\textit{Формулировка.} $f\in C[a,b]$, $g$ периодична с периодом $T$:
+$$\int_a^b f(x)g(nx)\,dx\xrightarrow{n\to\infty}\frac1T\int_0^T g\cdot\int_a^b f.$$
+
+\textit{Следствие (Риман–Лебег).} $\int_a^b f(x)e^{inx}\,dx\to0$.
+
+\medskip
+
+\subsection{Интегралы Валлиса (Wallis)}
+
+\textit{Формулировка.} $W_n=\int_0^{\pi/2}\sin^n x\,dx$. Рекуррентность $W_n=\frac{n-1}{n}W_{n-2}$ даёт явные формулы. Асимптотика: $W_n\sim\sqrt{\pi/(2n)}$.
+
+\medskip
+
+\subsection{Симметрия и инверсия}
+
+\textit{Симметрия $x\mapsto a+b-x$.} $\int_a^b f(x)\,dx=\int_a^b f(a+b-x)\,dx$. Если $f(x)+f(a+b-x)=h(x)$, интеграл равен $\frac12\int_a^b h$.
+
+\textit{Инверсия $x\mapsto1/x$.} Мера $dx/x$ инвариантна. $\int_0^\infty f(x)/x\,dx=\int_0^\infty f(1/x)/x\,dx$.
+
+\medskip
+
+\section{Последовательности и ряды (тесты и асимптотики)}
+
+\subsection{Признак Дирихле}
+
+\textit{Формулировка.} Пусть $\{a_n\}$, $\{b_n\}$ --- последовательности над $\mathbb{R}$ или $\mathbb{C}$. Если частичные суммы $A_n=\sum_{k=1}^n a_k$ ограничены, а $b_n$ монотонно стремится к $0$, то ряд $\sum_{n=1}^\infty a_n b_n$ сходится.
+
+\textit{Когда применять.} Знакопеременные ряды $\sum (-1)^n b_n$ (частный случай $a_n=(-1)^n$ --- признак Лейбница); ряды $\sum (\sin n\theta) b_n$, $\sum (\cos n\theta) b_n$ с $b_n\downarrow 0$; ряды $\sum z^n b_n$ с $|z|=1$, $z\neq1$ и $b_n\downarrow0$.
+
+\textit{Идея.} Преобразование Абеля: $\sum_{k=1}^N a_k b_k = A_N b_N - \sum_{k=1}^{N-1} A_k (b_{k+1}-b_k)$. Ограниченность $A_k$ и монотонность $b_k$ дают сходимость по Коши.
+
+\medskip
+
+\subsection{Признак Абеля}
+
+\textit{Формулировка.} Пусть ряд $\sum a_n$ сходится, а $\{b_n\}$ монотонна и ограничена. Тогда ряд $\sum a_n b_n$ сходится.
+
+\textit{Когда применять.} Ряд $\sum a_n$ уже известен сходящимся, но домножение на колеблющийся или сходящийся множитель $b_n$ требует обоснования; степенные ряды $\sum a_n x^n$ при $|x|<R$ и $|x|=R$ (Абель --- граничная точка); равномерная сходимость функциональных рядов.
+
+\textit{Идея.} Преобразование Абеля + ограниченность $b_n$: $b_n\to b$, тогда $b_n = b + (b_n-b)$ и $\sum a_n (b_n-b)$ сходится по Дирихле.
+
+\textit{Отличие от Дирихле.} Признак Абеля слабее: его условие ($\sum a_n$ сходится) влечёт ограниченность $A_n$, но не наоборот. Разница --- $b_n$ в Абеле не обязана стремиться к $0$, достаточно ограниченности.
+
+\medskip
+
+\subsection{Тест Коши о сгущении}
+
+\textit{Формулировка.} $a_n\geq0$ монотонно невозрастает $\Rightarrow$ $\sum a_n$ и $\sum 2^k a_{2^k}$ сходятся или расходятся одновременно.
+
+\textit{Применение.} Ряды Бертрана $\sum 1/(n\ln^p n)$.
+
+\medskip
+
+\subsection{Тесты Куммера, Раабе, Гаусса}
+
+\textit{Куммер.} $a_n>0$, $p_n>0$, $K_n=p_n\frac{a_n}{a_{n+1}}-p_{n+1}$.
+\begin{itemize}
+  \item $\liminf K_n>0$ $\Rightarrow$ сходимость.
+  \item $\limsup K_n<0$ и $\sum 1/p_n=\infty$ $\Rightarrow$ расходимость.
+\end{itemize}
+
+\textit{Раабе.} $R_n=n\bigl(\frac{a_n}{a_{n+1}}-1\bigr)$. Сходимость при $\liminf R_n>1$.
+
+\textit{Гаусс.} $\frac{a_n}{a_{n+1}}=1+\frac{\mu}{n}+O(n^{-1-\delta})$ $\Rightarrow$ сходимость при $\mu>1$.
+
+\medskip
+
+\subsection{Теорема Оливье}
+
+\textit{Формулировка.} $a_n\geq0$ невозрастает, $\sum a_n$ сходится $\Rightarrow$ $n a_n\to0$.
+
+\medskip
+
+
+\subsection{Теорема Римана о перестановке}
+
+\textit{Формулировка.} Условно сходящийся ряд можно переставить так, чтобы его сумма стала любым $L\in\mathbb{R}\cup\{\pm\infty\}$.
+
+\medskip
+
+\subsection{Произведение Коши и теорема Мертенса}
+
+\textit{Формулировка.} Если $\sum a_n$ сходится абсолютно к $A$, а $\sum b_n$ сходится (условно) к $B$, то произведение Коши $c_n=\sum_{k=0}^n a_k b_{n-k}$ даёт $\sum c_n=AB$.
+
+\medskip

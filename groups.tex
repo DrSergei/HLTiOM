@@ -1,0 +1,519 @@
+\chapter{Теория групп}
+
+\textbf{FAQ: Теория групп (олимпиадный справочник)}
+
+Сводка ключевых теорем, методов и формул по теории групп для задач олимпиадного уровня. Объединено из шести тематических заметок.
+
+\medskip
+
+\section{Порядки, Лагранж, Коши, циклические группы}
+
+\subsection{Теорема Лагранжа}
+\begin{itemize}
+\item \textit{Формулировка.} $|G|<\infty$, $H\le G$ $\Rightarrow$ $|H|\mid|G|$ и $|G|=[G:H]\cdot|H|$.
+\item \textit{Следствие.} $\operatorname{ord}(g)\mid|G|$, $g^{|G|}=e$.
+\item \textit{Когда использовать.} Любая задача на делимость порядка группы.
+\item \textit{Идея.} Левые смежные классы разбивают $G$ на блоки одинаковой мощности $|H|$.
+\end{itemize}
+
+\subsection{Теорема Коши}
+\begin{itemize}
+\item \textit{Формулировка.} $p$ простое, $p\mid|G|$ $\Rightarrow$ $\exists$ элемент порядка $p$.
+\item \textit{Когда использовать.} Извлечь элемент простого порядка.
+\item \textit{Идея.} $\mathbb Z/p$ циклическим сдвигом действует на $p$-наборах с произведением $e$; неподвижные точки дают $g^p=e$.
+\end{itemize}
+
+\subsection{Формула порядка степени}
+\begin{itemize}
+\item \textit{Формулировка.} $\operatorname{ord}(g)=n<\infty$ $\Rightarrow$ $\operatorname{ord}(g^k)=n/\gcd(k,n)$.
+\item \textit{Когда использовать.} Понизить порядок или найти образующие.
+\item \textit{Идея.} $g^{km}=e \iff n\mid km \iff n/\gcd(k,n)\mid m$.
+\end{itemize}
+
+\subsection{Структура подгрупп циклической группы}
+\begin{itemize}
+\item \textit{Формулировка.} $G=\langle g\rangle$, $|G|=n$:
+\begin{enumerate}
+\item Любая подгруппа $H\le G$ циклическая.
+\item Для каждого $d\mid n$ ровно одна подгруппа порядка $d$: $\langle g^{n/d}\rangle$.
+\item Биекция $\{d\mid n\}\leftrightarrow\{H\le G\}$.
+\end{enumerate}
+\item \textit{Когда использовать.} Вопрос о существовании/единственности подгруппы заданного порядка в циклической группе.
+\end{itemize}
+
+\subsection{Порядок произведения в абелевой группе}
+\begin{itemize}
+\item \textit{Формулировка.} $G$ абелева, $\operatorname{ord}(a)=m$, $\operatorname{ord}(b)=n$.
+\begin{enumerate}
+\item $\gcd(m,n)=1$ $\Rightarrow$ $\operatorname{ord}(ab)=mn$.
+\item В $\langle a,b\rangle$ $\exists$ элемент порядка $\operatorname{lcm}(m,n)$.
+\end{enumerate}
+\item \textit{Когда использовать.} Построить элемент комбинированного порядка.
+\item \textit{Осторожно.} В неабелевой группе неверно ($S_3$: $(12)(123)=(13)$ порядка 2, не 6).
+\end{itemize}
+
+\subsection{Критерий цикличности}
+\begin{itemize}
+\item \textit{Формулировка.} Конечная $G$ циклическая $\Leftrightarrow$ для каждого $d\mid|G|$ уравнение $x^d=e$ имеет $\le d$ решений. Равносильно: для каждого $d$ не более одной подгруппы порядка $d$.
+\item \textit{Когда использовать.} Доказать цикличность (например, $\mathbb F_q^\times$).
+\item \textit{Идея.} $\psi(d)$ --- число элементов порядка $d$; если $\psi(d)>0$, то $\psi(d)=\varphi(d)$. Сумма $\sum\psi(d)=|G|=\sum\varphi(d)$ даёт $\psi(d)=\varphi(d)$ для всех $d$.
+\end{itemize}
+
+\subsection{Теорема Фробениуса}
+\begin{itemize}
+\item \textit{Формулировка.} $G$ конечна, $n\mid|G|$ $\Rightarrow$ число решений $x^n=e$ делится на $n$.
+\item \textit{Осторожно.} Без $n\mid|G|$ работает слабая форма: число решений делится на $\gcd(n,|G|)$.
+\item \textit{Когда использовать.} Нижние оценки на число элементов фиксированного порядка.
+\end{itemize}
+
+\subsection{Группа порядка $p^2$ абелева}
+\begin{itemize}
+\item \textit{Формулировка.} $|G|=p^2$ $\Rightarrow$ $G$ абелева. С точностью до изоморфизма: $\mathbb Z/p^2$ и $\mathbb Z/p\times\mathbb Z/p$.
+\item \textit{Идея.} Центр $Z(G)$ нетривиален. Если $|Z(G)|=p$, то $G/Z(G)$ циклическая $\Rightarrow$ $G$ абелева (противоречие). Значит $Z(G)=G$.
+\end{itemize}
+
+\subsection{Группы порядка $pq$}
+\begin{itemize}
+\item \textit{Формулировка.} $|G|=pq$, $p<q$ простые. Тогда:
+\begin{enumerate}
+\item $p\nmid q-1$ $\Rightarrow$ $G\cong\mathbb Z/(pq)$.
+\item $p\mid q-1$ $\Rightarrow$ две группы: циклическая и $\mathbb Z/q\rtimes\mathbb Z/p$ (неабелева).
+\end{enumerate}
+\item \textit{Идея.} $n_q=1$ (Силов III), $Q\trianglelefteq G$, $G=Q\rtimes P$. $\operatorname{Aut}(Q)\cong\mathbb Z/(q-1)$.
+\end{itemize}
+
+\subsection{Подгруппа наименьшего простого индекса нормальна}
+\begin{itemize}
+\item \textit{Формулировка.} $[G:H]=p$ --- наименьший простой делитель $|G|$ $\Rightarrow$ $H\trianglelefteq G$.
+\item \textit{Идея.} Действие $G$ на $G/H$ даёт $\varphi:G\to S_p$; ядро лежит в $H$, и $[G:\ker\varphi]\mid p!$, откуда $[G:\ker\varphi]=p$, $\ker\varphi=H$.
+\item \textit{Осторожно.} Условие «наименьший» существенно: в $S_3$ подгруппа $\langle(12)\rangle$ индекса 3 не нормальна.
+\end{itemize}
+
+\subsection{Формула $|HK|$}
+\begin{itemize}
+\item \textit{Формулировка.} $H,K\le G$ конечны $\Rightarrow$ $|HK|=|H|\cdot|K|/|H\cap K|$, где $HK=\{hk\}$ (не обязательно подгруппа).
+\item \textit{Идея.} Каждый элемент представим $|H\cap K|$ способами.
+\end{itemize}
+
+\subsection{Индекс пересечения (Пуанкаре)}
+\begin{itemize}
+\item \textit{Формулировка.} $[G:H\cap K]\le[G:H]\cdot[G:K]$.
+\item \textit{Идея.} Отображение $g(H\cap K)\mapsto(gH,gK)$ инъективно.
+\end{itemize}
+
+\subsection{Китайская теорема для циклических групп}
+\begin{itemize}
+\item \textit{Формулировка.} $\gcd(m,n)=1$ $\Rightarrow$ $\mathbb Z/m\times\mathbb Z/n\cong\mathbb Z/(mn)$.
+\item \textit{Идея.} Элемент $(1,1)$ имеет порядок $\operatorname{lcm}(m,n)=mn$.
+\end{itemize}
+
+\subsection{$g^2=e$ всюду $\Rightarrow$ $G$ абелева}
+\begin{itemize}
+\item \textit{Формулировка.} Если $\forall g\in G\;g^2=e$, то $G$ абелева. Если $G$ конечна --- $G\cong(\mathbb Z/2)^k$.
+\item \textit{Осторожно.} Для $p>2$ аналог неверен (группа Гейзенберга над $\mathbb F_p$ --- неабелева, все элементы порядка $p$).
+\end{itemize}
+
+\medskip
+
+\section{Действие группы: орбита-стабилизатор, уравнение классов, Бёрнсайд}
+
+\subsection{Теорема об орбите и стабилизаторе}
+\begin{itemize}
+\item \textit{Формулировка.} $G$ действует на $X$, $x\in X$. Отображение $gG_x\mapsto gx$ --- биекция $G/G_x\to Gx$. При $|G|<\infty$:
+  $$|Gx|=[G:G_x]=\frac{|G|}{|G_x|}.$$
+  $$|X|=\sum_i[G:G_{x_i}]\quad\text{(разбиение на орбиты)}.$$
+\item \textit{Когда использовать.} Связать размер орбиты с индексом стабилизатора.
+\item \textit{Идея.} $gx=hx \iff h^{-1}g\in G_x \iff gG_x=hG_x$.
+\end{itemize}
+
+\subsection{Уравнение классов (сопряжение)}
+\begin{itemize}
+\item \textit{Формулировка.} $G$ действует на себе сопряжением $g\cdot h=ghg^{-1}$.
+\begin{enumerate}
+\item $|[h]|=[G:C_G(h)]$ (размер класса $=$ индекс централизатора).
+\item Уравнение классов: $|G|=|Z(G)|+\sum_i[G:C_G(g_i)]$ (по представителям нецентральных классов).
+\item Число сопряжённых подгруппы $H$ равно $[G:N_G(H)]$.
+\end{enumerate}
+\item \textit{Когда использовать.} Связать размер класса с делимостью порядка, изучать $p$-группы.
+\end{itemize}
+
+\subsection{Лемма о неподвижных точках $p$-группы}
+\begin{itemize}
+\item \textit{Формулировка.} $P$ --- $p$-группа, действует на конечном $X$ $\Rightarrow$ $|X^P|\equiv|X|\pmod p$.
+  Если $p\nmid|X|$, то есть неподвижная точка.
+\item \textit{Идея.} Нетривиальные орбиты имеют размер, кратный $p$; сумма $\equiv$ $|X^P|$ по модулю $p$.
+\end{itemize}
+
+\subsection{Центр конечной нетривиальной $p$-группы нетривиален}
+\begin{itemize}
+\item \textit{Формулировка.} $|G|=p^n$, $n\ge1$ $\Rightarrow$ $p\mid|Z(G)|$ (в частности $Z(G)\neq\{e\}$).
+\item \textit{Идея.} Уравнение классов: $[G:C_G(g)]$ для нецентрального $g$ --- степень $p>1$, делится на $p$. $|G|\equiv|Z(G)|\equiv0\pmod p$.
+\end{itemize}
+
+\subsection{Лемма Бёрнсайда (Коши--Фробениуса)}
+\begin{itemize}
+\item \textit{Формулировка.} Конечная $G$ действует на конечном $X$:
+  $$|X/G|=\frac1{|G|}\sum_{g\in G}|X^g|,$$
+  где $X^g$ --- неподвижные точки $g$, $X/G$ --- множество орбит.
+\item \textit{Идея.} Двойной счёт пар $\{(g,x):gx=x\}$.
+\item \textit{Вариант Пойа.} $G\le S_n$, число $G$-орбит на функциях $[n]\to Y$, $|Y|=k$: $\frac1{|G|}\sum_g k^{c(g)}$, $c(g)$ --- число циклов $g$.
+\end{itemize}
+
+\subsection{Теорема Кэли (обобщённая)}
+\begin{itemize}
+\item \textit{Формулировка.}
+\begin{enumerate}
+\item $G$ вкладывается в $S_{|G|}$ (левым сдвигом).
+\item Если $[G:H]=n<\infty$, действие на $G/H$ даёт $\varphi:G\to S_n$ с $\ker\varphi=\operatorname{core}_G(H)=\bigcap_{g}gHg^{-1}$. Ядро --- нормальная подгруппа в $H$, и $[G:\ker\varphi]\mid n!$.
+\end{enumerate}
+\item \textit{Когда использовать.} Ограничения на индекс подгруппы; выделение нормальной подгруппы.
+\end{itemize}
+
+\subsection{Двойные смежные классы}
+\begin{itemize}
+\item \textit{Формулировка.} $H,K\le G$, $|G|<\infty$:
+  $$|HgK|=\frac{|H|\cdot|K|}{|H\cap gKg^{-1}|},\qquad |G|=\sum_{g\in H\backslash G/K}\frac{|H|\cdot|K|}{|H\cap gKg^{-1}|}.$$
+\item \textit{Идея.} Действие $H\times K$ на $G$ по $(h,k)\cdot x=hxk^{-1}$; орбита $g$ --- $HgK$, стабилизатор изоморфен $H\cap gKg^{-1}$.
+\end{itemize}
+
+\subsection{Теорема Жордана}
+\begin{itemize}
+\item \textit{Формулировка.} Конечная $G$ транзитивно действует на $X$, $|X|>1$ $\Rightarrow$ $\exists$ элемент без неподвижных точек.
+\item \textit{Идея.} Бёрнсайд: среднее $|X^g|=1$. Тождество даёт $|X|>1$ неподвижных; если бы у всех остальных были неподвижные точки, сумма превысила бы $|G|$.
+\end{itemize}
+
+\subsection{Характер перестановочного представления}
+\begin{itemize}
+\item \textit{Формулировка.} $\rho:G\to GL(\mathbb C^X)$ --- линейное продолжение действия. $\chi(g)=\operatorname{tr}\rho(g)=|X^g|$. $\dim(\mathbb C^X)^G=|X/G|$.
+\item \textit{Когда использовать.} Перевести комбинаторику действия на язык представлений.
+\end{itemize}
+
+\medskip
+
+\section{Классы сопряжённости, нормализатор, централизатор}
+
+\subsection{Размер класса делит индекс центра}
+\begin{itemize}
+\item \textit{Формулировка.} $|\operatorname{cl}(g)|\mid[G:Z(G)]$. $|\operatorname{cl}(g)|=1 \iff g\in Z(G)$.
+\item \textit{Идея.} $Z(G)\le C_G(g)$ $\Rightarrow$ $|C_G(g)|$ делится на $|Z(G)|$.
+\end{itemize}
+
+\subsection{$G/Z(G)$ циклична $\Rightarrow$ $G$ абелева}
+\begin{itemize}
+\item \textit{Формулировка.} Если $G/Z(G)$ циклическая, то $G$ абелева (и $G/Z(G)$ тривиальна).
+\item \textit{Идея.} $G/Z(G)=\langle xZ(G)\rangle$ $\Rightarrow$ любой элемент $g=x^kz$, $z\in Z(G)$.
+\item \textit{Осторожно.} «Абелева» не достаточно: группа Гейзенберга даёт $G/Z(G)\cong\mathbb Z/p\times\mathbb Z/p$, $G$ неабелева.
+\end{itemize}
+
+\subsection{Теорема N/C}
+\begin{itemize}
+\item \textit{Формулировка.} $H\le G$ $\Rightarrow$ $N_G(H)/C_G(H)\hookrightarrow\operatorname{Aut}(H)$. Частный случай: $G/Z(G)\cong\operatorname{Inn}(G)\le\operatorname{Aut}(G)$.
+\item \textit{Когда использовать.} Ограничить $[N_G(H):C_G(H)]$ через $|\operatorname{Aut}(H)|$.
+\item \textit{Идея.} Сопряжение $h\mapsto xhx^{-1}$ даёт гомоморфизм $N_G(H)\to\operatorname{Aut}(H)$ с ядром $C_G(H)$.
+\end{itemize}
+
+\subsection{Нормализатор циклической подгруппы}
+\begin{itemize}
+\item \textit{Формулировка.} $\operatorname{ord}(g)=n$ $\Rightarrow$ $N_G(\langle g\rangle)/C_G(g)\hookrightarrow(\mathbb Z/n)^\times$.
+\item \textit{Следствие.} $[N_G(\langle g\rangle):C_G(g)]\mid\varphi(n)$.
+\item \textit{Идея.} Применение N/C к $H=\langle g\rangle$; $\operatorname{Aut}(\mathbb Z/n)\cong(\mathbb Z/n)^\times$.
+\end{itemize}
+
+\subsection{Число классов через Бёрнсайда}
+\begin{itemize}
+\item \textit{Формулировка.} $k(G)=\frac1{|G|}\sum_g|C_G(g)|=|\{(x,y):xy=yx\}|/|G|$.
+\item \textit{Когда использовать.} Оценки числа классов; связь с числом коммутирующих пар.
+\end{itemize}
+
+\subsection{Размер класса в $p$-группе}
+\begin{itemize}
+\item \textit{Формулировка.} $|G|=p^n$, $g\notin Z(G)$ $\Rightarrow$ $|\operatorname{cl}(g)|=p^k$, $k\ge1$.
+\item \textit{Когда использовать.} Индукция по $p$-группам.
+\end{itemize}
+
+\subsection{Размер класса --- степень простого $\Rightarrow$ непростота}
+\begin{itemize}
+\item \textit{Формулировка.} Если $g\notin Z(G)$ и $|\operatorname{cl}(g)|=p^k$ ($k\ge1$), то $G$ имеет нетривиальную нормальную подгруппу.
+\item \textit{Контекст.} Ядро доказательства теоремы Бёрнсайда $p^aq^b$.
+\end{itemize}
+
+\subsection{Амбивалентные группы}
+\begin{itemize}
+\item \textit{Формулировка.} $G$ амбивалентна, если каждый элемент сопряжён своему обратному. $S_n$ амбивалентна при всех $n$; $A_n$ --- только при $n\in\{1,2,5,6,10,14\}$.
+\item \textit{Идея.} В $S_n$ перестановка и обратная имеют один цикловой тип $\Rightarrow$ сопряжены.
+\end{itemize}
+
+\medskip
+
+\section{$S_n$ и $A_n$: знак, структура, сопряжённость}
+
+\subsection{Знак как гомоморфизм}
+\begin{itemize}
+\item \textit{Формулировка.} Единственный $\operatorname{sgn}:S_n\to\{\pm1\}$ c $\operatorname{sgn}(\text{транспозиция})=-1$. $\operatorname{sgn}(\sigma)=(-1)^{\#\{(i,j):i<j,\sigma(i)>\sigma(j)\}}$. $\ker\operatorname{sgn}=A_n$, $[S_n:A_n]=2$.
+\end{itemize}
+
+\subsection{Цикловой тип --- полный инвариант сопряжённости в $S_n$}
+\begin{itemize}
+\item \textit{Формулировка.} $\sigma,\tau\in S_n$ сопряжены $\Leftrightarrow$ одинаковый цикловой тип. Число классов $=p(n)$ (разбиений $n$).
+\item \textit{Размер класса} с типом $1^{m_1}2^{m_2}\cdots n^{m_n}$: $\dfrac{n!}{\prod_k m_k!\,k^{m_k}}$.
+\item \textit{Размер централизатора:} $|C_{S_n}(\sigma)|=\prod_k m_k!\,k^{m_k}$.
+\end{itemize}
+
+\subsection{Формула сопряжения}
+\begin{itemize}
+\item \textit{Формулировка.} $\rho\,(a_1\dots a_k)\,\rho^{-1}=(\rho(a_1)\dots\rho(a_k))$ --- «переименование меток».
+\end{itemize}
+
+\subsection{Знак через цикловую структуру}
+\begin{itemize}
+\item \textit{Формулировка.} $\operatorname{sgn}(\sigma)=(-1)^{n-c(\sigma)}=(-1)^{\sum(\lambda_i-1)}$, где $c(\sigma)$ --- число циклов (с 1-циклами). $k$-цикл имеет знак $(-1)^{k-1}$.
+\item \textit{Следствие.} Минимальное число транспозиций для $\sigma$ равно $n-c(\sigma)$.
+\end{itemize}
+
+\subsection{Генераторы $S_n$}
+\begin{itemize}
+\item \textit{Формулировка.} $S_n$ порождается:
+\begin{enumerate}
+\item Всеми транспозициями.
+\item Соседними транспозициями $(1\,2),\dots,(n-1\,n)$.
+\item Парой: транспозиция $(i\,j)$ и $n$-цикл $(1\,2\,\dots\,n)$ при $\gcd(j-i,n)=1$ (всегда работает $(1\,2)$ и $(1\,2\,\dots\,n)$).
+\end{enumerate}
+\item \textit{Осторожно.} В $S_4$ пара $(1\,3)$ и $(1\,2\,3\,4)$ не порождает $S_4$ ($\gcd(2,4)=2$).
+\end{itemize}
+
+\subsection{Генераторы $A_n$}
+\begin{itemize}
+\item \textit{Формулировка.} $A_n$ при $n\ge3$ порождается тройными циклами $(1\,2\,k)$, $k=3,\dots,n$.
+\item \textit{Идея.} Чётная перестановка --- произведение чётного числа транспозиций; пара транспозиций сводится к тройному циклу.
+\end{itemize}
+
+\subsection{Перестановка --- произведение двух инволюций}
+\begin{itemize}
+\item \textit{Формулировка.} Любая $\sigma\in S_n$ представима как $\sigma=\alpha\beta$, $\alpha^2=\beta^2=e$.
+\item \textit{Идея.} $k$-цикл --- поворот $k$-угольника, разлагается в две осевые симметрии. Для произвольной --- покомпонентно по циклам.
+\end{itemize}
+
+\subsection{Расщепление классов $S_n\to A_n$}
+\begin{itemize}
+\item \textit{Формулировка.} Класс $\sigma\in A_n$ в $S_n$ либо остаётся одним классом в $A_n$, либо распадается на два равной мощности. Распад $\Leftrightarrow$ цикловой тип $\sigma$ состоит из попарно различных нечётных длин.
+\item \textit{Пример.} В $A_5$ 5-циклы распадаются на 2 класса по 12; 3-циклы (тип $3,1,1$ --- длина 1 повторяется) --- нет.
+\item \textit{Идея.} Класс распадается $\Leftrightarrow$ $C_{S_n}(\sigma)\le A_n$. Чётные циклы дают нечётный элемент; два цикла одинаковой длины дают нечётную перестановку их обмена.
+\end{itemize}
+
+\subsection{Простота $A_n$ ($n\ge5$)}
+\begin{itemize}
+\item \textit{Формулировка.} $A_n$ проста при $n\ge5$.
+\item \textit{Идея.} Нормальная $H\ne\{e\}$ содержит тройной цикл $\Rightarrow$ $H$ содержит все тройные циклы $\Rightarrow$ $H=A_n$ (сопряжение + генерация). Для произвольного $\sigma\in H$ строится коммутатор, дающий тройной цикл.
+\end{itemize}
+
+\subsection{Нормальные подгруппы $S_n$}
+\begin{itemize}
+\item \textit{Формулировка.}
+\begin{itemize}
+\item $n=1,2$: $\{e\},S_n$.
+\item $n=3$: $\{e\},A_3,S_3$.
+\item $n=4$: $\{e\},V_4,A_4,S_4$ ($V_4$ --- клейновская четвёрка).
+\item $n\ge5$: $\{e\},A_n,S_n$.
+\end{itemize}
+\end{itemize}
+
+\subsection{Коммутант}
+\begin{itemize}
+\item \textit{Формулировка.} $[S_n,S_n]=A_n$ ($n\ge2$). $[A_n,A_n]=A_n$ при $n\ge5$ (совершенна). $[A_4,A_4]=V_4$.
+\end{itemize}
+
+\subsection{Разрешимость $S_n$, $A_n$}
+\begin{itemize}
+\item \textit{Формулировка.} $S_n$ и $A_n$ разрешимы $\Leftrightarrow$ $n\le4$.
+\item \textit{Ряд для $S_4$:} $S_4\supset A_4\supset V_4\supset\{e\}$, факторы $\mathbb Z/2,\mathbb Z/3,(\mathbb Z/2)^2$ --- абелевы.
+\end{itemize}
+
+\subsection{Знак --- единственный нетривиальный гомоморфизм $S_n\to\mathbb C^\times$ при $n\ge5$}
+\begin{itemize}
+\item \textit{Формулировка.} $n\ge5$, $\varphi:S_n\to\mathbb C^\times$ --- гомоморфизм $\Rightarrow$ $\varphi\equiv1$ или $\varphi=\operatorname{sgn}$.
+\item \textit{Идея.} $\ker\varphi$ нормален в $S_n$; из нормальных подгрупп только $\{e\},A_n,S_n$. $\ker=\{e\}$ невозможен ($S_n$ неабелева, $\mathbb C^\times$ абелева).
+\end{itemize}
+
+\subsection{Внешний автоморфизм $S_6$}
+\begin{itemize}
+\item \textit{Формулировка.} $\operatorname{Out}(S_n)$ тривиальна при $n\ne2,6$; $|\operatorname{Out}(S_6)|=2$.
+\item \textit{Идея.} При $n\ne6$ класс транспозиций --- единственный класс инволюций мощности $\binom n2$. В $S_6$ есть второй класс той же мощности 15: тройные транспозиции $(ab)(cd)(ef)$.
+\end{itemize}
+
+\subsection{Функция Ландау $g(n)$}
+\begin{itemize}
+\item \textit{Формулировка.} $g(n)=\max_{\sigma\in S_n}\operatorname{ord}(\sigma)=\max_{\sum\lambda_i=n}\operatorname{lcm}(\lambda_i)$. $\log g(n)\sim\sqrt{n\log n}$.
+\item \textit{Идея.} Порядок $=$ НОК длин циклов. Оптимум --- попарно почти взаимно простые длины (степени малых простых).
+\end{itemize}
+
+\medskip
+
+\section{Теоремы Силова и $p$-группы}
+
+\subsection{Теоремы Силова}
+\begin{itemize}
+\item \textit{Формулировка.} $|G|=p^a m$, $\gcd(p,m)=1$.
+\begin{itemize}
+\item \textit{I (существование).} Для каждого $0\le k\le a$ есть подгруппа порядка $p^k$. Подгруппа порядка $p^a$ --- силовская $p$-подгруппа.
+\item \textit{II (сопряжённость).} Все силовские $p$-подгруппы сопряжены. Любая $p$-подгруппа лежит в некоторой силовской.
+\item \textit{III (счёт).} $n_p\equiv1\pmod p$, $n_p\mid m$, $n_p=[G:N_G(P)]$.
+\end{itemize}
+\item \textit{Когда использовать.} Анализ непростоты групп, классификация малых порядков.
+\item \textit{Идея I (Виландт).} $G$ действует на $\binom G{p^a}$; $p\nmid\bigl|\binom G{p^a}\bigr|$ (Куммер). Стабилизатор орбиты некратного размера --- силовская.
+\item \textit{Идея II, III.} Действие $P$ на $\operatorname{Syl}_p(G)$ сопряжением. Единственная неподвижная точка --- $P$, значит $n_p\equiv1\pmod p$. $n_p=[G:N_G(P)]\mid m$.
+\end{itemize}
+
+\subsection{Аргумент Фраттини}
+\begin{itemize}
+\item \textit{Формулировка.} $N\trianglelefteq G$, $P\in\operatorname{Syl}_p(N)$ $\Rightarrow$ $G=N\cdot N_G(P)$.
+\item \textit{Идея.} $gPg^{-1}\le N$ $\Rightarrow$ по Силову II в $N$ $\exists$ $n\in N$ с $n(gPg^{-1})n^{-1}=P$, откуда $ng\in N_G(P)$.
+\end{itemize}
+
+\subsection{$p$-группа нильпотентна}
+\begin{itemize}
+\item \textit{Формулировка.} $|G|=p^n$ $\Rightarrow$ верхний центральный ряд достигает $G$ за $\le n$ шагов.
+\item \textit{Идея.} Пока $G/Z_i$ нетривиальна, её центр нетривиален.
+\item \textit{Следствие.} В $p$-группе любая собственная $H$ строго меньше $N_G(H)$.
+\end{itemize}
+
+\subsection{Максимальная подгруппа $p$-группы}
+\begin{itemize}
+\item \textit{Формулировка.} $|G|=p^n$, $M$ максимальна $\Rightarrow$ $M\trianglelefteq G$ и $[G:M]=p$.
+\item \textit{Идея.} $M\lneq N_G(M)$ (нильпотентность) $\Rightarrow$ $N_G(M)=G$. $G/M$ --- $p$-группа без собственных подгрупп $\Rightarrow$ $\cong\mathbb Z/p$.
+\end{itemize}
+
+\subsection{Подгруппа Фраттини}
+\begin{itemize}
+\item \textit{Формулировка.} $\Phi(G)=\bigcap M$ (пересечение всех максимальных). Для $p$-группы: $\Phi(G)=[G,G]\cdot G^p$.
+\begin{itemize}
+\item $G/\Phi(G)\cong(\mathbb F_p)^d$, $d$ --- минимальное число образующих.
+\item Набор порождает $G$ $\Leftrightarrow$ образы порождают $G/\Phi(G)$.
+\end{itemize}
+\item \textit{Когда использовать.} Счёт автоморфизмов $p$-группы; критерий цикличности ($d=1$).
+\end{itemize}
+
+\subsection{Шур--Цассенхауз}
+\begin{itemize}
+\item \textit{Формулировка.} $G$ конечна, $N\trianglelefteq G$, $\gcd(|N|,[G:N])=1$ $\Rightarrow$ $G=N\rtimes H$ и любые два дополнения сопряжены.
+\item \textit{Когда использовать.} Разложить группу в полупрямое произведение при взаимно простых порядке и индексе.
+\end{itemize}
+
+\subsection{Цепочка нормальных подгрупп в $p$-группе}
+\begin{itemize}
+\item \textit{Формулировка.} $|G|=p^n$ $\Rightarrow$ $\exists$ $\{e\}=N_0\lneq\cdots\lneq N_n=G$ с $|N_k|=p^k$ и $N_k\trianglelefteq G$.
+\item \textit{Идея.} Индукция: центральный элемент порядка $p$ даёт $N_1$, индукция по $G/N_1$.
+\end{itemize}
+
+\subsection{Нормализатор силовской самонормализуем}
+\begin{itemize}
+\item \textit{Формулировка.} $P\in\operatorname{Syl}_p(G)$, $H=N_G(P)$ $\Rightarrow$ $N_G(H)=H$.
+\item \textit{Идея.} $gPg^{-1}\le H$ --- силовская в $H$; в $N_G(P)$ силовская $P$ единственна, значит $gPg^{-1}=P$, $g\in H$.
+\end{itemize}
+
+\subsection{Число подгрупп порядка $p^k$ в $p$-группе}
+\begin{itemize}
+\item \textit{Формулировка.} $|G|=p^n$ $\Rightarrow$ число подгрупп порядка $p^k$ ($0\le k\le n$) $\equiv$ $1\pmod p$ (то же для нормальных подгрупп).
+\item \textit{Следствие.} Если в $p$-группе ровно одна подгруппа данного порядка --- она характеристична.
+\end{itemize}
+
+\subsection{Препятствие для вложения $GL_2(\mathbb F_p)\hookrightarrow S_p$}
+\begin{itemize}
+\item \textit{Формулировка.} При $p>3$ нет инъективного $\varphi:GL_2(\mathbb F_p)\to S_p$.
+\item \textit{Идея.} Силова $p$ в $S_p$ --- $\langle p\text{-цикл}\rangle$, её централизатор --- она сама (порядка $p$). В $GL_2(\mathbb F_p)$ централизатор силовской $p$ имеет порядок $p(p-1)$. Вложение передаёт централизатор.
+\end{itemize}
+
+\medskip
+
+\section{Конечные абелевы группы}
+
+\subsection{Теорема о структуре}
+\begin{itemize}
+\item \textit{Формулировка.} Любая конечная абелева $G$:
+\begin{itemize}
+\item \textit{Инвариантные множители:} $G\cong\mathbb Z/d_1\oplus\cdots\oplus\mathbb Z/d_k$, $1<d_1\mid d_2\mid\cdots\mid d_k$, $d_k=\exp(G)$.
+\item \textit{Элементарные делители:} $G\cong\bigoplus\mathbb Z/p_i^{a_i}$ --- однозначно с точностью до перестановки.
+\end{itemize}
+\item \textit{Идея.} Берём $a$ порядка $\exp(G)$; $\langle a\rangle$ --- прямое слагаемое; индукция.
+\item \textit{Когда использовать.} Свести задачу к $p$-группам.
+\end{itemize}
+
+\subsection{Разложение на $p$-силовские}
+\begin{itemize}
+\item \textit{Формулировка.} $G$ абелева $\Rightarrow$ $G=\bigoplus_{p\mid|G|}G_p$, где $G_p$ --- $p$-силовская.
+\item \textit{Идея.} Ортогональные проекторы по китайской теореме об остатках в $\operatorname{End}(G)$.
+\end{itemize}
+
+\subsection{$G[n]$ в абелевой группе}
+\begin{itemize}
+\item \textit{Формулировка.} $G\cong\bigoplus\mathbb Z/p_i^{a_i}$ $\Rightarrow$ $|G[n]|=\prod_i\gcd(n,p_i^{a_i})$. Для $p$-группы $\bigoplus\mathbb Z/p^{e_i}$: $|G[p^k]|=p^{\sum_i\min(k,e_i)}$.
+\item \textit{Когда использовать.} Подсчёт элементов порядка, ограничивающего $n$.
+\end{itemize}
+
+\subsection{Обращение Лагранжа в абелевом случае}
+\begin{itemize}
+\item \textit{Формулировка.} $G$ абелева, $d\mid|G|$ $\Rightarrow$ $\exists$ $H\le G$ порядка $d$.
+\item \textit{Идея.} $G\cong\bigoplus\mathbb Z/p_i^{a_i}$ $\Rightarrow$ $H=\bigoplus p_i^{a_i-b_i}\mathbb Z/p_i^{a_i}$.
+\end{itemize}
+
+\subsection{Гауссов бином}
+\begin{itemize}
+\item \textit{Формулировка.} Число подгрупп порядка $p^k$ в $(\mathbb Z/p)^n$ равно $\binom{n}{k}_p=\prod_{i=0}^{k-1}\frac{p^{n-i}-1}{p^{k-i}-1}$.
+\item \textit{Когда использовать.} Подсчёт подпространств в $\mathbb F_p^n$.
+\end{itemize}
+
+\subsection{Базисная теорема Бернсайда}
+\begin{itemize}
+\item \textit{Формулировка.} $G$ --- абелева $p$-группа. $d(G)=\dim_{\mathbb F_p}G/pG$ --- минимальное число образующих. Подмножество порождает $G$ $\Leftrightarrow$ его образы порождают $G/pG$.
+\end{itemize}
+
+\subsection{Лемма Гурса}
+\begin{itemize}
+\item \textit{Формулировка.} Подгруппы $\Delta\le A\times B$ находятся в биекции с $(A_1,A_2,B_1,B_2,\varphi)$: $A_2\trianglelefteq A_1\le A$, $B_2\trianglelefteq B_1\le B$, $\varphi:A_1/A_2\xrightarrow{\sim}B_1/B_2$. $\Delta=\{(a,b):a\in A_1,b\in B_1,\varphi(aA_2)=bB_2\}$.
+\item \textit{Когда использовать.} Классифицировать подгруппы прямого произведения.
+\end{itemize}
+
+\subsection{Двойственность характеров}
+\begin{itemize}
+\item \textit{Формулировка.} $G$ абелева. $\widehat G=\operatorname{Hom}(G,\mathbb C^\times)\cong G$.
+\begin{itemize}
+\item Ортогональность: $\sum_g\chi(g)\overline{\psi(g)}=|G|\cdot[\chi=\psi]$.
+\item $\sum_\chi\chi(g)\overline{\chi(h)}=|G|\cdot[g=h]$.
+\end{itemize}
+\item \textit{Когда использовать.} Суммы по группе, преобразование Фурье.
+\end{itemize}
+
+\subsection{Нормальная форма Смита}
+\begin{itemize}
+\item \textit{Формулировка.} $M\in\mathbb Z^{m\times n}$ приводится к $\operatorname{diag}(d_1,\dots,d_r,0,\dots)$ с $d_1\mid d_2\mid\cdots\mid d_r$ умножением на $GL_m(\mathbb Z),GL_n(\mathbb Z)$; $d_k=\Delta_k/\Delta_{k-1}$.
+\item \textit{Применение.} Если $G\cong\mathbb Z^n/M\mathbb Z^m$, то $G\cong\mathbb Z^{n-r}\oplus\bigoplus\mathbb Z/d_i$.
+\item \textit{Когда использовать.} Классификация абелевой группы по заданным образующим и соотношениям.
+\end{itemize}
+
+\subsection{Произведение порядков (Putnam-2009-A5)}
+\begin{itemize}
+\item \textit{Формулировка.} Для абелевой $2$-группы $G$: $\pi(G)=\prod_{g\in G}\operatorname{ord}(g)=2^{k(G)}$, $k(G)\equiv 2^{r_2(G)}-1\pmod4$. Если $r_2(G)=0$, $k(G)=0$; $r_2(G)=1$ $\Rightarrow$ $k(G)\equiv1\pmod4$; $r_2(G)\ge2$ $\Rightarrow$ $k(G)\equiv3\pmod4$.
+\item \textit{Идея.} Вклад циклических подгрупп порядка $2^h$ ($h\ge2$) кратен 4; остаётся вклад инволюций.
+\end{itemize}
+
+\subsection{Порядок $\operatorname{Aut}(G)$ (формула Хилляр--Ри)}
+\begin{itemize}
+\item \textit{Формулировка.} $G\cong\bigoplus_{i=1}^n\mathbb Z/p^{e_i}$, $e_1\le\cdots\le e_n$. Положим $d_k=\max\{l:e_l=e_k\}$, $c_k=\min\{l:e_l=e_k\}$.
+  $$|\operatorname{Aut}(G)|=\prod_{k=1}^n(p^{d_k}-p^{k-1})\prod_{j=1}^n p^{e_j(n-d_j)}\prod_{i=1}^n p^{(e_i-1)(n-c_i+1)}.$$
+\item \textit{Частные случаи.} $|\operatorname{Aut}((\mathbb Z/p)^n)|=|GL_n(\mathbb F_p)|$; $|\operatorname{Aut}(\mathbb Z/p^n)|=p^{n-1}(p-1)$.
+\end{itemize}
+
+\medskip
+
+\section{Основные методы и приёмы}
+
+\begin{itemize}
+\item \textit{Подсчёт Силовских.} $n_p\equiv1\pmod p$, $n_p\mid m$ часто фиксирует $n_p$. $n_p=1$ $\Rightarrow$ силовская нормальна $\Rightarrow$ группа не проста.
+\item \textit{Подсчёт элементов.} Если $n_p$ велико, элементы порядка $p$ занимают много места, оставляя мало для других --- часто $n_q=1$.
+\item \textit{Уравнение классов.} $|G|=|Z(G)|+\sum[G:C_G(g)]$ --- основа $p$-групповой индукции.
+\item \textit{Двойной счёт.} Ядро леммы Бёрнсайда; подсчёт пар $(g,x)$ с $gx=x$.
+\item \textit{Действие на смежных классах.} Переводит подгруппу $H$ в гомоморфизм $G\to S_{[G:H]}$. Ядро --- $\operatorname{core}_G(H)$, нормальная подгруппа внутри $H$.
+\item \textit{Формула $|HK|$.} $|HK|=|H||K|/|H\cap K|$; оценка пересечения или размера произведения.
+\item \textit{Теорема N/C.} $N_G(H)/C_G(H)\hookrightarrow\operatorname{Aut}(H)$. Ограничивает нормализатор через автоморфизмы.
+\item \textit{Критерий цикличности абелевой $p$-группы:} $d(G)=1$ (минимальное число образующих $=1$) $\Leftrightarrow$ $G$ циклическая.
+\item \textit{Сведение к $p$-частям.} В абелевом случае задача разбивается на независимые $p$-компоненты.
+\end{itemize}
