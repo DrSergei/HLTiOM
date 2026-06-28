@@ -1,0 +1,202 @@
+\chapter{Graph Theory}
+\label{ch:graph}
+
+\medskip
+
+\textbf{Notation.} $G=(V,E)$ with $n=|V|$, $m=|E|$.
+$\kappa(G)$ --- vertex connectivity; $\lambda(G)$ --- edge connectivity.
+$\delta(G)$ --- minimum degree; $\Delta(G)$ --- maximum degree.
+$\chi(G)$ --- chromatic number; $\alpha(G)$ --- independence number.
+$\omega(G)$ --- clique number; $\nu(G)$ --- matching number; $\tau(G)$ --- vertex cover number; $\beta(G)$ --- edge cover number.
+$\operatorname{diam}(G)$ --- diameter; $\operatorname{rad}(G)$ --- radius.
+$N(v)$ --- neighbourhood of $v$; $N(S)=\bigcup_{v\in S}N(v)$.
+$\overline G$ --- complement; $G[U]$ --- induced subgraph.
+$G$ is $k$-regular if $\deg(v)=k$ for all $v$.
+
+\medskip
+
+\section{Basic definitions and facts}
+\label{sec:graph-basics}
+
+\subsection{Walks, paths, cycles, connectivity}
+\label{subsec:walks-paths}
+
+A \textit{walk} is a sequence of vertices with consecutive ones adjacent; a \textit{path} is a walk with no repeated vertices; a \textit{cycle} is a closed path. $G$ is \textit{connected} if any two vertices are linked by a path; \textit{components} are maximal connected subgraphs. The \textit{distance} $d(u,v)$ is the length of a shortest path; \textit{diameter} $\operatorname{diam}(G)=\max_{u,v}d(u,v)$; \textit{radius} $\operatorname{rad}(G)=\min_u\max_v d(u,v)$. The center consists of vertices with $\max_v d(u,v)=\operatorname{rad}(G)$; for a tree it is a single vertex or two adjacent vertices.
+
+A graph is $k$-\textit{connected} ($\kappa(G)\ge k$) if removing $<k$ vertices leaves it connected; $k$-\textit{edge-connected} ($\lambda(G)\ge k$) similarly.
+
+\subsection{Distance and diameter bounds}
+\label{subsec:diameter-bounds}
+
+$\operatorname{diam}(G)\le n-1$ (equality for a path). If $\delta\ge2$ then $\operatorname{diam}(G)\le n/2$. For a tree: $\operatorname{diam}\ge2\operatorname{rad}-1$ or $2\operatorname{rad}$ depending on parity. $\operatorname{rad}(G)\le\operatorname{diam}(G)\le2\operatorname{rad}(G)$.
+
+\subsection{Degree sequences}
+\label{subsec:degree-sequences}
+
+Handshaking lemma: $\sum\deg v=2m$, hence the number of odd-degree vertices is even.
+A sequence is \textit{graphic} (realizable as a simple graph) iff it satisfies the Erd\H{o}s--Gallai inequalities.
+
+\medskip
+
+\section{Trees}
+\label{sec:trees}
+
+\subsection{Tree characterizations}
+\label{subsec:tree-char}
+
+For $G$ on $n$ vertices the following are equivalent: (1) tree, (2) connected + $m=n-1$, (3) acyclic + $m=n-1$, (4) unique path between any two vertices. Every tree with $n\ge2$ has at least two leaves.
+
+\subsection{Cayley's formula and Pr\"ufer code}
+\label{subsec:cayley-tree}
+
+Number of labeled trees on $n$ vertices $=n^{n-2}$. Corollary: number of spanning trees of $K_n$ is $n^{n-2}$.
+
+\subsection{Kirchhoff's theorem (matrix-tree)}
+\label{subsec:kirchhoff}
+
+$t(G)=\det\widetilde L_{ii}=\frac1n\lambda_2\cdots\lambda_n$, where $L=D-A$ is the Laplacian, $\lambda_1\ge\cdots\ge\lambda_n=0$ are its eigenvalues.
+
+\medskip
+
+\section{Spanning subgraphs and matchings}
+\label{sec:matchings}
+
+\subsection{Hall's theorem}
+\label{subsec:hall-graph}
+
+A bipartite graph $G=(X\cup Y,E)$ has a matching saturating $X$ $\iff$ $|N(S)|\ge|S|$ for all $S\subseteq X$.
+
+\subsection{Menger's theorem}
+\label{subsec:menger}
+
+The minimum number of vertices separating non-adjacent $a,b$ equals the maximum number of internally vertex-disjoint $a$-$b$ paths. Edge version: min edge cut size = max number of edge-disjoint paths. Consequence: $G$ is $k$-connected $\iff$ any two vertices are linked by $k$ internally vertex-disjoint paths.
+
+\subsection{Bipartite graphs and K\"onig's theorem}
+\label{subsec:bipartite}
+
+$G$ is bipartite $\iff$ it has no odd cycles. For bipartite $G$: $\nu(G)=\tau(G)$ (K\"onig), where $\nu$ is max matching and $\tau$ is min vertex cover.
+
+\textit{Gallai's theorem:} for any graph without isolated vertices, $\nu(G)+\beta(G)=n$, where $\beta(G)$ is the size of a minimum edge cover. Consequence: $\tau(G)+\beta(G)=n$ for bipartite graphs.
+
+\subsection{Independent sets and covers}
+\label{subsec:independence-covers}
+
+For any graph: a set $S$ is independent $\iff$ $V\setminus S$ is a vertex cover, hence $\alpha(G)+\tau(G)=n$. Together with K\"onig, for bipartite graphs $\alpha(G)=n-\nu(G)$. Gallai gives $\beta(G)=\nu(G)$ for bipartite graphs (since $\tau=\nu$). Simple bound: $\alpha(G)\ge n/(\Delta+1)$ (greedy: pick a vertex, delete it and its neighbours, repeat).
+
+\medskip
+
+\section{Eulerian and Hamiltonian graphs}
+\label{sec:eulerian-hamiltonian}
+
+\subsection{Eulerian trails}
+\label{subsec:eulerian}
+
+Undirected: Eulerian circuit $\iff$ all degrees even. Eulerian trail $\iff$ exactly $0$ or $2$ odd degrees.
+Directed: Eulerian circuit $\iff$ each vertex has equal in- and out-degree. Eulerian trail $\iff$ at most one vertex with out-in $=1$, at most one with in-out $=1$, others balanced.
+
+\subsection{Hamiltonicity conditions}
+\label{subsec:hamiltonicity}
+
+\textit{Necessary:} a Hamiltonian graph is $2$-connected and has no cut-vertex.
+\textit{Sufficient:}
+\begin{itemize}
+\item Dirac: $\delta\ge n/2$ $\Rightarrow$ Hamiltonian.
+\item Ore: $\deg u+\deg v\ge n$ for any non-adjacent $u,v$ $\Rightarrow$ Hamiltonian.
+\item Bondy--Chv\'atal: if $\deg u+\deg v\ge n$ for non-adjacent $u,v$, add edge $uv$. Repeating gives the \textit{Hamiltonian closure}; $G$ is Hamiltonian $\iff$ its closure is $K_n$.
+\end{itemize}
+
+\subsection{Tournaments}
+\label{subsec:tournaments}
+
+A \textit{tournament} is a complete oriented graph. Every tournament has a Hamiltonian path. A tournament is \textit{strongly connected} (any vertex reachable from any other) $\iff$ it has a Hamiltonian cycle. Every tournament has a king (a vertex reachable from every other in $\le2$ steps).
+
+\medskip
+
+\section{Connectivity and orientation}
+\label{sec:connectivity}
+
+\subsection{Strong connectivity}
+\label{subsec:strong-connectivity}
+
+A directed graph $D$ is \textit{strongly connected} if for any $u,v$ there is a directed path $u\rightsquigarrow v$. \textit{Strongly connected components (SCCs)} are maximal strongly connected subgraphs; they form a DAG (the \textit{condensation}). Every SCC has at least one cycle (unless it is a single vertex with no loop). A directed graph is strongly connected $\iff$ it has a closed spanning walk.
+
+\textit{Robbins' theorem:} an undirected graph has a strongly connected orientation $\iff$ it is $2$-edge-connected.
+
+\subsection{Blocks and cut-vertices}
+\label{subsec:blocks}
+
+A \textit{cut-vertex} (articulation point) is a vertex whose removal increases the number of components. A \textit{block} is a maximal $2$-connected subgraph; blocks intersect at cut-vertices forming a tree (block-cut tree). A graph with no cut-vertices is $2$-connected $\iff$ any two vertices lie on a common cycle.
+
+\medskip
+
+\section{Graph coloring}
+\label{sec:coloring}
+
+\subsection{Lower bounds}
+\label{subsec:coloring-lower}
+
+$\chi(G)\ge\omega(G)$ (clique number). $\chi(G)\ge\lceil n/\alpha(G)\rceil$ (each color class is independent). For an odd cycle $C_{2k+1}$: $\chi=3$, $\omega=2$, $\alpha=k$, so $\chi=n/\alpha$ can be tight.
+
+\subsection{Greedy bound and Brooks' theorem}
+\label{subsec:greedy-coloring}
+
+$\chi(G)\le\Delta(G)+1$ (greedy coloring). \textit{Brooks:} if $G$ is connected and neither a complete graph nor an odd cycle, then $\chi(G)\le\Delta(G)$.
+
+\subsection{Wilf bound}
+\label{subsec:wilf}
+
+$\chi(G)\le 1+\lambda_1(G)$, where $\lambda_1$ is the largest eigenvalue of the adjacency matrix.
+
+\subsection{Mycielski construction}
+\label{subsec:mycielski}
+
+For any graph $G$ with $\chi(G)=k$, the Mycielski graph $M(G)$ has $\chi(M(G))=k+1$ and contains no triangles (if $G$ had none). Hence there exist triangle-free graphs with arbitrarily large chromatic number.
+
+\medskip
+
+\section{Planar graphs}
+\label{sec:planar}
+
+\subsection{Euler's formula}
+\label{subsec:euler-formula}
+
+For a connected planar graph drawn in the sphere: $n-m+f=2$ ($f$ = number of faces). Consequence: $m\le3n-6$ for $n\ge3$ (each face has $\ge3$ edges); equality holds for triangulations (all faces triangles). A triangle-free planar graph satisfies $m\le2n-4$. From $m\le3n-6$ and $2m\ge n\delta$, every planar graph has $\delta\le5$.
+
+$K_5$ and $K_{3,3}$ are non-planar. \textit{Kuratowski:} a graph is planar $\iff$ it contains no subdivision of $K_5$ or $K_{3,3}$. \textit{Wagner:} a graph is planar $\iff$ it has no $K_5$ or $K_{3,3}$ minor.
+
+\subsection{Five-color theorem}
+\label{subsec:five-color}
+
+Every planar graph is $5$-colorable. ($4$-color theorem: every planar graph is $4$-colorable, but the proof is computer-assisted.)
+
+\medskip
+
+\section{Extremal graph theory}
+\label{sec:extremal}
+
+\subsection{Tur\'an's theorem}
+\label{subsec:turan}
+
+The maximum number of edges in an $n$-vertex graph with no $(r+1)$-clique is $\left(1-\frac1r\right)\frac{n^2}{2}$, attained by the complete $r$-partite Tur\'an graph $T_r(n)$ with parts as equal as possible.
+
+\textit{Consequence:} if $m>n^2/4$ then $G$ contains a triangle (case $r=2$, Mantel's theorem).
+
+\subsection{Extremal numbers}
+\label{subsec:extremal-numbers}
+
+$\operatorname{ex}(n,F)$ is the max edges in an $n$-vertex $F$-free graph. For bipartite $F$: $\operatorname{ex}(n,F)=o(n^2)$ (Erd\H{o}s--Stone). For $K_{s,t}$: $\operatorname{ex}(n,K_{s,t})=O(n^{2-1/s})$ (K\H{o}v\'ari--S\'os--Tur\'an).
+
+\medskip
+
+\section{Spectral graph theory}
+\label{sec:graph-spectra}
+
+\subsection{Spectra of standard graphs}
+\label{subsec:graph-spectra}
+
+$K_n$: $n-1$ (1), $-1$ ($n-1$). $K_{m,n}$: $\pm\sqrt{mn}$, $0$ ($m+n-2$). $C_n$: $2\cos(2\pi k/n)$. $P_n$: $2\cos(\pi k/(n+1))$.
+
+\subsection{Hoffman bound for $\alpha(G)$}
+\label{subsec:hoffman}
+
+$G$ is $k$-regular on $n$ vertices, $\lambda_n$ is the smallest eigenvalue $\Rightarrow$ $\alpha(G)\le\frac{-n\lambda_n}{k-\lambda_n}$.

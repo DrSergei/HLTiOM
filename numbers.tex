@@ -1,192 +1,254 @@
-\chapter{Теория чисел}
+\chapter{Number Theory}
+\label{ch:numbers}
+
+\medskip
+
+\textbf{Notation.} $\mathbb{N},\mathbb{Z},\mathbb{Q},\mathbb{R},\mathbb{C}$ --- usual.
+$v_p(n)$ --- exponent of $p$ in $n$ (valuation).
+$a\mid b$ --- $a$ divides $b$; $p^k\parallel n$ means $p^k\mid n$, $p^{k+1}\nmid n$.
+$\operatorname{ord}_n(a)$ --- multiplicative order of $a$ modulo $n$.
+$\varphi(n)$ --- Euler totient; $\mu(n)$ --- M\"obius function.
+$\left(\frac{a}{p}\right)$ --- Legendre symbol; $\left(\frac{a}{n}\right)$ --- Jacobi symbol.
+$\mathbb{Z}/n\mathbb{Z}$ (or $\mathbb{Z}_n$) --- integers modulo $n$.
 
 \medskip
 
 \section{LTE (Lifting The Exponent)}
 
-\subsection{LTE для нечётного p, разность}
+\subsection{LTE for odd $p$, difference}
+\label{subsec:lte-odd-diff}
 
-\textbf{Формула.} Пусть $p$ -- нечётное простое, $x,y\in\mathbb{Z}$, $n\ge 1$, $p\mid x-y$, $p\nmid xy$. Тогда
+\textit{Statement.} Let $p$ be an odd prime, $x,y\in\mathbb{Z}$, $n\ge 1$, $p\mid x-y$, $p\nmid xy$. Then
 $$v_p(x^n-y^n)=v_p(x-y)+v_p(n).$$
 
-\textbf{Когда применять.} Задачи вида «доказать $p^k\mid a^n-b^n$», «найти все $n$ с $p^k\mid a^n\pm b^n$».
+\textit{When to use.} Problems like ``prove $p^k\mid a^n-b^n$'', ``find all $n$ with $p^k\mid a^n\pm b^n$''.
 
-\subsection{LTE для нечётного p, сумма}
+\subsection{LTE for odd $p$, sum}
+\label{subsec:lte-odd-sum}
 
-\textbf{Формула.} $p$ нечётное, $n$ нечётное, $p\mid x+y$, $p\nmid xy$. Тогда
+\textit{Statement.} $p$ odd, $n$ odd, $p\mid x+y$, $p\nmid xy$. Then
 $$v_p(x^n+y^n)=v_p(x+y)+v_p(n).$$
 
-\subsection{LTE для $p=2$}
+\subsection{LTE for $p=2$}
+\label{subsec:lte-p2}
 
-\textbf{Формула.} $x,y$ нечётные, $n\ge 1$.
+\textit{Statement.} $x,y$ odd, $n\ge 1$.
 \begin{itemize}
-\item $n$ нечётно: $v_2(x^n-y^n)=v_2(x-y)$.
-\item $n$ чётно: $v_2(x^n-y^n)=v_2(x-y)+v_2(x+y)+v_2(n)-1$.
-\item Если $4\mid x-y$, то $v_2(x^n-y^n)=v_2(x-y)+v_2(n)$.
+\item $n$ odd: $v_2(x^n-y^n)=v_2(x-y)$.
+\item $n$ even: $v_2(x^n-y^n)=v_2(x-y)+v_2(x+y)+v_2(n)-1$.
+\item If $4\mid x-y$, then $v_2(x^n-y^n)=v_2(x-y)+v_2(n)$.
 \end{itemize}
-Для суммы: при нечётном $n$ $v_2(x^n+y^n)=v_2(x+y)$; при чётном $n$ $v_2(x^n+y^n)=1$.
+For sum: when $n$ is odd $v_2(x^n+y^n)=v_2(x+y)$; when $n$ is even $v_2(x^n+y^n)=1$.
 
-\subsection{Формула Лежандра}
+\subsection{Legendre's formula}
+\label{subsec:legendre}
 
 $$v_p(n!)=\sum_{k\ge1}\left\lfloor\frac{n}{p^k}\right\rfloor=\frac{n-s_p(n)}{p-1},$$
-где $s_p(n)$ -- сумма цифр $n$ в $p$-ичной системе.
+where $s_p(n)$ is the sum of digits of $n$ in base $p$.
 
-\subsection{Теорема Куммера}
+\subsection{Kummer's theorem}
+\label{subsec:kummer}
 
-$v_p\binom{m+n}{n}$ равно числу переносов при сложении $m$ и $n$ в $p$-ичной системе. Эквивалентно:
+$v_p\binom{m+n}{n}$ equals the number of carries when adding $m$ and $n$ in base $p$. Equivalently:
 $$v_p\binom{m+n}{n}=\frac{s_p(m)+s_p(n)-s_p(m+n)}{p-1}.$$
 
-\subsection{Подъём порядка по модулю $p^k$}
+\subsection{Lifting the order modulo $p^k$}
+\label{subsec:lift-order}
 
-Пусть $p$ нечётное, $p\nmid a$, $d=\operatorname{ord}_p(a)$, $c=v_p(a^d-1)\ge1$. Для всех $k\ge1$:
+Let $p$ be odd, $p\nmid a$, $d=\operatorname{ord}_p(a)$, $c=v_p(a^d-1)\ge1$. For all $k\ge1$:
 $$\operatorname{ord}_{p^k}(a)=d\cdot p^{\max(0,\,k-c)}.$$
-Для $p=2$: при $a\equiv1\pmod4$ имеем $\operatorname{ord}_{2^k}(a)=2^{\max(0,\,k-v_2(a-1))}$.
+For $p=2$: when $a\equiv1\pmod4$ we have $\operatorname{ord}_{2^k}(a)=2^{\max(0,\,k-v_2(a-1))}$.
 
-\subsection{Теорема Жигмонди (Zsigmondy)}
+\subsection{Zsigmondy's theorem}
+\label{subsec:zsigmondy}
 
-$a>b\ge1$, $\gcd(a,b)=1$, $n\ge2$. У $a^n-b^n$ существует простой делитель, не делящий $a^k-b^k$ ни для одного $k<n$ (примитивный). Исключения:
+$a>b\ge1$, $\gcd(a,b)=1$, $n\ge2$. The number $a^n-b^n$ has a prime divisor that does not divide $a^k-b^k$ for any $k<n$ (primitive). Exceptions:
 \begin{itemize}
-\item $n=2$ и $a+b$ -- степень двойки;
+\item $n=2$ and $a+b$ is a power of $2$;
 \item $(a,b,n)=(2,1,6)$.
 \end{itemize}
 
-Аналог для суммы: при $n\ge2$, $a>b\ge1$, $\gcd(a,b)=1$, $a^n+b^n$ имеет примитивный простой делитель, кроме случая $n=2$, $a+b$ -- степень двойки, или $(a,b,n)=(2,1,3)$.
+Analog for sum: for $n\ge2$, $a>b\ge1$, $\gcd(a,b)=1$, $a^n+b^n$ has a primitive prime divisor, except for $n=2$, $a+b$ a power of $2$, or $(a,b,n)=(2,1,3)$.
 
 \medskip
 
-\section{Диофантовы трюки: спуск, модули, оценки}
+\section{Diophantine tricks: descent, moduli, estimates}
 
-\subsection{Бесконечный спуск (infinite descent)}
+\subsection{Infinite descent}
+\label{subsec:descent}
 
-\textbf{Идея.} Если из любого целочисленного решения строится решение со строго меньшей положительной мерой, то решений нет.
+\textit{Idea.} If from any integer solution one can construct a solution with strictly smaller positive measure, then no solutions exist.
 
-\textbf{Когда применять.} Уравнения вида $x^4+y^4=z^2$, $x^2+y^2=3z^2$, «нет $n>1$ с $n\mid2^n-1$».
+\textit{When to use.} Equations like $x^4+y^4=z^2$, $x^2+y^2=3z^2$, ``there is no $n>1$ with $n\mid2^n-1$''.
 
-\subsection{Препятствие по модулю $n$}
+\subsection{Modulo obstruction}
+\label{subsec:mod-obstruction}
 
-Если уравнение $F=0$ не имеет решений по модулю $n$, то нет решений и в $\mathbb{Z}$.
+If the equation $F=0$ has no solutions modulo $n$, then it has no solutions in $\mathbb{Z}$ either.
 
-\textbf{Полезные таблицы:}
+\textit{Useful tables.}
 $$x^2\bmod3\in\{0,1\},\; x^2\bmod4\in\{0,1\},\; x^2\bmod8\in\{0,1,4\}.$$
-Следствия: $a^2+b^2\not\equiv3\pmod4$, сумма трёх квадратов не $\equiv7\pmod8$.
+Consequences: $a^2+b^2\not\equiv3\pmod4$, sum of three squares is not $\equiv7\pmod8$.
 
-\subsection{$p$-адический баланс}
-Если $A=B$ в $\mathbb{Z}$, то $v_p(A)=v_p(B)$ для каждого $p$. Комбинируется с формулой Лежандра.
+\subsection{$p$-adic balance}
+\label{subsec:padic-balance}
 
-\subsection{Лемма Гензеля (Hensel)}
-Пусть $f\in\mathbb{Z}[x]$, $p$ простое. Если $f(a)\equiv0\pmod p$ и $f'(a)\not\equiv0\pmod p$, то для каждого $k\ge1$ существует единственный $a_k\in\mathbb{Z}/p^k$ с $a_k\equiv a\pmod p$ и $f(a_k)\equiv0\pmod{p^k}$.
+If $A=B$ in $\mathbb{Z}$, then $v_p(A)=v_p(B)$ for every $p$. Usually combined with Legendre's formula (\ref{subsec:legendre}) and LTE (\ref{subsec:lte-odd-diff}).
 
-\subsection{Китайская теорема об остатках (КТО)}
-$n_1,\dots,n_k$ попарно взаимно просты. Для любых $a_i$ существует $x$ с $x\equiv a_i\pmod{n_i}$, единственный по модулю $\prod n_i$.
+\subsection{Hensel's lemma}
+\label{subsec:hensel}
 
-\subsection{Прыжок Виета (Vieta jumping)}
-Уравнение симметрично по $a,b$ и квадратично по $a$ при фиксированном $b$. Если $(a,b)$ -- решение, то второй корень $a'$ -- тоже целое решение. Обычно $|a'|<|a|$, что даёт спуск.
+Let $f\in\mathbb{Z}[x]$, $p$ prime. If $f(a)\equiv0\pmod p$ and $f'(a)\not\equiv0\pmod p$, then for each $k\ge1$ there exists a unique $a_k\in\mathbb{Z}/p^k$ with $a_k\equiv a\pmod p$ and $f(a_k)\equiv0\pmod{p^k}$.
 
-\subsection{Тождество Софи Жермен}
+\subsection{Chinese Remainder Theorem (CRT)}
+\label{subsec:crt}
+
+$n_1,\dots,n_k$ are pairwise coprime. For any $a_i$ there exists $x$ with $x\equiv a_i\pmod{n_i}$, unique modulo $\prod n_i$.
+
+\subsection{Vieta jumping}
+\label{subsec:vieta-jump}
+
+The equation is symmetric in $a,b$ and quadratic in $a$ for fixed $b$. If $(a,b)$ is a solution, then the second root $a'$ is also an integer solution. Usually $|a'|<|a|$, giving a descent.
+
+\subsection{Sophie Germain identity}
+\label{subsec:sophie-germain}
+
 $$a^4+4b^4=(a^2+2ab+2b^2)(a^2-2ab+2b^2).$$
 
-\textbf{Когда применять.} Факторизация $n^4+4$ и $n^4+4^n$ (при нечётном $n$).
+\textit{When to use.} Factorization of $n^4+4$ and $n^4+4^n$ (for odd $n$).
 
-\subsection{Препятствие по порядку элемента}
-Если $\gcd(a,p)=1$ и $d=\operatorname{ord}_p(a)$, то $a^n\equiv1\pmod p\iff d\mid n$. По малой теореме Ферма $d\mid p-1$.
+\subsection{Order obstruction}
+\label{subsec:order-obstruction}
 
-\subsection{Серии Пелля}
-$D>0$ не квадрат. Все положительные решения $x^2-Dy^2=1$:
+If $\gcd(a,p)=1$ and $d=\operatorname{ord}_p(a)$, then $a^n\equiv1\pmod p\iff d\mid n$. By Fermat's little theorem $d\mid p-1$.
+
+\subsection{Pell equations}
+\label{subsec:pell}
+
+$D>0$ is not a square. All positive solutions of $x^2-Dy^2=1$:
 $$x_n+y_n\sqrt{D}=(x_1+y_1\sqrt{D})^n,$$
-где $(x_1,y_1)$ -- наименьшее положительное решение.
+where $(x_1,y_1)$ is the minimal positive solution.
 
 \medskip
 
-\section{Квадратичные вычеты}
+\section{Quadratic residues}
+\label{sec:quadratic-residues}
 
-\subsection{Критерий Эйлера}
-Для нечётного простого $p$ и $p\nmid a$:
+\subsection{Euler's criterion}
+\label{subsec:euler-criterion}
+
+For odd prime $p$ and $p\nmid a$:
 $$a^{(p-1)/2}\equiv\left(\frac{a}{p}\right)\pmod p.$$
-Следствие: $\bigl(\frac{-1}{p}\bigr)=(-1)^{(p-1)/2}$.
+Corollary: $\bigl(\frac{-1}{p}\bigr)=(-1)^{(p-1)/2}$.
 
-\subsection{Закон квадратичной взаимности}
-Для различных нечётных простых $p,q$:
+\subsection{Quadratic reciprocity law}
+\label{subsec:quad-reciprocity}
+
+For distinct odd primes $p,q$:
 $$\left(\frac{p}{q}\right)\left(\frac{q}{p}\right)=(-1)^{\frac{p-1}{2}\cdot\frac{q-1}{2}}.$$
 
-\textbf{Дополнения:}
+\textit{Supplementary.}
 $$\left(\frac{-1}{p}\right)=\begin{cases}+1,&p\equiv1\pmod4,\\-1,&p\equiv3\pmod4.\end{cases}$$
 $$\left(\frac{2}{p}\right)=\begin{cases}+1,&p\equiv\pm1\pmod8,\\-1,&p\equiv\pm3\pmod8.\end{cases}$$
 
-\subsection{Символ Якоби}
-Для нечётного $n=\prod p_i^{a_i}$: $\bigl(\frac{a}{n}\bigr)=\prod\bigl(\frac{a}{p_i}\bigr)^{a_i}$. Мультипликативен по обоим аргументам; работает тот же закон взаимности. Важно: $\bigl(\frac{a}{n}\bigr)=1$ не означает, что $a$ -- квадрат по модулю $n$.
+\subsection{Jacobi symbol}
+\label{subsec:jacobi}
 
-\subsection{Структура квадратов в $(\mathbb{Z}/p^k)^\times$}
-$p$ нечётное, $\gcd(a,p)=1$: $a$ -- квадрат в $(\mathbb{Z}/p^k)^\times$ $\iff$ $\bigl(\frac{a}{p}\bigr)=+1$.
-Для $p=2$ ($k\ge3$): нечётное $a$ -- квадрат по модулю $2^k$ $\iff$ $a\equiv1\pmod8$.
+For odd $n=\prod p_i^{a_i}$: $\bigl(\frac{a}{n}\bigr)=\prod\bigl(\frac{a}{p_i}\bigr)^{a_i}$. It is multiplicative in both arguments; the same reciprocity law holds. Important: $\bigl(\frac{a}{n}\bigr)=1$ does not imply $a$ is a square modulo $n$.
 
-\subsection{Сумма символов Лежандра}
-При $p\nmid a$: $\sum_{x=0}^{p-1}\bigl(\frac{ax+b}{p}\bigr)=0$.
-Для $f(x)=ax^2+bx+c$, $p\nmid a$, $D=b^2-4ac$:
+\subsection{Structure of squares in $(\mathbb{Z}/p^k)^\times$}
+\label{subsec:squares-mod-pk}
+
+$p$ odd, $\gcd(a,p)=1$: $a$ is a square in $(\mathbb{Z}/p^k)^\times$ $\iff$ $\bigl(\frac{a}{p}\bigr)=+1$.
+For $p=2$ ($k\ge3$): odd $a$ is a square modulo $2^k$ $\iff$ $a\equiv1\pmod8$.
+
+\subsection{Sum of Legendre symbols}
+\label{subsec:sum-legendre}
+
+With $p\nmid a$: $\sum_{x=0}^{p-1}\bigl(\frac{ax+b}{p}\bigr)=0$.
+For $f(x)=ax^2+bx+c$, $p\nmid a$, $D=b^2-4ac$:
 $$\sum_{x=0}^{p-1}\left(\frac{f(x)}{p}\right)=\begin{cases}
 -\bigl(\frac{a}{p}\bigr), & p\nmid D,\\
 (p-1)\bigl(\frac{a}{p}\bigr), & p\mid D.
 \end{cases}$$
 
-\subsection{Формула Вильсона для $(\frac{p-1}{2})!$}
-Для нечётного простого $p$:
-$$\bigl(\tfrac{p-1}{2}\bigr)!^2\equiv(-1)^{(p+1)/2}\pmod p.$$
-
 \medskip
 
-\section{Порядок элемента, первообразные корни}
+\section{Order of an element, primitive roots}
+\label{sec:primitive-roots}
 
-\subsection{Свойства порядка}
+\subsection{Properties of order}
+\label{subsec:order-properties}
+
 $\gcd(a,n)=1$, $d=\operatorname{ord}_n(a)$.
 \begin{enumerate}
 \item $a^k\equiv1\pmod n \iff d\mid k$.
 \item $d\mid\varphi(n)$.
 \item $\operatorname{ord}_n(a^k)=d/\gcd(d,k)$.
-\item Если $\gcd(\operatorname{ord}_n a,\operatorname{ord}_n b)=1$, то $\operatorname{ord}_n(ab)=\operatorname{ord}_n(a)\cdot\operatorname{ord}_n(b)$.
-\item В абелевой группе $\exists$ элемент порядка $\operatorname{lcm}(\operatorname{ord}_n a,\operatorname{ord}_n b)$.
+\item If $\gcd(\operatorname{ord}_n a,\operatorname{ord}_n b)=1$, then $\operatorname{ord}_n(ab)=\operatorname{ord}_n(a)\cdot\operatorname{ord}_n(b)$.
+\item In an abelian group there exists an element of order $\operatorname{lcm}(\operatorname{ord}_n a,\operatorname{ord}_n b)$.
 \end{enumerate}
 
-\subsection{Существование первообразного корня}
-Для любого простого $p$ группа $(\mathbb{Z}/p)^\times$ циклична. Число первообразных корней mod $p$ равно $\varphi(p-1)$.
-\textbf{Тест:} $g$ -- первообразный корень $\iff$ $g^{(p-1)/q}\not\equiv1\pmod p$ для каждого простого $q\mid p-1$.
+\subsection{Existence of primitive roots}
+\label{subsec:primitive-existence}
 
-\subsection{Структура $(\mathbb{Z}/n)^\times$}
-$(\mathbb{Z}/n)^\times$ циклична $\iff$ $n\in\{1,2,4,p^k,2p^k\}$ ($p$ -- нечётное простое).
-Для нечётного $p$: $(\mathbb{Z}/p^k)^\times\cong\mathbb{Z}/p^{k-1}(p-1)$.
-Для $p=2$, $k\ge3$: $(\mathbb{Z}/2^k)^\times\cong\mathbb{Z}/2\times\mathbb{Z}/2^{k-2}$.
+For any prime $p$, the group $(\mathbb{Z}/p)^\times$ is cyclic. The number of primitive roots mod $p$ is $\varphi(p-1)$.
+\textit{Test.} $g$ is a primitive root $\iff$ $g^{(p-1)/q}\not\equiv1\pmod p$ for every prime $q\mid p-1$.
 
-\subsection{Приём наименьшего простого делителя}
-$n\ge2$, $p$ -- наименьший простой делитель $n$, $\gcd(a,n)=1$.
+\subsection{Structure of $(\mathbb{Z}/n)^\times$}
+\label{subsec:zn-structure}
+
+$(\mathbb{Z}/n)^\times$ is cyclic $\iff$ $n\in\{1,2,4,p^k,2p^k\}$ ($p$ odd prime).
+For odd $p$: $(\mathbb{Z}/p^k)^\times\cong\mathbb{Z}/p^{k-1}(p-1)$.
+For $p=2$, $k\ge3$: $(\mathbb{Z}/2^k)^\times\cong\mathbb{Z}/2\times\mathbb{Z}/2^{k-2}$.
+
+\subsection{Smallest prime divisor trick}
+\label{subsec:smallest-prime}
+
+$n\ge2$, $p$ the smallest prime divisor of $n$, $\gcd(a,n)=1$.
 \begin{itemize}
-\item Если $n\mid a^n-1$, то $a\equiv1\pmod p$.
-\item Если $n$ нечётно и $n\mid a^n+1$, то $a\equiv-1\pmod p$.
+\item If $n\mid a^n-1$, then $a\equiv1\pmod p$.
+\item If $n$ is odd and $n\mid a^n+1$, then $a\equiv-1\pmod p$.
 \end{itemize}
-\textbf{Когда применять.} IMO 1990-3 ($n^2\mid2^n+1$), задача «нет $n>1$ с $n\mid2^n-1$».
+\textit{When to use.} IMO 1990{-}3 ($n^2\mid2^n+1$), problem ``there is no $n>1$ with $n\mid2^n-1$''.
 
-\subsection{Функция Кармайкла}
-$$\lambda(p^k)=\begin{cases}p^{k-1}(p-1), & p\text{ нечётное или }p^k\in\{2,4\},\\ 2^{k-2}, & p=2,\ k\ge3,\end{cases}$$
+\subsection{Carmichael function}
+\label{subsec:carmichael}
+
+$$\lambda(p^k)=\begin{cases}p^{k-1}(p-1), & p\text{ odd or }p^k\in\{2,4\},\\ 2^{k-2}, & p=2,\ k\ge3,\end{cases}$$
 $$\lambda(n)=\operatorname{lcm}\bigl(\lambda(p_1^{a_1}),\dots,\lambda(p_r^{a_r})\bigr).$$
-В $(\mathbb{Z}/n)^\times$ всегда есть элемент порядка $\lambda(n)$.
+In $(\mathbb{Z}/n)^\times$ there always exists an element of order $\lambda(n)$.
 
-\subsection{Простые делители циклотомического многочлена}
-$p\nmid a$. Если $p\mid\Phi_n(a)$, то либо $\operatorname{ord}_p(a)=n$ ($\implies p\equiv1\pmod n$), либо $p\mid n$.
+\subsection{Prime divisors of cyclotomic polynomials}
+\label{subsec:cyclotomic-prime}
 
-\subsection{Бесконечность простых $\equiv1\pmod n$}
-Для любого $n\ge1$ существует бесконечно много простых $p\equiv1\pmod n$. Идея: взять простой делитель $\Phi_n(M)$.
+$p\nmid a$. If $p\mid\Phi_n(a)$, then either $\operatorname{ord}_p(a)=n$ ($\implies p\equiv1\pmod n$), or $p\mid n$.
 
-\subsection{Индекс и критерий $k$-й степени}
-$p$ нечётное, $g$ -- первообразный корень mod $p$. Отображение $\operatorname{ind}_g:(\mathbb{Z}/p)^\times\to\mathbb{Z}/(p-1)$ -- изоморфизм.
-$a$ является $k$-й степенью $\iff$ $a^{(p-1)/\gcd(k,p-1)}\equiv1\pmod p$.
-Число $k$-х степеней в $(\mathbb{Z}/p)^\times$ равно $(p-1)/\gcd(k,p-1)$.
+\subsection{Infinitely many primes $\equiv1\pmod n$}
+\label{subsec:inf-primes-1modn}
 
-\subsection{Степенные суммы по модулю простого}
-Для простого $p$ и $m\ge0$:
+For any $n\ge1$ there are infinitely many primes $p\equiv1\pmod n$. Idea: take a prime divisor of $\Phi_n(M)$ (see \ref{subsec:cyclotomic-prime}).
+
+\subsection{Index and $k$-th power criterion}
+\label{subsec:kth-power}
+
+$p$ odd, $g$ a primitive root mod $p$. The map $\operatorname{ind}_g:(\mathbb{Z}/p)^\times\to\mathbb{Z}/(p-1)$ is an isomorphism.
+$a$ is a $k$-th power $\iff$ $a^{(p-1)/\gcd(k,p-1)}\equiv1\pmod p$.
+The number of $k$-th powers in $(\mathbb{Z}/p)^\times$ is $(p-1)/\gcd(k,p-1)$.
+
+\subsection{Power sums modulo a prime}
+\label{subsec:power-sums-mod}
+
+For a prime $p$ and $m\ge0$:
 $$\sum_{a=1}^{p-1}a^m\equiv\begin{cases}
--1\pmod p, & m\ge1\text{ и }(p-1)\mid m,\\
-0\pmod p, & \text{иначе}.
+-1\pmod p, & m\ge1\text{ and }(p-1)\mid m,\\
+0\pmod p, & \text{otherwise}.
 \end{cases}$$
 
-\subsection{Обобщённая теорема Вильсона}
+\subsection{Generalized Wilson theorem}
+\label{subsec:generalized-wilson}
+
 $$\prod_{\substack{1\le a\le n\\\gcd(a,n)=1}}a\equiv\begin{cases}
 -1\pmod n, & n\in\{2,4,p^k,2p^k\},\\
-+1\pmod n, & \text{иначе}.
++1\pmod n, & \text{otherwise}.
 \end{cases}$$

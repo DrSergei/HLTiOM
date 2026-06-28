@@ -1,204 +1,256 @@
-\chapter{Многочлены, кольца и поля}
+\chapter{Polynomials, Rings and Fields}
+\label{ch:polynoms}
 
-\section{Результант и дискриминант}
+\medskip
 
-\subsection{Результант --- определение и критерий общего корня}
+\textbf{Notation.} $K[x]$ --- polynomials over field $K$; $\overline{K}$ --- algebraic closure.
+$\deg f$ --- degree; $f'$ --- formal derivative $\bigl(f'=\sum i a_i x^{i-1}$, with the usual rules$\bigr)$.
+$\operatorname{Res}(f,g)$ --- resultant; $\Delta(f)$ --- discriminant.
+$e_k$ --- elementary symmetric sums; $p_k=\sum\alpha_i^k$ --- power sums.
+$\mathbb{F}_q$ --- finite field of order $q=p^n$.
+$[L:K]$ --- degree of field extension.
+$\Phi_n(x)$ --- $n$-th cyclotomic polynomial.
+A polynomial $f\in L[x]$ is \textit{separable} if it has no repeated roots; a field extension $L/K$ is separable if every algebraic element has a separable minimal polynomial.
 
-\textit{Формулировка.} Для $f(x)=a_nx^n+\dots+a_0,\;g(x)=b_mx^m+\dots+b_0$ над целостным кольцом: $\operatorname{Res}(f,g)=\det\operatorname{Syl}(f,g)$.
+\medskip
 
-$$\operatorname{Res}(f,g)=0 \iff f,g\text{ имеют общий делитель степени}\ge 1\text{ в }\overline{K}[x].$$
+\section{Resultant and discriminant}
+\label{sec:resultant-discriminant}
 
-\textit{Идея.} Матрица Сильвестра: $m$ строк со сдвигами коэффициентов $f$, затем $n$ строк со сдвигами $g$.
+\subsection{Resultant --- definition and common root criterion}
+\label{subsec:resultant-def}
 
-\subsection{Результант через корни}
+\textit{Statement.} For $f(x)=a_nx^n+\dots+a_0,\;g(x)=b_mx^m+\dots+b_0$ over an integral domain: $\operatorname{Res}(f,g)=\det\operatorname{Syl}(f,g)$.
+
+$$\operatorname{Res}(f,g)=0 \iff f,g\text{ have a common divisor of degree}\ge 1\text{ in }\overline{K}[x].$$
+
+\textit{Idea.} The Sylvester matrix is $(m+n)\times(m+n)$: first $m$ rows contain shifted coefficients of $f$, next $n$ rows contain shifted coefficients of $g$:
+
+\subsection{Resultant via roots}
+\label{subsec:resultant-roots}
 
 $f=a_n\prod(x-\alpha_i),\;g=b_m\prod(x-\beta_j)$:
 $$\operatorname{Res}(f,g)=a_n^m b_m^n\prod_{i,j}(\alpha_i-\beta_j)=a_n^m\prod_i g(\alpha_i)=(-1)^{nm}b_m^n\prod_j f(\beta_j).$$
 
-\textit{Свойства:} мультипликативность; $\operatorname{Res}(g,f)=(-1)^{nm}\operatorname{Res}(f,g)$; $\operatorname{Res}(f,x-a)=f(a)$.
+\textit{Properties.} Multiplicativity; $\operatorname{Res}(g,f)=(-1)^{nm}\operatorname{Res}(f,g)$; $\operatorname{Res}(f,x-a)=f(a)$.
 
-\subsection{Дискриминант}
+\subsection{Discriminant}
+\label{subsec:discriminant}
 
 $\Delta(f)=\frac{(-1)^{n(n-1)/2}}{a_n}\operatorname{Res}(f,f')=a_n^{2n-2}\prod_{i<j}(\alpha_i-\alpha_j)^2.$
 
-$\Delta(f)=0 \iff f$ имеет кратный корень. $\Delta(f(x+c))=\Delta(f)$, $\Delta(cf)=c^{2n-2}\Delta(f)$.
+$\Delta(f)=0 \iff f$ has a multiple root. $\Delta(f(x+c))=\Delta(f)$, $\Delta(cf)=c^{2n-2}\Delta(f)$.
 
-\subsection{Дискриминант трёхчлена $x^n+ax+b$}
+\subsection{Discriminant of $x^n+ax+b$}
+\label{subsec:discriminant-trinomial}
 
 $$\Delta(x^n+ax+b)=(-1)^{n(n-1)/2}\bigl((1-n)^{n-1}a^n+n^n b^{n-1}\bigr).$$
-Проверка: $n=2$: $a^2-4b$; $n=3$: $-(4a^3+27b^2)$.
+Check: $n=2$: $a^2-4b$; $n=3$: $-(4a^3+27b^2)$.
 
-\subsection{Знак дискриминанта и число вещественных корней}
-$f\in\mathbb{R}[x]$ степени $n$ без кратных корней. $s$ --- число пар комплексно-сопряжённых корней. Тогда $\operatorname{sign}\Delta(f)=(-1)^s$.
+\subsection{Sign of the discriminant and number of real roots}
+\label{subsec:discriminant-real}
 
-\subsection{Композиция через результант}
-$\operatorname{Res}_y(f(y),g(x-y))$ --- многочлен от $x$ с корнями $\alpha_i+\beta_j$. $\operatorname{Res}_y(f(y),y^m g(x/y))$ --- многочлен с корнями $\alpha_i\beta_j$.
-
-\subsection{Исключение переменной}
-Для $P,Q\in K[x,y]$ как многочленов от $y$: $R(x)=\operatorname{Res}_y(P,Q)\in K[x]$. Корни $R$ --- $x$-координаты общих нулей $P=Q=0$.
+$f\in\mathbb{R}[x]$ of degree $n$ with no multiple roots. Let $s$ be the number of pairs of complex conjugate roots. Then $\operatorname{sign}\Delta(f)=(-1)^s$.
 
 \medskip
 
-\section{Формулы Виета, симметрические многочлены, тождества Ньютона}
+\section{Vieta's formulas, symmetric polynomials, Newton's identities}
+\label{sec:vieta-symmetric}
 
-\subsection{Формулы Виета}
-$f(x)=a_nx^n+\dots+a_0$ с корнями $\alpha_1,\dots,\alpha_n$:
+\subsection{Vieta's formulas}
+\label{subsec:vieta}
+
+$f(x)=a_nx^n+\dots+a_0$ with roots $\alpha_1,\dots,\alpha_n$:
 $$e_k(\alpha_1,\dots,\alpha_n)=(-1)^k\frac{a_{n-k}}{a_n}.$$
-В частности, $\sum\alpha_i=-a_{n-1}/a_n$, $\prod\alpha_i=(-1)^n a_0/a_n$.
+In particular, $\sum\alpha_i=-a_{n-1}/a_n$, $\prod\alpha_i=(-1)^n a_0/a_n$.
 
-\subsection{Тождества Ньютона--Жирара}
-$p_k=\sum\alpha_i^k$. При $1\le k\le n$:
+\subsection{Newton--Girard identities}
+\label{subsec:newton-girard}
+
+$p_k=\sum\alpha_i^k$. For $1\le k\le n$:
 $$p_k=e_1 p_{k-1}-e_2 p_{k-2}+\dots+(-1)^{k-1}k\,e_k.$$
-При $k>n$: $p_k=e_1 p_{k-1}-\dots+(-1)^{n-1}e_n p_{k-n}$.
+For $k>n$: $p_k=e_1 p_{k-1}-\dots+(-1)^{n-1}e_n p_{k-n}$.
 
-\subsection{Основная теорема о симметрических многочленах}
-Любой симметрический $\Phi\in R[x_1,\dots,x_n]$ единственным образом выражается через $e_1,\dots,e_n$.
+\subsection{Fundamental theorem of symmetric polynomials}
+\label{subsec:fundamental-symmetric}
 
-\subsection{Логарифмическая производная}
+Every symmetric $\Phi\in R[x_1,\dots,x_n]$ can be expressed uniquely in terms of $e_1,\dots,e_n$.
+
+\subsection{Logarithmic derivative}
+\label{subsec:log-derivative}
+
 $\dfrac{f'(x)}{f(x)}=\sum_i\dfrac1{x-\alpha_i}$.
-Следствие: $(n-1)(f')^2\ge n f f''$ при вещественных корнях.
+Consequence: $(n-1)(f')^2\ge n f f''$ when all roots are real.
 
-\subsection{Неравенства Ньютона и Маклорена}
-Если все корни $f(x)=\prod(x+\alpha_i)$ вещественны, то $E_k=e_k/\binom{n}{k}$ удовлетворяют $E_k^2\ge E_{k-1}E_{k+1}$ (лог-вогнутость).
-Для $\alpha_i>0$: $S_1\ge S_2^{1/2}\ge\dots\ge S_n^{1/n}$, где $S_k=e_k/\binom{n}{k}$.
+\subsection{Newton and Maclaurin inequalities}
+\label{subsec:newton-maclaurin}
 
-\subsection{Правило знаков Декарта}
-Число положительных корней $f\in\mathbb{R}[x]$ (с учётом кратности) равно числу смен знака в последовательности коэффициентов $V(f)$ либо меньше на чётное число.
+If all roots of $f(x)=\prod(x+\alpha_i)$ are real, then $E_k=e_k/\binom{n}{k}$ satisfy $E_k^2\ge E_{k-1}E_{k+1}$ (log-concavity).
+For $\alpha_i>0$: $S_1\ge S_2^{1/2}\ge\dots\ge S_n^{1/n}$, where $S_k=e_k/\binom{n}{k}$.
 
-\subsection{Оценки на корни}
+\subsection{Descartes' rule of signs}
+\label{subsec:descartes}
+
+The number of positive roots of $f\in\mathbb{R}[x]$ (counted with multiplicity) equals the number of sign changes in the coefficient sequence $V(f)$ or is less by an even number.
+
+\subsection{Root bounds}
+\label{subsec:root-bounds}
+
 \begin{enumerate}
-\item \textit{Коши:} все корни $f$ в $|z|\le 1+\max_{k<n}|a_k/a_n|$.
-\item \textit{Лагранж:} все корни в $|z|\le\max(1,\sum_{k=0}^{n-1}|a_k/a_n|)$.
-\item \textit{Эненстрём--Какея:} если $0<a_0\le a_1\le\dots\le a_n$, то все корни в $|z|\le 1$.
+\item \textit{Cauchy:} all roots of $f$ satisfy $|z|\le 1+\max_{k<n}|a_k/a_n|$.
+\item \textit{Lagrange:} all roots satisfy $|z|\le\max(1,\sum_{k=0}^{n-1}|a_k/a_n|)$.
+\item \textit{Enestr\"om--Kakeya:} if $0<a_0\le a_1\le\dots\le a_n$, then all roots lie in $|z|\le 1$.
 \end{enumerate}
 
 \medskip
 
-\section{Многочлены над $\mathbb{F}_p$ и $\mathbb{F}_q$}
+\section{Polynomials over $\mathbb{F}_p$ and $\mathbb{F}_q$}
+\label{sec:polynomials-over-fq}
 
-\subsection{Эндоморфизм Фробениуса}
-В характеристике $p$: $(x+y)^p=x^p+y^p$. Отображение $\varphi:a\mapsto a^p$ --- кольцевой гомоморфизм. На $\mathbb{F}_q$ ($q=p^n$) --- автоморфизм, порождающий $\operatorname{Gal}(\mathbb{F}_{p^n}/\mathbb{F}_p)$.
+\subsection{Frobenius endomorphism}
+\label{subsec:frobenius}
 
-\subsection{Тождество $x^q-x=\prod_{a\in\mathbb{F}_q}(x-a)$}
-$x^q-x=\prod_{a\in\mathbb{F}_q}(x-a)$, $x^{q-1}-1=\prod_{a\in\mathbb{F}_q^\times}(x-a)$. Следствие: $\gcd(f,x^q-x)=\prod_{a: f(a)=0}(x-a)$.
+In characteristic $p$: $(x+y)^p=x^p+y^p$. The map $\varphi:a\mapsto a^p$ is a ring homomorphism. Over $\mathbb{F}_q$ ($q=p^n$) it is an automorphism generating $\operatorname{Gal}(\mathbb{F}_{p^n}/\mathbb{F}_p)$.
 
-\subsection{Степенные суммы $\sum_{a\in\mathbb{F}_q}a^k$}
-$$\sum_{a\in\mathbb{F}_q}a^k=\begin{cases}-1,&(q-1)\mid k,\\0,&\text{иначе}.\end{cases}$$
+\subsection{Identity $x^q-x=\prod_{a\in\mathbb{F}_q}(x-a)$}
+\label{subsec:xq-x}
 
-\subsection{Принцип «слишком много корней»}
-$f\in\mathbb{F}_q[x]$ степени $n$ имеет $\le n$ корней.
+$x^q-x=\prod_{a\in\mathbb{F}_q}(x-a)$, $x^{q-1}-1=\prod_{a\in\mathbb{F}_q^\times}(x-a)$. Consequence: $\gcd(f,x^q-x)=\prod_{a: f(a)=0}(x-a)$.
 
-\subsection{Цикличность $\mathbb{F}_q^\times$}
-$\mathbb{F}_q^\times$ --- циклическая порядка $q-1$.
+\subsection{Power sums $\sum_{a\in\mathbb{F}_q}a^k$}
+\label{subsec:power-sums-fq}
 
-\subsection{Универсальная факторизация $x^{q^n}-x$}
-$$x^{q^n}-x=\prod_{d\mid n}\;\prod_{\substack{f\text{ нормир. неприв.}\\\deg f=d}} f(x).$$
-Число нормированных неприводимых степени $n$ над $\mathbb{F}_q$:
+$$\sum_{a\in\mathbb{F}_q}a^k=\begin{cases}-1,&(q-1)\mid k,\\0,&\text{otherwise}.\end{cases}$$
+
+\subsection{``Too many roots'' principle}
+\label{subsec:too-many-roots}
+
+$f\in\mathbb{F}_q[x]$ of degree $n$ has at most $n$ roots.
+
+\subsection{Cyclicity of $\mathbb{F}_q^\times$}
+\label{subsec:fq-cyclic}
+
+$\mathbb{F}_q^\times$ is cyclic of order $q-1$.
+
+\subsection{Universal factorization of $x^{q^n}-x$}
+\label{subsec:universal-factorization}
+
+$$x^{q^n}-x=\prod_{d\mid n}\;\prod_{\substack{f\text{ monic irreducible}\\\deg f=d}} f(x).$$
+The number of monic irreducibles of degree $n$ over $\mathbb{F}_q$:
 $$N_q(n)=\frac1n\sum_{d\mid n}\mu(d)\,q^{n/d}>0.$$
 
-\subsection{Шевалле--Варнинг (Chevalley--Warning)}
-$f_1,\dots,f_r\in\mathbb{F}_q[x_1,\dots,x_n]$, $\sum\deg f_i<n$. Число общих нулей в $\mathbb{F}_q^n$ делится на $p$.
-Следствие: если все $f_i$ однородны без свободного члена, то существует нетривиальный общий нуль.
+\subsection{Chevalley--Warning}
+\label{subsec:chevalley-warning}
 
-\subsection{Комбинаторный Nullstellensatz (Алон)}
-$F$ --- поле, $S_i\subset F$ конечны, $f\in F[x_1,\dots,x_n]$, $\deg f\le\sum t_i$ при $t_i<|S_i|$. Если коэффициент $f$ при $\prod x_i^{t_i}$ ненулевой, то $f$ принимает ненулевое значение на $S_1\times\dots\times S_n$.
+$f_1,\dots,f_r\in\mathbb{F}_q[x_1,\dots,x_n]$, $\sum\deg f_i<n$. The number of common zeros in $\mathbb{F}_q^n$ is divisible by $p$.
+Consequence: if all $f_i$ are homogeneous with no constant term, there is a non-trivial common zero (see also \ref{subsec:chevalley-warning-linalg}).
 
-\subsection{Теорема Лукаса}
-$\binom{n}{k}\equiv\prod\binom{n_i}{k_i}\pmod p$, где $n=\sum n_i p^i$, $k=\sum k_i p^i$ --- $p$-ичные разложения. $p\nmid\binom{n}{k}\iff k_i\le n_i$ для всех $i$.
+\subsection{Combinatorial Nullstellensatz (Alon)}
+\label{subsec:combinatorial-nullstellensatz-poly}
 
-\subsection{Выделение сепарабельной части}
-\begin{itemize}
-\item $\gcd(f,x^q-x)=\prod_{a\in\mathbb{F}_q,\,f(a)=0}(x-a)$.
-\item $\gcd(f,x^{q^d}-x)=\prod$ (неприводимых делителей $f$ степени, делящей $d$).
-\item $f/\gcd(f,f')$ --- сепарабельная часть $f$.
-\end{itemize}
+$F$ is a field, $S_i\subset F$ finite, $f\in F[x_1,\dots,x_n]$, $\deg f\le\sum t_i$ with $t_i<|S_i|$. If the coefficient of $f$ at $\prod x_i^{t_i}$ is non-zero, then $f$ takes a non-zero value on $S_1\times\dots\times S_n$ (see also \ref{subsec:combinatorial-nullstellensatz}).
 
-\subsection{Эрдёш--Гинзбург--Зив}
-Среди любых $2n-1$ целых найдутся $n$ с суммой, кратной $n$.
+\subsection{Erd\H{o}s--Ginzburg--Ziv}
+\label{subsec:egz-poly}
+
+Among any $2n-1$ integers there are $n$ whose sum is divisible by $n$ (see also \ref{subsec:egz-combinatorics}).
 
 \medskip
 
-\section{Расширения полей}
+\section{Field extensions}
+\label{sec:field-extensions}
 
-\subsection{Минимальный многочлен}
-Для алгебраического $\alpha\in L/K$ существует единственный монический $m_\alpha\in K[x]$ наименьшей степени с $m_\alpha(\alpha)=0$. Свойства: $m_\alpha$ неприводим над $K$; $K[\alpha]=K(\alpha)$, $[K(\alpha):K]=\deg m_\alpha$; $\{1,\alpha,\dots,\alpha^{n-1}\}$ --- базис.
+\subsection{Minimal polynomial}
+\label{subsec:minimal-polynomial-field}
 
-\subsection{Сопряжённые и симметрические функции}
-Пусть $m_\alpha=\prod_{i=1}^n(x-\alpha_i)$ (сепарабельный). Для любого $f\in K[x]$: $\sum f(\alpha_i)\in K$, $\prod f(\alpha_i)\in K$.
+For algebraic $\alpha\in L/K$ there is a unique monic $m_\alpha\in K[x]$ of smallest degree with $m_\alpha(\alpha)=0$. Properties: $m_\alpha$ is irreducible over $K$; $K[\alpha]=K(\alpha)$, $[K(\alpha):K]=\deg m_\alpha$; $\{1,\alpha,\dots,\alpha^{n-1}\}$ is a basis.
 
-\subsection{Алгебраические целые}
-Если алгебраическое целое рационально, то оно целое.
+\subsection{Conjugates and symmetric functions}
+\label{subsec:conjugates}
 
-\subsection{След и норма}
-Для сепарабельного $L/K$ степени $n$ с вложениями $\sigma_i$:
+Let $m_\alpha=\prod_{i=1}^n(x-\alpha_i)$ (separable). For any $f\in K[x]$: $\sum f(\alpha_i)\in K$, $\prod f(\alpha_i)\in K$.
+
+\subsection{Algebraic integers}
+\label{subsec:algebraic-integers}
+
+If an algebraic integer is rational, it is an integer.
+
+\subsection{Trace and norm}
+\label{subsec:trace-norm}
+
+For a separable $L/K$ of degree $n$ with embeddings $\sigma_i$:
 $$\operatorname{Tr}_{L/K}(\alpha)=\sum\sigma_i(\alpha),\quad \operatorname{N}_{L/K}(\alpha)=\prod\sigma_i(\alpha).$$
-Для $L=K(\alpha)$ с $m_\alpha=x^n+c_{n-1}x^{n-1}+\dots+c_0$: $\operatorname{Tr}(\alpha)=-c_{n-1}$, $\operatorname{N}(\alpha)=(-1)^n c_0$.
-Транзитивность: $\operatorname{Tr}_{M/K}=\operatorname{Tr}_{L/K}\circ\operatorname{Tr}_{M/L}$.
+For $L=K(\alpha)$ with $m_\alpha=x^n+c_{n-1}x^{n-1}+\dots+c_0$: $\operatorname{Tr}(\alpha)=-c_{n-1}$, $\operatorname{N}(\alpha)=(-1)^n c_0$.
+Transitivity: $\operatorname{Tr}_{M/K}=\operatorname{Tr}_{L/K}\circ\operatorname{Tr}_{M/L}$.
 
-\subsection{Структура $\mathbb{F}_q$}
-Для $q=p^n$ существует единственное поле $\mathbb{F}_q$. $\mathbb{F}_q=\{a\in\overline{\mathbb{F}}_p:a^q=a\}$ --- поле разложения $x^q-x$. $\mathbb{F}_q^\times$ --- циклическая.
+\subsection{Structure of $\mathbb{F}_q$}
+\label{subsec:structure-fq}
 
-\subsection{Круговой многочлен $\Phi_n$}
+For $q=p^n$ there exists a unique field $\mathbb{F}_q$. $\mathbb{F}_q=\{a\in\overline{\mathbb{F}}_p:a^q=a\}$ is the splitting field of $x^q-x$. $\mathbb{F}_q^\times$ is cyclic.
+
+\subsection{Cyclotomic polynomial $\Phi_n$}
+\label{subsec:cyclotomic}
+
 $$\Phi_n(x)=\prod_{\substack{1\le k\le n\\\gcd(k,n)=1}}(x-\zeta_n^k)\in\mathbb{Z}[x],\quad\deg\Phi_n=\varphi(n).$$
-$\Phi_n$ неприводим над $\mathbb{Q}$. $x^n-1=\prod_{d\mid n}\Phi_d(x)$, $\Phi_n(x)=\prod_{d\mid n}(x^d-1)^{\mu(n/d)}$.
+$\Phi_n$ is irreducible over $\mathbb{Q}$. $x^n-1=\prod_{d\mid n}\Phi_d(x)$, $\Phi_n(x)=\prod_{d\mid n}(x^d-1)^{\mu(n/d)}$.
 
-\subsection{Формула башни}
+\subsection{Tower formula}
+\label{subsec:tower-formula}
+
 $[L:K]=[L:F]\cdot[F:K]$.
 
-\subsection{Первообразный элемент}
-Конечное сепарабельное $L/K$ имеет вид $L=K(\theta)$. Для $K(\alpha,\beta)$ с бесконечным $K$ подходит $\theta=\alpha+c\beta$ почти для всех $c$.
+\subsection{Primitive element}
+\label{subsec:primitive-element}
 
-\subsection{Кронекер о корнях единицы}
-Если $\alpha\ne0$ --- алгебраическое целое и все его сопряжённые $|\alpha_i|\le1$, то $\alpha$ --- корень единицы.
+A finite separable $L/K$ is of the form $L=K(\theta)$. For $K(\alpha,\beta)$ with infinite $K$, $\theta=\alpha+c\beta$ works for almost all $c$.
+
+\subsection{Kronecker on roots of unity}
+\label{subsec:kronecker-roots}
+
+If $\alpha\ne0$ is an algebraic integer and all its conjugates satisfy $|\alpha_i|\le1$, then $\alpha$ is a root of unity.
 
 \medskip
 
-\section{Факторизация и неприводимость}
+\section{Factorization and irreducibility}
+\label{sec:irreducibility}
 
-\subsection{Лемма Гаусса}
-Произведение примитивных многочленов из $\mathbb{Z}[x]$ примитивно. $f$ неприводим над $\mathbb{Z}$ $\Leftrightarrow$ неприводим над $\mathbb{Q}$ (с точностью до константы).
+\subsection{Gauss's lemma}
+\label{subsec:gauss-lemma}
 
-\subsection{Критерий Эйзенштейна}
-$f=a_nx^n+\dots+a_0\in\mathbb{Z}[x]$, $p$ простое. Если $p\nmid a_n$, $p\mid a_i$ ($0\le i\le n-1$), $p^2\nmid a_0$, то $f$ неприводим над $\mathbb{Q}$.
-\textit{Трюки:} сдвиг $x\mapsto x+a$; реверс $\hat f(x)=x^n f(1/x)$.
+The product of primitive polynomials in $\mathbb{Z}[x]$ is primitive. $f$ is irreducible over $\mathbb{Z}$ $\Leftrightarrow$ irreducible over $\mathbb{Q}$ (up to a constant factor).
 
-\subsection{Обобщённый Эйзенштейн}
-Если $p\mid a_0,\dots,a_k$, $p\nmid a_{k+1}$, $p^2\nmid a_0$, то любой непостоянный множитель $f$ имеет степень $>k$.
+\subsection{Eisenstein's criterion}
+\label{subsec:eisenstein}
 
-\subsection{Редукция по модулю $p$}
-$f\in\mathbb{Z}[x]$, $p\nmid a_n$. Если $\bar f$ неприводим в $\mathbb{F}_p[x]$, то $f$ неприводим в $\mathbb{Z}[x]$. Обратное неверно ($x^4+1$ --- контрпример).
+$f=a_nx^n+\dots+a_0\in\mathbb{Z}[x]$, $p$ prime. If $p\nmid a_n$, $p\mid a_i$ ($0\le i\le n-1$), $p^2\nmid a_0$, then $f$ is irreducible over $\mathbb{Q}$.
+\textit{Tricks:} shift $x\mapsto x+a$; reversal $\hat f(x)=x^n f(1/x)$.
 
-\subsection{Оценка через корни (простой свободный член)}
-$f=a_nx^n+\dots+a_0\in\mathbb{Z}[x]$, $|a_0|$ --- простое, $|a_0|>|a_1|+\dots+|a_n|$. Тогда $f$ неприводим.
+\subsection{Generalized Eisenstein}
+\label{subsec:eisenstein-generalized}
 
-\subsection{Приём Шура ($\pm1$ в целых точках)}
-Пусть $a_1,\dots,a_n$ различны. Тогда:
-\begin{itemize}
-\item при нечётном $n$: $\prod(x-a_i)+1$ неприводим;
-\item при любом $n$: $\prod(x-a_i)-1$ неприводим;
-\item $\prod(x-a_i)^2+1$ неприводим.
-\end{itemize}
+If $p\mid a_0,\dots,a_k$, $p\nmid a_{k+1}$, $p^2\nmid a_0$, then every non-constant factor of $f$ has degree $>k$.
 
-\subsection{Неприводимость $\Phi_p$ через сдвиг}
-$\Phi_p(x+1)=\frac{(x+1)^p-1}{x}=x^{p-1}+\binom{p}{1}x^{p-2}+\dots+\binom{p}{p-1}$. Применить Эйзенштейн с $p$.
+\subsection{Reduction modulo $p$}
+\label{subsec:reduction-mod-p}
 
-\subsection{Критерий Кона}
-$b\ge2$, $p$ --- простое, $p=\sum a_k b^k$ ($0\le a_k<b$). Тогда $f(x)=\sum a_k x^k$ неприводим.
+$f\in\mathbb{Z}[x]$, $p\nmid a_n$. If $\bar f$ is irreducible in $\mathbb{F}_p[x]$, then $f$ is irreducible in $\mathbb{Z}[x]$. The converse is false ($x^4+1$ is a counterexample).
 
-\subsection{Критерий Перрона}
-$f(x)=x^n+a_{n-1}x^{n-1}+\dots+a_0\in\mathbb{Z}[x]$ монический, $a_0\ne0$ и $|a_{n-1}|>1+|a_{n-2}|+\dots+|a_0|$. Тогда $f$ неприводим.
+\subsection{Root estimate (simple constant term)}
+\label{subsec:root-estimate-irred}
 
-\subsection{Принцип Дирихле на делителях значений}
-$f\in\mathbb{Z}[x]$, $a_1<\dots<a_m$ различны, $f(a_i)=N\ne0$. Если $f=gh$, то $g(a_i)\mid N$. При $m>D\cdot\deg g$ (где $D$ --- число делителей $N$) получаем $g\equiv\text{const}$.
+$f=a_nx^n+\dots+a_0\in\mathbb{Z}[x]$, $|a_0|$ is prime, $|a_0|>|a_1|+\dots+|a_n|$. Then $f$ is irreducible.
 
-\subsection{Аргумент в UFD}
-Если $a^k=b^\ell$ в UFD $R$, то $a=u_1 c^{\ell/d}$, $b=u_2 c^{k/d}$, $d=\gcd(k,\ell)$.
+\subsection{Irreducibility of $\Phi_p$ via shift}
+\label{subsec:phi-p-eisenstein}
 
-\subsection{Многоугольник Ньютона}
-Для $f=\sum a_i x^i\in\mathbb{Z}_p[x]$ строится нижняя выпуклая оболочка точек $(i,v_p(a_i))$. Если многоугольник из одного отрезка с наклоном $-s/n$ и $\gcd(s,n)=1$, то $f$ неприводим над $\mathbb{Q}$.
+$\Phi_p(x+1)=\frac{(x+1)^p-1}{x}=x^{p-1}+\binom{p}{1}x^{p-2}+\dots+\binom{p}{p-1}$. Apply Eisenstein with $p$.
 
-\subsection{Теорема Капелли}
-$f\in K[x]$ неприводим с корнем $\alpha$. Тогда $f(g(x))$ неприводим над $K$ $\Leftrightarrow$ $g(x)-\alpha$ неприводим над $K(\alpha)$.
+\subsection{Newton polygon}
+\label{subsec:newton-polygon}
 
-\subsection{Лифтинг Гензеля (Hensel)}
-$f\in\mathbb{Z}[x]$, $f(a)\equiv0\pmod p$, $f'(a)\not\equiv0\pmod p$. Тогда для любого $k\ge1$ существует единственный $\tilde a\pmod{p^k}$ с $\tilde a\equiv a\pmod p$ и $f(\tilde a)\equiv0\pmod{p^k}$.
+$f=\sum a_i x^i\in\mathbb{Z}_p[x]$, plot points $(i,v_p(a_i))$, take lower convex hull. If the slopes are $\lambda_1,\dots,\lambda_k$ with multiplicities $m_1,\dots,m_k$, then the valuations of the roots are $-\lambda_i$ with multiplicity $m_i$. Irreducibility criterion: a single segment of slope $m/n$ in lowest terms $\Rightarrow$ $f$ remains irreducible over any extension of degree $<n$. If $v_p(a_n)=0$, $v_p(a_0)=1$, and every other $v_p(a_i)\ge1$, then $f$ is irreducible (Eisenstein via Newton).
+
+\subsection{Hensel lifting}
+\label{subsec:hensel-polynomial}
+
+$f\in\mathbb{Z}[x]$, $f(a)\equiv0\pmod p$, $f'(a)\not\equiv0\pmod p$. Then for any $k\ge1$ there exists a unique $\tilde a\pmod{p^k}$ with $\tilde a\equiv a\pmod p$ and $f(\tilde a)\equiv0\pmod{p^k}$ (see also \ref{subsec:hensel}).

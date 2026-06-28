@@ -1,0 +1,126 @@
+\chapter{Complex Analysis}
+\label{ch:complex}
+
+\medskip
+
+\textbf{Notation.} $U\subset\mathbb{C}$ open; $\Delta_r(a)=\{z:|z-a|<r\}$; $\partial U$ --- boundary.
+$H(U)$ --- holomorphic (complex differentiable) functions on $U$; $f^{(n)}$ --- $n$-th derivative.
+$\oint_\gamma f\,dz$ --- contour integral; $\operatorname{ind}_\gamma(a)=\frac1{2\pi i}\oint_\gamma\frac{dz}{z-a}$ --- winding number.
+$\operatorname{Res}(f,a)$ --- residue at $a$.
+A curve $\gamma$ is \textit{null-homotopic} in $U$ if it can be continuously contracted to a point within $U$.
+An \textit{entire} function is holomorphic on all of $\mathbb{C}$.
+An \textit{annulus} is a region $r<|z-a|<R$.
+
+\medskip
+
+\section{Cauchy--Riemann equations}
+\label{sec:cauchy-riemann}
+
+$f=u+iv$ is holomorphic (complex differentiable) on $U$ $\iff$ $u,v$ are $C^1$ and satisfy
+$$u_x=v_y,\quad u_y=-v_x.$$
+Equivalently $\partial_{\overline z}f=0$. A holomorphic function is infinitely differentiable and analytic.
+
+\medskip
+
+\section{Cauchy's integral theorem and formula}
+\label{sec:cauchy-integral}
+
+\subsection{Cauchy's theorem}
+\label{subsec:cauchy-theorem}
+
+$f\in H(U)$, $\gamma$ is a null-homotopic closed curve in $U$ $\Rightarrow$ $\oint_\gamma f(z)\,dz=0$.
+
+\subsection{Cauchy's integral formula}
+\label{subsec:cauchy-formula}
+
+$f\in H(U)$, $\overline{\Delta_r(a)}\subset U$. For $z\in\Delta_r(a)$:
+$$f(z)=\frac1{2\pi i}\oint_{|\zeta-a|=r}\frac{f(\zeta)}{\zeta-z}\,d\zeta.$$
+Consequence (derivatives): $f^{(n)}(a)=\frac{n!}{2\pi i}\oint\frac{f(\zeta)}{(\zeta-a)^{n+1}}\,d\zeta$.
+
+\subsection{Cauchy estimate and Liouville}
+\label{subsec:cauchy-estimate}
+
+$|f^{(n)}(a)|\le\frac{n!}{r^n}\max_{|\zeta-a|=r}|f(\zeta)|$.
+\textit{Liouville:} a bounded entire function is constant. \textit{Fundamental theorem of algebra:} every non-constant polynomial has a root in $\mathbb{C}$.
+
+\medskip
+
+\section{Power series and analyticity}
+\label{sec:power-series-complex}
+
+\subsection{Taylor series}
+\label{subsec:taylor-series-complex}
+
+Holomorphic $f$ is analytic: $f(z)=\sum_{n\ge0}a_n(z-a)^n$, converging in $\Delta_R(a)$ where $R=$ distance to the nearest singularity. $a_n=f^{(n)}(a)/n!$.
+
+\subsection{Laurent series}
+\label{subsec:laurent-series}
+
+$f$ holomorphic on an annulus $r<|z-a|<R$:
+$$f(z)=\sum_{n=-\infty}^\infty c_n(z-a)^n,\quad c_n=\frac1{2\pi i}\oint_{|\zeta-a|=\rho}\frac{f(\zeta)}{(\zeta-a)^{n+1}}\,d\zeta.$$
+
+\medskip
+
+\section{Zeros and singularities}
+\label{sec:singularities}
+
+\subsection{Zeros}
+\label{subsec:zeros-complex}
+
+$f\not\equiv0$ holomorphic, $f(a)=0$ $\Rightarrow$ $f(z)=(z-a)^m g(z)$, $g(a)\neq0$. Zeros are isolated unless $f\equiv0$.
+
+\textit{Identity theorem:} $f=g$ on a set with a limit point in $U$ $\Rightarrow$ $f\equiv g$ on $U$.
+
+\subsection{Classification of isolated singularities}
+\label{subsec:singularities-class}
+
+\noindent
+\begin{itemize}
+\item \textit{Removable:} Laurent series has no negative terms; $\lim_{z\to a}f(z)$ finite.
+\item \textit{Pole:} finite negative part; $\lim_{z\to a}f(z)=\infty$.
+\item \textit{Essential:} infinitely many negative terms; $\lim_{z\to a}f(z)$ does not exist.
+\end{itemize}
+
+\subsubsection{Pole criterion}
+\label{subsubsec:pole-criterion}
+
+If $|f(z)|\to\infty$ as $z\to a$, then $a$ is a pole. $a$ is a pole $\iff$ $1/f$ has a removable zero.
+
+\medskip
+
+\section{Residue theorem}
+\label{sec:residue-theorem}
+
+\subsection{Residue}
+\label{subsec:residue}
+
+$\operatorname{Res}(f,a)=c_{-1}$ for a Laurent expansion at $a$.
+\begin{itemize}
+\item Simple pole: $\operatorname{Res}(f,a)=\lim_{z\to a}(z-a)f(z)=\dfrac{g(a)}{h'(a)}$ if $f=g/h$, $h(a)=0$, $h'(a)\neq0$.
+\item Pole of order $m$: $\operatorname{Res}(f,a)=\frac1{(m-1)!}\lim_{z\to a}\frac{d^{m-1}}{dz^{m-1}}\bigl((z-a)^m f(z)\bigr)$.
+\end{itemize}
+
+\subsection{Residue theorem}
+\label{subsec:residue-theorem}
+
+$f\in H(U\setminus S)$, $\gamma$ null-homotopic in $U$, avoids $S$, finite $S\cap\operatorname{int}\gamma$:
+$$\oint_\gamma f(z)\,dz=2\pi i\sum_{a\in S}\operatorname{Res}(f,a)\operatorname{ind}_\gamma(a).$$
+
+\textit{When to use.} Computing real integrals $\int_{-\infty}^\infty R(x)\,dx$, $\int_0^{2\pi} R(\cos\theta,\sin\theta)\,d\theta$, sums $\sum_{n\in\mathbb{Z}} f(n)$ via $\pi\cot\pi z$.
+
+\medskip
+
+\section{Maximum modulus and Schwarz lemma}
+\label{sec:maximum-modulus}
+
+\subsection{Maximum modulus principle}
+\label{subsec:maximum-modulus}
+
+$f\in H(U)$, $|f|$ attains a local maximum at $a\in U$ $\Rightarrow$ $f$ is constant on the component. Minimum principle: if $f\neq0$, $|f|$ attains a minimum $\Rightarrow$ $f$ constant.
+
+\textit{Corollary (Hadamard's three circles):} $\ln M(r)$ is a convex function of $\ln r$, where $M(r)=\max_{|z|=r}|f(z)|$.
+
+\subsection{Schwarz lemma}
+\label{subsec:schwarz-lemma}
+
+$f:\Delta_1(0)\to\Delta_1(0)$, $f(0)=0$ $\Rightarrow$ $|f(z)|\le|z|$ and $|f'(0)|\le1$. Equality at $z\neq0$ or $|f'(0)|=1$ $\Rightarrow$ $f(z)=e^{i\theta}z$.

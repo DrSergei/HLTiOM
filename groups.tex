@@ -1,218 +1,324 @@
-\chapter{Теория групп}
+\chapter{Group Theory}
+\label{ch:groups}
 
-\section{Порядки, Лагранж, Коши, циклические группы}
+\medskip
 
-\subsection{Теорема Лагранжа}
-$|G|<\infty$, $H\le G$ $\Rightarrow$ $|H|\mid|G|$ и $|G|=[G:H]\cdot|H|$. Следствие: $\operatorname{ord}(g)\mid|G|$, $g^{|G|}=e$.
+\textbf{Notation.} $G$ --- group; $H\le G$ --- subgroup; $H\trianglelefteq G$ --- normal subgroup.
+$[G:H]$ --- index; $|G|$ --- order.
+$Z(G)$ --- center; $C_G(H)$ --- centralizer; $N_G(H)$ --- normalizer.
+$\operatorname{cl}(g)$ --- conjugacy class of $g$.
+$\operatorname{Aut}(G)$ --- automorphism group; $\operatorname{Inn}(G)$ --- inner automorphisms.
+$G/H$ --- quotient group; $G\cong H$ --- isomorphic.
+$S_n$ --- symmetric group; $A_n$ --- alternating group.
+$\mathbb Z/n\mathbb Z$ (or $C_n$) --- cyclic group of order $n$.
 
-\subsection{Теорема Коши}
-$p$ простое, $p\mid|G|$ $\Rightarrow$ $\exists$ элемент порядка $p$.
+\medskip
 
-\subsection{Формула порядка степени}
+\section{Orders, Lagrange, Cauchy, cyclic groups}
+\label{sec:groups-orders}
+
+\subsection{Lagrange's theorem}
+\label{subsec:lagrange}
+
+$|G|<\infty$, $H\le G$ $\Rightarrow$ $|H|\mid|G|$ and $|G|=[G:H]\cdot|H|$. Corollary: $\operatorname{ord}(g)\mid|G|$, $g^{|G|}=e$.
+
+\subsection{Cauchy's theorem}
+\label{subsec:cauchy-group}
+
+$p$ prime, $p\mid|G|$ $\Rightarrow$ $\exists$ element of order $p$.
+
+\subsection{Order of a power}
+\label{subsec:order-power}
+
 $\operatorname{ord}(g)=n<\infty$ $\Rightarrow$ $\operatorname{ord}(g^k)=n/\gcd(k,n)$.
 
-\subsection{Структура подгрупп циклической группы}
-$G=\langle g\rangle$, $|G|=n$: любая подгруппа циклическая; для каждого $d\mid n$ ровно одна подгруппа порядка $d$: $\langle g^{n/d}\rangle$.
+\subsection{Subgroup structure of cyclic groups}
+\label{subsec:cyclic-subgroups}
 
-\subsection{Порядок произведения в абелевой группе}
-$G$ абелева, $\operatorname{ord}(a)=m$, $\operatorname{ord}(b)=n$:
+$G=\langle g\rangle$, $|G|=n$: every subgroup is cyclic; for each $d\mid n$ there is exactly one subgroup of order $d$: $\langle g^{n/d}\rangle$.
+
+\subsection{Order of product in abelian groups}
+\label{subsec:order-product-abelian}
+
+$G$ abelian, $\operatorname{ord}(a)=m$, $\operatorname{ord}(b)=n$:
 \begin{enumerate}
 \item $\gcd(m,n)=1$ $\Rightarrow$ $\operatorname{ord}(ab)=mn$.
-\item В $\langle a,b\rangle$ $\exists$ элемент порядка $\operatorname{lcm}(m,n)$.
+\item In $\langle a,b\rangle$ $\exists$ an element of order $\operatorname{lcm}(m,n)$.
 \end{enumerate}
-Осторожно: в неабелевой группе неверно ($S_3$).
+Caution: in non-abelian groups this may fail ($S_3$).
 
-\subsection{Критерий цикличности}
-Конечная $G$ циклическая $\Leftrightarrow$ для каждого $d\mid|G|$ уравнение $x^d=e$ имеет $\le d$ решений. Равносильно: для каждого $d$ не более одной подгруппы порядка $d$.
+\subsection{Cyclicity criterion}
+\label{subsec:cyclicity-criterion}
 
-\subsection{Теорема Фробениуса}
-$G$ конечна, $n\mid|G|$ $\Rightarrow$ число решений $x^n=e$ делится на $n$.
+A finite $G$ is cyclic $\Leftrightarrow$ for each $d\mid|G|$ the equation $x^d=e$ has at most $d$ solutions. Equivalently: for each $d$ at most one subgroup of order $d$.
 
-\subsection{Группа порядка $p^2$ абелева}
-$|G|=p^2$ $\Rightarrow$ $G$ абелева. С точностью до изоморфизма: $\mathbb Z/p^2$ и $\mathbb Z/p\times\mathbb Z/p$.
+\subsection{Groups of order $p^2$ are abelian}
+\label{subsec:order-p2}
 
-\subsection{Группы порядка $pq$}
-$|G|=pq$, $p<q$ простые. Тогда:
+$|G|=p^2$ $\Rightarrow$ $G$ is abelian. Up to isomorphism: $\mathbb Z/p^2$ and $\mathbb Z/p\times\mathbb Z/p$.
+
+\subsection{Groups of order $pq$}
+\label{subsec:order-pq}
+
+$|G|=pq$, $p<q$ primes. Then:
 \begin{enumerate}
 \item $p\nmid q-1$ $\Rightarrow$ $G\cong\mathbb Z/(pq)$.
-\item $p\mid q-1$ $\Rightarrow$ две группы: циклическая и $\mathbb Z/q\rtimes\mathbb Z/p$ (неабелева).
+\item $p\mid q-1$ $\Rightarrow$ two groups: cyclic and $\mathbb Z/q\rtimes\mathbb Z/p$ (non-abelian semidirect product $G=N\rtimes H$ where $N\trianglelefteq G$, $NH=G$, $N\cap H=\{e\}$).
 \end{enumerate}
 
-\subsection{Подгруппа наименьшего простого индекса нормальна}
-$[G:H]=p$ --- наименьший простой делитель $|G|$ $\Rightarrow$ $H\trianglelefteq G$.
+\subsection{Subgroup of smallest prime index is normal}
+\label{subsec:smallest-prime-index}
 
-\subsection{Формула $|HK|$}
-$H,K\le G$ конечны $\Rightarrow$ $|HK|=|H|\cdot|K|/|H\cap K|$.
+$[G:H]=p$ is the smallest prime divisor of $|G|$ $\Rightarrow$ $H\trianglelefteq G$.
 
-\subsection{Индекс пересечения}
+\subsection{Formula $|HK|$}
+\label{subsec:hk-formula}
+
+$H,K\le G$ finite $\Rightarrow$ $|HK|=|H|\cdot|K|/|H\cap K|$.
+
+\subsection{Index of intersection}
+\label{subsec:index-intersection}
+
 $[G:H\cap K]\le[G:H]\cdot[G:K]$.
 
-\subsection{Китайская теорема для циклических групп}
+\subsection{Chinese remainder for cyclic groups}
+\label{subsec:crt-cyclic}
+
 $\gcd(m,n)=1$ $\Rightarrow$ $\mathbb Z/m\times\mathbb Z/n\cong\mathbb Z/(mn)$.
 
-\subsection{$g^2=e$ всюду $\Rightarrow$ $G$ абелева}
-Если $\forall g\in G\;g^2=e$, то $G$ абелева. Если $G$ конечна --- $G\cong(\mathbb Z/2)^k$.
+\subsection{$g^2=e$ everywhere $\Rightarrow$ $G$ is abelian}
+\label{subsec:g2-e}
+
+If $\forall g\in G\;g^2=e$, then $G$ is abelian. If $G$ is finite --- $G\cong(\mathbb Z/2)^k$.
 
 \medskip
 
-\section{Действие группы: орбита-стабилизатор, уравнение классов}
+\section{Group action: orbit--stabilizer, class equation}
+\label{sec:group-action}
 
-\subsection{Теорема об орбите и стабилизаторе}
-$G$ действует на $X$, $x\in X$. Отображение $gG_x\mapsto gx$ --- биекция $G/G_x\to Gx$. При $|G|<\infty$:
+\subsection{Orbit--stabilizer theorem}
+\label{subsec:orbit-stabilizer}
+
+$G$ acts on $X$, $x\in X$. The map $gG_x\mapsto gx$ is a bijection $G/G_x\to Gx$. When $|G|<\infty$:
 $$|Gx|=[G:G_x]=\frac{|G|}{|G_x|}.$$
 
-\subsection{Уравнение классов (сопряжение)}
-$G$ действует на себе сопряжением $g\cdot h=ghg^{-1}$.
+\subsection{Class equation (conjugation)}
+\label{subsec:class-equation}
+
+$G$ acts on itself by conjugation $g\cdot h=ghg^{-1}$.
 \begin{enumerate}
 \item $|[h]|=[G:C_G(h)]$.
-\item $|G|=|Z(G)|+\sum_i[G:C_G(g_i)]$ (по нецентральным классам).
-\item Число сопряжённых подгруппы $H$ равно $[G:N_G(H)]$.
+\item $|G|=|Z(G)|+\sum_i[G:C_G(g_i)]$ (over non-central classes).
+\item The number of conjugates of a subgroup $H$ equals $[G:N_G(H)]$.
 \end{enumerate}
 
-\subsection{Лемма о неподвижных точках $p$-группы}
-$P$ --- $p$-группа, действует на конечном $X$ $\Rightarrow$ $|X^P|\equiv|X|\pmod p$. Если $p\nmid|X|$, то есть неподвижная точка.
+\subsection{Fixed point lemma for $p$-groups}
+\label{subsec:pgroup-fixed}
 
-\subsection{Центр конечной нетривиальной $p$-группы нетривиален}
-$|G|=p^n$, $n\ge1$ $\Rightarrow$ $p\mid|Z(G)|$ (в частности $Z(G)\neq\{e\}$).
+$P$ is a $p$-group acting on a finite $X$ $\Rightarrow$ $|X^P|\equiv|X|\pmod p$. If $p\nmid|X|$, there is a fixed point.
 
-\subsection{Лемма Бёрнсайда (Коши--Фробениуса)}
+\subsection{Center of a non-trivial finite $p$-group is non-trivial}
+\label{subsec:pgroup-center}
+
+$|G|=p^n$, $n\ge1$ $\Rightarrow$ $p\mid|Z(G)|$ (in particular $Z(G)\neq\{e\}$).
+
+\subsection{Burnside's lemma (Cauchy--Frobenius)}
+\label{subsec:burnside}
+
 $$|X/G|=\frac1{|G|}\sum_{g\in G}|X^g|,$$
-где $X^g$ --- неподвижные точки $g$. Вариант Пойа: $G\le S_n$, число орбит на функциях $[n]\to Y$, $|Y|=k$: $\frac1{|G|}\sum_g k^{c(g)}$, $c(g)$ --- число циклов $g$.
+where $X^g$ are the fixed points of $g$. P\'olya variant: $G\le S_n$, number of orbits on functions $[n]\to Y$, $|Y|=k$: $\frac1{|G|}\sum_g k^{c(g)}$, $c(g)$ is the number of cycles of $g$.
 
-\subsection{Теорема Кэли (обобщённая)}
+\subsection{Cayley's theorem (generalized)}
+\label{subsec:cayley}
+
 \begin{enumerate}
-\item $G$ вкладывается в $S_{|G|}$ (левым сдвигом).
-\item Если $[G:H]=n$, действие на $G/H$ даёт $\varphi:G\to S_n$ с $\ker\varphi=\bigcap_{g}gHg^{-1}$. Ядро --- нормальная подгруппа в $H$, $[G:\ker\varphi]\mid n!$.
+\item $G$ embeds into $S_{|G|}$ (by left translation).
+\item If $[G:H]=n$, the action on $G/H$ gives $\varphi:G\to S_n$ with $\ker\varphi=\bigcap_{g}gHg^{-1}$. The kernel is a normal subgroup inside $H$, $[G:\ker\varphi]\mid n!$.
 \end{enumerate}
 
 \medskip
 
-\section{Классы сопряжённости, нормализатор, централизатор}
+\section{Conjugacy classes, normalizer, centralizer}
+\label{sec:conjugacy}
 
-\subsection{Размер класса делит индекс центра}
+\subsection{Class size divides index of center}
+\label{subsec:class-size-center}
+
 $|\operatorname{cl}(g)|\mid[G:Z(G)]$. $|\operatorname{cl}(g)|=1 \iff g\in Z(G)$.
 
-\subsection{$G/Z(G)$ циклична $\Rightarrow$ $G$ абелева}
-Если $G/Z(G)$ циклическая, то $G$ абелева (и $G/Z(G)$ тривиальна).
+\subsection{$G/Z(G)$ cyclic $\Rightarrow$ $G$ abelian}
+\label{subsec:gz-cyclic}
 
-\subsection{Теорема N/C}
-$H\le G$ $\Rightarrow$ $N_G(H)/C_G(H)\hookrightarrow\operatorname{Aut}(H)$. Частный случай: $G/Z(G)\cong\operatorname{Inn}(G)\le\operatorname{Aut}(G)$.
+If $G/Z(G)$ is cyclic, then $G$ is abelian (and $G/Z(G)$ is trivial).
 
-\subsection{Нормализатор циклической подгруппы}
-$\operatorname{ord}(g)=n$ $\Rightarrow$ $N_G(\langle g\rangle)/C_G(g)\hookrightarrow(\mathbb Z/n)^\times$. Следствие: $[N_G(\langle g\rangle):C_G(g)]\mid\varphi(n)$.
+\subsection{N/C theorem}
+\label{subsec:nc-theorem}
 
-\subsection{Размер класса в $p$-группе}
+$H\le G$ $\Rightarrow$ $N_G(H)/C_G(H)\hookrightarrow\operatorname{Aut}(H)$. Special case: $G/Z(G)\cong\operatorname{Inn}(G)\le\operatorname{Aut}(G)$.
+
+\subsection{Normalizer of a cyclic subgroup}
+\label{subsec:normalizer-cyclic}
+
+$\operatorname{ord}(g)=n$ $\Rightarrow$ $N_G(\langle g\rangle)/C_G(g)\hookrightarrow(\mathbb Z/n)^\times$. Consequence: $[N_G(\langle g\rangle):C_G(g)]\mid\varphi(n)$.
+
+\subsection{Class size in a $p$-group}
+\label{subsec:class-size-pgroup}
+
 $|G|=p^n$, $g\notin Z(G)$ $\Rightarrow$ $|\operatorname{cl}(g)|=p^k$, $k\ge1$.
 
 \medskip
 
-\section{$S_n$ и $A_n$: знак, структура, сопряжённость}
+\section{$S_n$ and $A_n$: sign, structure, conjugacy}
+\label{sec:sn-an}
 
-\subsection{Знак как гомоморфизм}
-Единственный $\operatorname{sgn}:S_n\to\{\pm1\}$ c $\operatorname{sgn}(\text{транспозиция})=-1$. $\ker\operatorname{sgn}=A_n$, $[S_n:A_n]=2$.
+\subsection{Sign as a homomorphism}
+\label{subsec:sign-homomorphism}
 
-\subsection{Цикловой тип --- полный инвариант сопряжённости в $S_n$}
-$\sigma,\tau\in S_n$ сопряжены $\Leftrightarrow$ одинаковый цикловой тип. Размер класса с типом $1^{m_1}2^{m_2}\cdots n^{m_n}$: $\dfrac{n!}{\prod_k m_k!\,k^{m_k}}$.
+The unique $\operatorname{sgn}:S_n\to\{\pm1\}$ with $\operatorname{sgn}(\text{transposition})=-1$. $\ker\operatorname{sgn}=A_n$, $[S_n:A_n]=2$.
+
+\subsection{Cycle type is a complete invariant for conjugacy in $S_n$}
+\label{subsec:cycle-type}
+
+$\sigma,\tau\in S_n$ are conjugate $\Leftrightarrow$ they have the same cycle type. Class size with type $1^{m_1}2^{m_2}\cdots n^{m_n}$: $\dfrac{n!}{\prod_k m_k!\,k^{m_k}}$.
 $|C_{S_n}(\sigma)|=\prod_k m_k!\,k^{m_k}$.
 
-\subsection{Формула сопряжения}
+\subsection{Conjugation formula}
+\label{subsec:conjugation-formula}
+
 $\rho\,(a_1\dots a_k)\,\rho^{-1}=(\rho(a_1)\dots\rho(a_k))$.
 
-\subsection{Знак через цикловую структуру}
-$\operatorname{sgn}(\sigma)=(-1)^{n-c(\sigma)}=(-1)^{\sum(\lambda_i-1)}$, где $c(\sigma)$ --- число циклов. $k$-цикл имеет знак $(-1)^{k-1}$.
+\subsection{Sign via cycle structure}
+\label{subsec:sign-cycle}
 
-\subsection{Генераторы $S_n$}
-$S_n$ порождается: всеми транспозициями; соседними транспозициями; парой $(1\,2)$ и $(1\,2\,\dots\,n)$.
+$\operatorname{sgn}(\sigma)=(-1)^{n-c(\sigma)}=(-1)^{\sum(\lambda_i-1)}$, where $c(\sigma)$ is the number of cycles. A $k$-cycle has sign $(-1)^{k-1}$.
 
-\subsection{Генераторы $A_n$}
-$A_n$ при $n\ge3$ порождается тройными циклами $(1\,2\,k)$, $k=3,\dots,n$.
+\subsection{Generators of $S_n$}
+\label{subsec:generators-sn}
 
-\subsection{Расщепление классов $S_n\to A_n$}
-Класс $\sigma\in A_n$ в $S_n$ распадается на два класса в $A_n$ $\Leftrightarrow$ цикловой тип $\sigma$ состоит из попарно различных нечётных длин.
+$S_n$ is generated by: all transpositions; adjacent transpositions; the pair $(1\,2)$ and $(1\,2\,\dots\,n)$.
 
-\subsection{Простота $A_n$ ($n\ge5$)}
-$A_n$ проста при $n\ge5$.
+\subsection{Generators of $A_n$}
+\label{subsec:generators-an}
 
-\subsection{Нормальные подгруппы $S_n$}
+$A_n$ for $n\ge3$ is generated by $3$-cycles $(1\,2\,k)$, $k=3,\dots,n$.
+
+\subsection{Splitting of $S_n$-classes in $A_n$}
+\label{subsec:splitting-classes}
+
+A class of $\sigma\in A_n$ in $S_n$ splits into two classes in $A_n$ $\Leftrightarrow$ the cycle type of $\sigma$ consists of pairwise distinct odd lengths.
+
+\subsection{Simplicity of $A_n$ ($n\ge5$)}
+\label{subsec:simplicity-an}
+
+A group $G\neq\{e\}$ is \textit{simple} if it has no non-trivial normal subgroups. $A_n$ is simple for $n\ge5$.
+
+\subsection{Normal subgroups of $S_n$}
+\label{subsec:normal-sn}
+
 $n=1,2$: $\{e\},S_n$. $n=3$: $\{e\},A_3,S_3$. $n=4$: $\{e\},V_4,A_4,S_4$. $n\ge5$: $\{e\},A_n,S_n$.
 
-\subsection{Коммутант}
-$[S_n,S_n]=A_n$ ($n\ge2$). $[A_n,A_n]=A_n$ при $n\ge5$ (совершенна). $[A_4,A_4]=V_4$.
+\subsection{Commutator}
+\label{subsec:commutator-sn}
 
-\subsection{Разрешимость $S_n$, $A_n$}
-$S_n$ и $A_n$ разрешимы $\Leftrightarrow$ $n\le4$.
+The \textit{commutator subgroup} $[G,G]=\langle g^{-1}h^{-1}gh:g,h\in G\rangle$ is the smallest normal subgroup with abelian quotient. $[S_n,S_n]=A_n$ ($n\ge2$). $[A_n,A_n]=A_n$ for $n\ge5$ (perfect). $[A_4,A_4]=V_4$.
+
+\subsection{Solvability of $S_n$, $A_n$}
+\label{subsec:solvability-sn}
+
+A group $G$ is \textit{solvable} if its derived series $G^{(0)}=G$, $G^{(k+1)}=[G^{(k)},G^{(k)}]$ reaches $\{e\}$ finitely. $S_n$ and $A_n$ are solvable $\Leftrightarrow$ $n\le4$.
 
 \medskip
 
-\section{Теоремы Силова и $p$-группы}
+\section{Sylow theorems and $p$-groups}
+\label{sec:sylow}
 
-\subsection{Теоремы Силова}
+\subsection{Sylow theorems}
+\label{subsec:sylow}
+
 $|G|=p^a m$, $\gcd(p,m)=1$.
 \begin{itemize}
-\item \textit{I (существование).} Для каждого $0\le k\le a$ есть подгруппа порядка $p^k$. Подгруппа порядка $p^a$ --- силовская $p$-подгруппа.
-\item \textit{II (сопряжённость).} Все силовские $p$-подгруппы сопряжены. Любая $p$-подгруппа лежит в некоторой силовской.
-\item \textit{III (счёт).} $n_p\equiv1\pmod p$, $n_p\mid m$, $n_p=[G:N_G(P)]$.
+\item \textit{I (existence).} For each $0\le k\le a$ there is a subgroup of order $p^k$. A subgroup of order $p^a$ is a Sylow $p$-subgroup.
+\item \textit{II (conjugacy).} All Sylow $p$-subgroups are conjugate. Any $p$-subgroup lies in some Sylow $p$-subgroup.
+\item \textit{III (counting).} $n_p\equiv1\pmod p$, $n_p\mid m$, $n_p=[G:N_G(P)]$.
 \end{itemize}
 
-\subsection{Аргумент Фраттини}
+\subsection{Frattini argument}
+\label{subsec:frattini}
+
 $N\trianglelefteq G$, $P\in\operatorname{Syl}_p(N)$ $\Rightarrow$ $G=N\cdot N_G(P)$.
 
-\subsection{$p$-группа нильпотентна}
-$|G|=p^n$ $\Rightarrow$ верхний центральный ряд достигает $G$ за $\le n$ шагов. Следствие: в $p$-группе любая собственная $H$ строго меньше $N_G(H)$.
+\subsection{$p$-groups are nilpotent}
+\label{subsec:pgroup-nilpotent}
 
-\subsection{Максимальная подгруппа $p$-группы}
-$|G|=p^n$, $M$ максимальна $\Rightarrow$ $M\trianglelefteq G$ и $[G:M]=p$.
+A group $G$ is \textit{nilpotent} if its upper central series $\{e\}=Z_0\le Z_1\le\cdots\le Z_k=G$ reaches $G$ in finitely many steps ($Z_{i+1}/Z_i=Z(G/Z_i)$). For $|G|=p^n$ this holds in at most $n$ steps. Consequence: in a $p$-group every proper $H$ is strictly smaller than $N_G(H)$.
 
-\subsection{Подгруппа Фраттини}
-$\Phi(G)=\bigcap M$ (пересечение всех максимальных). Для $p$-группы: $\Phi(G)=[G,G]\cdot G^p$.
-$G/\Phi(G)\cong(\mathbb F_p)^d$, $d$ --- минимальное число образующих.
+\subsection{Maximal subgroup of a $p$-group}
+\label{subsec:pgroup-maximal}
 
-\subsection{Цепочка нормальных подгрупп в $p$-группе}
-$|G|=p^n$ $\Rightarrow$ $\exists$ $\{e\}=N_0\lneq\cdots\lneq N_n=G$ с $|N_k|=p^k$ и $N_k\trianglelefteq G$.
+$|G|=p^n$, $M$ is maximal $\Rightarrow$ $M\trianglelefteq G$ and $[G:M]=p$.
+
+\subsection{Frattini subgroup}
+\label{subsec:frattini-subgroup}
+
+$\Phi(G)=\bigcap M$ (intersection of all maximal subgroups). For a $p$-group: $\Phi(G)=[G,G]\cdot G^p$.
+$G/\Phi(G)\cong(\mathbb F_p)^d$, $d$ is the minimal number of generators.
+
+\subsection{Chain of normal subgroups in a $p$-group}
+\label{subsec:pgroup-chain}
+
+$|G|=p^n$ $\Rightarrow$ $\exists$ $\{e\}=N_0\lneq\cdots\lneq N_n=G$ with $|N_k|=p^k$ and $N_k\trianglelefteq G$.
 
 \medskip
 
-\section{Конечные абелевы группы}
+\section{Finite abelian groups}
+\label{sec:finite-abelian}
 
-\subsection{Теорема о структуре}
-Любая конечная абелева $G$:
+\subsection{Structure theorem}
+\label{subsec:structure-abelian}
+
+Any finite abelian $G$:
 \begin{itemize}
-\item \textit{Инвариантные множители:} $G\cong\mathbb Z/d_1\oplus\cdots\oplus\mathbb Z/d_k$, $1<d_1\mid d_2\mid\cdots\mid d_k$.
-\item \textit{Элементарные делители:} $G\cong\bigoplus\mathbb Z/p_i^{a_i}$ --- однозначно с точностью до перестановки.
+\item \textit{Invariant factors:} $G\cong\mathbb Z/d_1\oplus\cdots\oplus\mathbb Z/d_k$, $1<d_1\mid d_2\mid\cdots\mid d_k$.
+\item \textit{Elementary divisors:} $G\cong\bigoplus\mathbb Z/p_i^{a_i}$ --- uniquely determined up to permutation.
 \end{itemize}
 
-\subsection{Разложение на $p$-силовские}
-$G$ абелева $\Rightarrow$ $G=\bigoplus_{p\mid|G|}G_p$, где $G_p$ --- $p$-силовская.
+\subsection{$p$-Sylow decomposition}
+\label{subsec:p-sylow-abelian}
 
-\subsection{$G[n]$ в абелевой группе}
+$G$ abelian $\Rightarrow$ $G=\bigoplus_{p\mid|G|}G_p$, where $G_p$ is the $p$-Sylow subgroup.
+
+\subsection{$G[n]$ in an abelian group}
+\label{subsec:g-n-abelian}
+
 $G\cong\bigoplus\mathbb Z/p_i^{a_i}$ $\Rightarrow$ $|G[n]|=\prod_i\gcd(n,p_i^{a_i})$.
 
-\subsection{Обращение Лагранжа в абелевом случае}
-$G$ абелева, $d\mid|G|$ $\Rightarrow$ $\exists$ $H\le G$ порядка $d$.
+\subsection{Converse of Lagrange for abelian groups}
+\label{subsec:converse-lagrange}
 
-\subsection{Гауссов бином}
-Число подгрупп порядка $p^k$ в $(\mathbb Z/p)^n$ равно $\binom{n}{k}_p=\prod_{i=0}^{k-1}\frac{p^{n-i}-1}{p^{k-i}-1}$.
+$G$ abelian, $d\mid|G|$ $\Rightarrow$ $\exists$ $H\le G$ of order $d$.
 
-\subsection{Базисная теорема Бернсайда}
-$G$ --- абелева $p$-группа. $d(G)=\dim_{\mathbb F_p}G/pG$ --- минимальное число образующих.
+\subsection{Duality of characters}
+\label{subsec:character-duality}
 
-\subsection{Двойственность характеров}
-$G$ абелева. $\widehat G=\operatorname{Hom}(G,\mathbb C^\times)\cong G$.
-Ортогональность: $\sum_g\chi(g)\overline{\psi(g)}=|G|\cdot[\chi=\psi]$; $\sum_\chi\chi(g)\overline{\chi(h)}=|G|\cdot[g=h]$.
+$G$ abelian. A \textit{character} is a homomorphism $\chi:G\to\mathbb C^\times$. $\widehat G=\operatorname{Hom}(G,\mathbb C^\times)\cong G$.
+Orthogonality: $\sum_g\chi(g)\overline{\psi(g)}=|G|\cdot[\chi=\psi]$; $\sum_\chi\chi(g)\overline{\chi(h)}=|G|\cdot[g=h]$.
 
-\subsection{Нормальная форма Смита}
-$M\in\mathbb Z^{m\times n}$ приводится к $\operatorname{diag}(d_1,\dots,d_r,0,\dots)$ с $d_1\mid d_2\mid\cdots\mid d_r$ умножением на $GL_m(\mathbb Z),GL_n(\mathbb Z)$. Применение: если $G\cong\mathbb Z^n/M\mathbb Z^m$, то $G\cong\mathbb Z^{n-r}\oplus\bigoplus\mathbb Z/d_i$.
+\subsection{Smith normal form}
+\label{subsec:snf-abelian}
+
+$M\in\mathbb Z^{m\times n}$ can be reduced to $\operatorname{diag}(d_1,\dots,d_r,0,\dots)$ with $d_1\mid d_2\mid\cdots\mid d_r$ by multiplication by $GL_m(\mathbb Z),GL_n(\mathbb Z)$. Application: if $G\cong\mathbb Z^n/M\mathbb Z^m$, then $G\cong\mathbb Z^{n-r}\oplus\bigoplus\mathbb Z/d_i$ (see also \ref{subsec:snf}).
 
 \medskip
 
-\section{Основные методы и приёмы}
+\section{Basic methods and techniques}
+\label{sec:group-methods}
 
 \begin{itemize}
-\item \textit{Подсчёт Силовских.} $n_p\equiv1\pmod p$, $n_p\mid m$ часто фиксирует $n_p$. $n_p=1$ $\Rightarrow$ силовская нормальна $\Rightarrow$ группа не проста.
-\item \textit{Подсчёт элементов.} Если $n_p$ велико, элементы порядка $p$ занимают много места, оставляя мало для других --- часто $n_q=1$.
-\item \textit{Уравнение классов.} $|G|=|Z(G)|+\sum[G:C_G(g)]$ --- основа $p$-групповой индукции.
-\item \textit{Двойной счёт.} Ядро леммы Бёрнсайда; подсчёт пар $(g,x)$ с $gx=x$.
-\item \textit{Действие на смежных классах.} Переводит подгруппу $H$ в гомоморфизм $G\to S_{[G:H]}$. Ядро --- $\operatorname{core}_G(H)$, нормальная подгруппа внутри $H$.
-\item \textit{Теорема N/C.} $N_G(H)/C_G(H)\hookrightarrow\operatorname{Aut}(H)$. Ограничивает нормализатор через автоморфизмы.
-\item \textit{Сведение к $p$-частям.} В абелевом случае задача разбивается на независимые $p$-компоненты.
+\item \textit{Sylow counting.} $n_p\equiv1\pmod p$, $n_p\mid m$ often determines $n_p$. $n_p=1$ $\Rightarrow$ the Sylow subgroup is normal $\Rightarrow$ the group is not simple.
+\item \textit{Element counting.} If $n_p$ is large, elements of order $p$ occupy much space, leaving little for others --- often $n_q=1$.
+\item \textit{Class equation.} $|G|=|Z(G)|+\sum[G:C_G(g)]$ is the foundation of $p$-group induction.
+\item \textit{Double counting.} The kernel of Burnside's lemma; counting pairs $(g,x)$ with $gx=x$.
+\item \textit{Action on cosets.} Turns a subgroup $H$ into a homomorphism $G\to S_{[G:H]}$. The kernel is $\operatorname{core}_G(H)$, a normal subgroup inside $H$.
+\item \textit{N/C theorem.} $N_G(H)/C_G(H)\hookrightarrow\operatorname{Aut}(H)$. Restricts the normalizer via automorphisms.
+\item \textit{Reduction to $p$-parts.} In the abelian case the problem splits into independent $p$-components.
 \end{itemize}

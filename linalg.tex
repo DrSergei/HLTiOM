@@ -1,246 +1,383 @@
-\chapter{Линейная алгебра}
-
-\section{Характеристический и минимальный многочлен. Кэли--Гамильтон}
-
-\subsection{Теорема Кэли--Гамильтона}
-\begin{description}
-  \item[Формулировка:] Для любой квадратной матрицы $A$ над коммутативным кольцом: $\chi_A(A)=0$, где $\chi_A(t)=\det(tI-A)$.
-  \item[Когда использовать:] Сведение $A^k$ ($k\ge n$) к линейным комбинациям $I,A,\dots,A^{n-1}$. Выражение $A^{-1}$ как многочлена от $A$.
-\end{description}
-
-\subsection{Минимальный многочлен $\mu_A$}
-\begin{description}
-  \item[Формулировка:] Нормированный многочлен наименьшей степени с $\mu_A(A)=0$. Делит $\chi_A$, имеет те же корни. Кратность $\lambda$ в $\mu_A$ равна размеру крупнейшей жордановой клетки для $\lambda$.
-  \item[Критерий диагонализуемости:] $A$ диагонализуема над $F$ $\iff$ $\mu_A$ раскладывается над $F$ на различные линейные множители.
-\end{description}
+\chapter{Linear Algebra}
+\label{ch:linalg}
 
 \medskip
 
-\section{След (trace) и спектр произведения}
+\textbf{Notation.} $M_{m\times n}(F)$ --- $m\times n$ matrices over field $F$; $M_n(F)$ for square.
+$A^T$ --- transpose; $A^*$ --- conjugate transpose.
+$\operatorname{tr}(A)$ --- trace; $\det A$ --- determinant; $\operatorname{rank}(A)$ --- rank.
+$\chi_A(t)=\det(tI-A)$ --- characteristic polynomial; $\mu_A$ --- minimal polynomial.
+$\operatorname{Spec}(A)=\sigma(A)$ --- spectrum (set of eigenvalues).
+$A\succ0$ / $A\succeq0$ --- positive definite / positive semidefinite.
+$U$ is \textit{unitary} if $U^*U=I$; \textit{orthogonal} if $Q^TQ=I$.
+$I_n$ (or $I$) --- identity matrix; $\operatorname{diag}(\lambda_1,\dots,\lambda_n)$ --- diagonal matrix.
+$A\otimes B$ --- Kronecker product; $\operatorname{vec}(X)$ --- vectorization.
+$\|A\|_F$ --- Frobenius norm; $\rho(A)$ --- spectral radius.
+$\mathbb{F}_q$ --- finite field of order $q=p^n$.
 
-\subsection{Свойства следа}
-$\operatorname{tr}(AB)=\operatorname{tr}(BA)$, $\operatorname{tr}(A)=\sum\lambda_i$, $\operatorname{tr}(A^k)=\sum\lambda_i^k$. След инвариантен относительно подобия.
+\medskip
 
-\subsection{Спектр $AB$ vs $BA$}
-$A\in M_{m\times n}$, $B\in M_{n\times m}$: $\det(\lambda I_n-BA)=\lambda^{n-m}\det(\lambda I_m-AB)$. Ненулевые собственные значения $AB$ и $BA$ совпадают. При $m=n$: $\chi_{AB}=\chi_{BA}$. Следствие: $\det(I+AB)=\det(I+BA)$.
+\section{Characteristic and minimal polynomial. Cayley--Hamilton}
+\label{sec:cayley-hamilton}
 
-\subsection{Тождества Ньютона}
-$p_k=\operatorname{tr}(A^k)$, $\chi_A(t)=\sum(-1)^k e_k t^{n-k}$. Тогда
+\subsection{Cayley--Hamilton theorem}
+\label{subsec:cayley-hamilton}
+
+\textit{Statement.} For any square matrix $A$ over a commutative ring: $\chi_A(A)=0$, where $\chi_A(t)=\det(tI-A)$.
+
+\textit{When to use.} Reducing $A^k$ ($k\ge n$) to linear combinations of $I,A,\dots,A^{n-1}$. Expressing $A^{-1}$ as a polynomial in $A$.
+
+\subsection{Minimal polynomial $\mu_A$}
+\label{subsec:minimal-polynomial}
+
+\textit{Statement.} The monic polynomial of smallest degree with $\mu_A(A)=0$. It divides $\chi_A$, has the same roots. The multiplicity of $\lambda$ in $\mu_A$ equals the size of the largest Jordan block for $\lambda$.
+
+\textit{Diagonalizability criterion.} $A$ is diagonalizable over $F$ $\iff$ $\mu_A$ factors over $F$ into distinct linear factors.
+
+\medskip
+
+\section{Trace and spectrum of products}
+\label{sec:trace-spectrum}
+
+\subsection{Trace properties}
+\label{subsec:trace-properties}
+
+$\operatorname{tr}(AB)=\operatorname{tr}(BA)$, $\operatorname{tr}(A)=\sum\lambda_i$, $\operatorname{tr}(A^k)=\sum\lambda_i^k$. The trace is invariant under similarity.
+
+\subsection{Polynomial of a matrix}
+\label{subsec:polynomial-eigenvalues}
+
+If $\lambda$ is an eigenvalue of $A$, then $p(\lambda)$ is an eigenvalue of $p(A)$ for any polynomial $p$. Conversely, every eigenvalue of $p(A)$ is $p(\lambda)$ for some eigenvalue $\lambda$ of $A$. If $A$ is diagonalizable, so is $p(A)$. Consequence: $\det p(A)=\prod p(\lambda_i)$, $\operatorname{tr} p(A)=\sum p(\lambda_i)$.
+
+\subsection{Spectrum of $AB$ vs $BA$}
+\label{subsec:spectrum-ab-ba}
+
+$A\in M_{m\times n}$, $B\in M_{n\times m}$: $\det(\lambda I_n-BA)=\lambda^{n-m}\det(\lambda I_m-AB)$. Non-zero eigenvalues of $AB$ and $BA$ coincide. When $m=n$: $\chi_{AB}=\chi_{BA}$. Corollary: $\det(I+AB)=\det(I+BA)$.
+
+\subsection{Newton's identities}
+\label{subsec:newton-identities}
+
+$p_k=\operatorname{tr}(A^k)$, $\chi_A(t)=\sum(-1)^k e_k t^{n-k}$. Then
 $$p_k - e_1 p_{k-1} + e_2 p_{k-2} - \dots + (-1)^{k-1}k e_k = 0,\quad k=1,\dots,n.$$
-Над полем характеристики $0$ знание $p_1,\dots,p_n$ восстанавливает $\chi_A$.
+Over a field of characteristic $0$, knowing $p_1,\dots,p_n$ recovers $\chi_A$.
 
-\subsection{Критерий нильпотентности}
-Над полем характеристики $0$: $A$ нильпотентна $\iff$ $\operatorname{tr}(A^k)=0$ для $k=1,\dots,n$.
+\subsection{Nilpotence criterion}
+\label{subsec:nilpotence-criterion}
 
-\medskip
-
-\section{Ранг}
-
-\subsection{Неравенства Сильвестра и Фробениуса}
-Сильвестр: $\operatorname{rank}(A)+\operatorname{rank}(B)-n\le\operatorname{rank}(AB)\le\min(\operatorname{rank}(A),\operatorname{rank}(B))$.
-Фробениус: $\operatorname{rank}(AB)+\operatorname{rank}(BC)\le\operatorname{rank}(B)+\operatorname{rank}(ABC)$.
-Следствие: $AB=0\Rightarrow\operatorname{rank}(A)+\operatorname{rank}(B)\le n$.
+Over a field of characteristic $0$: $A$ is nilpotent $\iff$ $\operatorname{tr}(A^k)=0$ for $k=1,\dots,n$.
 
 \medskip
 
-\section{Жорданова форма и спектральная теорема}
+\section{Rank}
+\label{sec:rank}
 
-\subsection{Жорданова нормальная форма}
-Над $\mathbb{C}$: $A=SJS^{-1}$, $J=\bigoplus J_{m_k}(\lambda_k)$, $J_m(\lambda)=\lambda I_m+N_m$. Число блоков размера $\ge k$ для $\lambda$ равно $\dim\ker(A-\lambda I)^k-\dim\ker(A-\lambda I)^{k-1}$.
+\subsection{Sylvester and Frobenius rank inequalities}
+\label{subsec:rank-inequalities}
 
-\subsection{Спектральная теорема для нормальных матриц}
-$A\in M_n(\mathbb{C})$ нормальна ($AA^*=A^*A$) $\iff$ существует унитарная $U$ с $U^*AU=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$.
+Sylvester: $\operatorname{rank}(A)+\operatorname{rank}(B)-n\le\operatorname{rank}(AB)\le\min(\operatorname{rank}(A),\operatorname{rank}(B))$.
+Frobenius: $\operatorname{rank}(AB)+\operatorname{rank}(BC)\le\operatorname{rank}(B)+\operatorname{rank}(ABC)$.
+Corollary: $AB=0\Rightarrow\operatorname{rank}(A)+\operatorname{rank}(B)\le n$.
+
+\subsection{Rank and zero eigenvalues}
+\label{subsec:rank-zero-eigenvalues}
+
+For a normal (in particular Hermitian) matrix: $\operatorname{rank}(A)=n-\dim\ker A$ equals the number of non-zero eigenvalues (counted with multiplicity). For a general square matrix this fails (a Jordan block $J_n(0)$ has rank $n-1$ but all eigenvalues are zero). In general $\operatorname{rank}(A)\ge$ the number of non-zero eigenvalues, with equality when $A$ is diagonalizable. For singular values: $\operatorname{rank}(A)=\#\{\sigma_i>0\}$ always holds.
+
+\subsection{Basic eigenvalue facts}
+\label{subsec:eigenvalue-facts}
+
 \begin{itemize}
-  \item Эрмитова ($A=A^*$): $\lambda_i\in\mathbb{R}$.
-  \item Унитарная ($A^*A=I$): $|\lambda_i|=1$.
-  \item Вещественная симметричная: ортогонально диагонализуема над $\mathbb{R}$.
+\item \textit{Sum = trace:} $\sum\lambda_i=\operatorname{tr}(A)$. \textit{Product = determinant:} $\prod\lambda_i=\det A$.
+\item \textit{Rank 1:} $A=uv^T$ has eigenvalues $\{v^Tu,0,\dots,0\}$.
+\item \textit{Nilpotent:} $A^n=0$ $\iff$ all eigenvalues are $0$ (over $\mathbb{C}$). More generally, $A$ is nilpotent $\iff$ $\chi_A(t)=t^n$.
+\item \textit{Idempotent (projector):} $P^2=P$ $\Rightarrow$ eigenvalues $\in\{0,1\}$.
+\item \textit{Involution:} $A^2=I$ (char$\neq2$) $\Rightarrow$ eigenvalues $\in\{\pm1\}$.
+\item \textit{Unitary:} $U^*U=I$ $\Rightarrow$ $|\lambda_i|=1$.
+\item \textit{Hermitian:} $A=A^*$ $\Rightarrow$ $\lambda_i\in\mathbb{R}$.
+\item \textit{Skew-Hermitian:} $A=-A^*$ $\Rightarrow$ $\lambda_i$ are purely imaginary.
+\item \textit{Triangular:} eigenvalues = diagonal entries.
+\item \textit{Similarity:} $S^{-1}AS$ has the same eigenvalues as $A$.
+\item \textit{Transpose:} $A$ and $A^T$ have the same eigenvalues.
+\item \textit{Polynomial:} $p(A)$ has eigenvalues $p(\lambda_i)$ (see \ref{subsec:polynomial-eigenvalues}).
 \end{itemize}
 
-\subsection{Триангуляризация Шура}
-Над $\mathbb{C}$: существует унитарная $U$ и верхнетреугольная $T$ с $U^*AU=T$, $T_{ii}=\lambda_i$.
+\medskip
+
+\section{Jordan form and spectral theorem}
+\label{sec:jordan-spectral}
+
+\subsection{Jordan normal form}
+\label{subsec:jordan-form}
+
+Over $\mathbb{C}$: $A=SJS^{-1}$, $J=\bigoplus J_{m_k}(\lambda_k)$, $J_m(\lambda)=\lambda I_m+N_m$. The number of blocks of size $\ge k$ for $\lambda$ equals $\dim\ker(A-\lambda I)^k-\dim\ker(A-\lambda I)^{k-1}$.
+
+\subsection{Spectral theorem for normal matrices}
+\label{subsec:spectral-theorem}
+
+$A\in M_n(\mathbb{C})$ is normal ($AA^*=A^*A$) $\iff$ there exists a unitary $U$ with $U^*AU=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$.
+\begin{itemize}
+  \item Hermitian ($A=A^*$): $\lambda_i\in\mathbb{R}$.
+  \item Unitary ($A^*A=I$): $|\lambda_i|=1$.
+  \item Real symmetric: orthogonally diagonalizable over $\mathbb{R}$.
+\end{itemize}
+
+\subsection{Schur triangularization}
+\label{subsec:schur-triangularization}
+
+Over $\mathbb{C}$: there exists a unitary $U$ and upper-triangular $T$ with $U^*AU=T$, $T_{ii}=\lambda_i$.
 
 \medskip
 
-\section{Положительно (полу)определённые матрицы}
+\section{Positive (semi)definite matrices}
+\label{sec:psd}
 
-\subsection{Эквивалентные критерии PSD}
-Для эрмитовой $A$ эквивалентны:
+\subsection{Equivalent criteria for PSD}
+\label{subsec:psd-criteria}
+
+For a Hermitian $A$ the following are equivalent:
 \begin{enumerate}
-  \item $x^*Ax\ge0$ для всех $x$;
+  \item $x^*Ax\ge0$ for all $x$;
   \item $\lambda_i\ge0$;
-  \item $A=B^*B$ для некоторой $B$;
-  \item все главные миноры $\ge0$.
+  \item $A=B^*B$ for some $B$;
+  \item all principal minors $\ge0$.
 \end{enumerate}
-Для PD: строгие неравенства; в (4) достаточно ведущих главных миноров (критерий Сильвестра).
+For PD: strict inequalities; in (4) it suffices to check leading principal minors (Sylvester's criterion).
 
-\subsection{Представление Грама}
-$A\succeq0$ $\iff$ $A=B^*B$ $\iff$ $A_{ij}=\langle v_i,v_j\rangle$. $\operatorname{rank}(A)=\dim\operatorname{span}(v_i)$. Любая PSD-матрица --- матрица Грама некоторого набора векторов.
+\subsection{Gram matrix representation}
+\label{subsec:gram-representation}
 
-\subsection{Разложение Холецкого}
-$A\succ0$ $\iff$ существует единственная нижнетреугольная $L$ с $L_{ii}>0$ и $A=LL^*$.
+$A\succeq0$ $\iff$ $A=B^*B$ $\iff$ $A_{ij}=\langle v_i,v_j\rangle$. $\operatorname{rank}(A)=\dim\operatorname{span}(v_i)$. Every PSD matrix is the Gram matrix of some set of vectors.
 
-\subsection{Квадратный корень}
-Для $A\succeq0$ существует единственный $A^{1/2}\succeq0$ с $(A^{1/2})^2=A$ (через спектр: $A^{1/2}=U\Lambda^{1/2}U^*$).
+\subsection{Cholesky decomposition}
+\label{subsec:cholesky}
 
-\subsection{Дополнение Шура}
-Для $M=\begin{pmatrix}A&B\\ B^*&D\end{pmatrix}$ с $D\succ0$: $M\succ0$ $\iff$ $A-BD^{-1}B^*\succ0$.
+$A\succ0$ $\iff$ there exists a unique lower-triangular $L$ with $L_{ii}>0$ and $A=LL^*$.
 
-\subsection{Порядок Лёвнера}
-$A\succeq B$ $\iff$ $A-B\succeq0$. Свойства: $A\succeq B\Rightarrow C^*AC\succeq C^*BC$; $0\prec A\preceq B\Rightarrow B^{-1}\preceq A^{-1}$.
+\subsection{Square root}
+\label{subsec:square-root}
 
-\subsection{Сингулярное разложение (SVD)}
-Любая $A\in\mathbb{C}^{m\times n}$: $A=U\Sigma V^*$, $U,V$ унитарны, $\Sigma$ диагональна с $\sigma_1\ge\cdots\ge\sigma_r>0$. $\sigma_i=\sqrt{\lambda_i(A^*A)}$, $r=\operatorname{rank}(A)$.
+For $A\succeq0$ there exists a unique $A^{1/2}\succeq0$ with $(A^{1/2})^2=A$ (via the spectrum: $A^{1/2}=U\Lambda^{1/2}U^*$).
 
-\subsection{Полярное разложение}
-Любая $A$: $A=UP$, $U$ унитарна, $P=(A^*A)^{1/2}\succeq0$.
+\subsection{Schur complement}
+\label{subsec:schur-complement}
 
-\medskip
+For $M=\begin{pmatrix}A&B\\ B^*&D\end{pmatrix}$ with $D\succ0$: $M\succ0$ $\iff$ $A-BD^{-1}B^*\succ0$.
 
-\section{Евклидовы пространства и матрица Грама}
+\subsection{L\"owner order}
+\label{subsec:loewner-order}
 
-\subsection{Матрица Грама}
-$G_{ij}=\langle v_i,v_j\rangle$. $G$ симметрична и PSD. $G\succ0$ $\iff$ $v_i$ линейно независимы. $\det G=(\operatorname{Vol})^2$.
+$A\succeq B$ $\iff$ $A-B\succeq0$. Properties: $A\succeq B\Rightarrow C^*AC\succeq C^*BC$; $0\prec A\preceq B\Rightarrow B^{-1}\preceq A^{-1}$.
 
-\subsection{Неравенство Адамара}
-$|\det A|\le\prod\|a_i\|$ (столбцы). Равенство $\iff$ столбцы ортогональны. Для PSD: $\det H\le\prod H_{ii}$.
+\subsection{Singular value decomposition (SVD)}
+\label{subsec:svd}
 
-\subsection{Ортогональная проекция}
-Для $W\subseteq V$: $P_W^2=P_W$, $P_W^T=P_W$, $\operatorname{im}P_W=W$, $\ker P_W=W^\perp$. $\|x-P_Wx\|=\min_{y\in W}\|x-y\|$. Если столбцы $A$ --- базис $W$: $P_W=A(A^TA)^{-1}A^T$.
+Any $A\in\mathbb{C}^{m\times n}$: $A=U\Sigma V^*$, $U,V$ unitary, $\Sigma$ diagonal with $\sigma_1\ge\cdots\ge\sigma_r>0$. $\sigma_i=\sqrt{\lambda_i(A^*A)}$, $r=\operatorname{rank}(A)$.
 
-\subsection{Неравенство Бесселя}
-Для ортонормированной системы $e_1,\dots,e_k$: $\sum_{i=1}^k|\langle x,e_i\rangle|^2\le\|x\|^2$. Равенство $\iff$ $x\in\operatorname{span}(e_i)$.
+\subsection{Polar decomposition}
+\label{subsec:polar}
 
-\subsection{Неравенство Коши--Шварца}
-$|\langle u,v\rangle|\le\|u\|\cdot\|v\|$, равенство $\iff$ $u,v$ линейно зависимы.
+Any $A$: $A=UP$, $U$ unitary, $P=(A^*A)^{1/2}\succeq0$.
 
 \medskip
 
-\section{Аналитическая геометрия}
+\section{Euclidean spaces and Gram matrices}
+\label{sec:gram}
 
-\subsection{Прямая на плоскости}
+\subsection{Gram matrix}
+\label{subsec:gram-matrix}
+
+$G_{ij}=\langle v_i,v_j\rangle$. $G$ is symmetric and PSD. $G\succ0$ $\iff$ the $v_i$ are linearly independent. $\det G=(\operatorname{Vol})^2$.
+
+\subsection{Hadamard's inequality}
+\label{subsec:hadamard}
+
+$|\det A|\le\prod\|a_i\|$ (column vectors). Equality $\iff$ columns are orthogonal. For PSD: $\det H\le\prod H_{ii}$.
+
+\subsection{Orthogonal projection}
+\label{subsec:orthogonal-projection}
+
+For $W\subseteq V$: $P_W^2=P_W$, $P_W^T=P_W$, $\operatorname{im}P_W=W$, $\ker P_W=W^\perp$. $\|x-P_Wx\|=\min_{y\in W}\|x-y\|$. If the columns of $A$ form a basis of $W$: $P_W=A(A^TA)^{-1}A^T$.
+
+\subsection{Bessel's inequality}
+\label{subsec:bessel}
+
+For an orthonormal system $e_1,\dots,e_k$: $\sum_{i=1}^k|\langle x,e_i\rangle|^2\le\|x\|^2$. Equality $\iff$ $x\in\operatorname{span}(e_i)$.
+
+\subsection{Cauchy--Schwarz inequality}
+\label{subsec:cauchy-schwarz-linalg}
+
+$|\langle u,v\rangle|\le\|u\|\cdot\|v\|$, equality $\iff$ $u,v$ are linearly dependent (see also \ref{subsec:cs-calculus}).
+
+\medskip
+
+\section{Analytic geometry}
+\label{sec:analytic-geometry}
+
+\subsection{Line in the plane}
+\label{subsec:line-plane}
+
 \begin{itemize}
-\item \textit{Параметрически:} $(x,y) = (x_0,y_0) + t(a,b)$.
-\item \textit{Общее уравнение:} $Ax+By+C=0$, нормаль $(A,B)$.
-\item \textit{Расстояние от точки $(x_0,y_0)$:} $\dfrac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}$.
-\item \textit{Угол между прямыми:} $\cos\theta = \dfrac{|A_1A_2+B_1B_2|}{\sqrt{A_1^2+B_1^2}\sqrt{A_2^2+B_2^2}}$.
+\item \textit{Parametric:} $(x,y) = (x_0,y_0) + t(a,b)$.
+\item \textit{General equation:} $Ax+By+C=0$, normal $(A,B)$.
+\item \textit{Distance from point $(x_0,y_0)$:} $\dfrac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}$.
+\item \textit{Angle between lines:} $\cos\theta = \dfrac{|A_1A_2+B_1B_2|}{\sqrt{A_1^2+B_1^2}\sqrt{A_2^2+B_2^2}}$.
 \end{itemize}
 
-\subsection{Плоскость и прямая в пространстве}
+\subsection{Plane and line in space}
+\label{subsec:plane-line-space}
+
 \begin{itemize}
-\item \textit{Плоскость:} $Ax+By+Cz+D=0$, нормаль $(A,B,C)$.
-\item \textit{Расстояние от точки до плоскости:} $\dfrac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}$.
-\item \textit{Прямая в $\mathbb{R}^3$:} $(x,y,z) = (x_0,y_0,z_0) + t(a,b,c)$.
-\item \textit{Расстояние между скрещивающимися прямыми:} $d = \dfrac{|(\mathbf{r}_2-\mathbf{r}_1)\cdot(\mathbf{a}_1\times\mathbf{a}_2)|}{\|\mathbf{a}_1\times\mathbf{a}_2\|}$.
+\item \textit{Plane:} $Ax+By+Cz+D=0$, normal $(A,B,C)$.
+\item \textit{Distance from point to plane:} $\dfrac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}$.
+\item \textit{Line in $\mathbb{R}^3$:} $(x,y,z) = (x_0,y_0,z_0) + t(a,b,c)$.
+\item \textit{Distance between skew lines:} $d = \dfrac{|(\mathbf{r}_2-\mathbf{r}_1)\cdot(\mathbf{a}_1\times\mathbf{a}_2)|}{\|\mathbf{a}_1\times\mathbf{a}_2\|}$.
 \end{itemize}
 
-\subsection{Конические сечения (коники)}
+\subsection{Conic sections}
+\label{subsec:conics}
 
-Общее уравнение второй степени: $Ax^2+Bxy+Cy^2+Dx+Ey+F=0$.
+General second-degree equation: $Ax^2+Bxy+Cy^2+Dx+Ey+F=0$.
 
-Тип кривой определяется дискриминантом $\Delta = B^2-4AC$:
+The type is determined by the discriminant $\Delta = B^2-4AC$:
 \begin{itemize}
-\item $\Delta<0$: эллипс (в частном случае окружность при $A=C$, $B=0$).
-\item $\Delta=0$: парабола.
-\item $\Delta>0$: гипербола.
+\item $\Delta<0$: ellipse (circle when $A=C$, $B=0$).
+\item $\Delta=0$: parabola.
+\item $\Delta>0$: hyperbola.
 \end{itemize}
 
-\subsubsection{Эллипс}
+\subsubsection{Ellipse}
+\label{subsubsec:ellipse}
 
 $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$, $a\ge b>0$.
 \begin{itemize}
-\item Фокусы $(\pm c,0)$, $c=\sqrt{a^2-b^2}$.
-\item $r_1+r_2 = 2a$ (сумма расстояний до фокусов постоянна).
-\item Эксцентриситет $e=c/a<1$.
-\item Директрисы $x=\pm a/e$.
-\item Площадь $S=\pi ab$.
+\item Foci $(\pm c,0)$, $c=\sqrt{a^2-b^2}$.
+\item $r_1+r_2 = 2a$ (sum of distances to foci is constant).
+\item Eccentricity $e=c/a<1$.
+\item Directrices $x=\pm a/e$.
+\item Area $S=\pi ab$.
 \end{itemize}
 
-\subsubsection{Гипербола}
+\subsubsection{Hyperbola}
+\label{subsubsec:hyperbola}
 
 $\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1$.
 \begin{itemize}
-\item Фокусы $(\pm c,0)$, $c=\sqrt{a^2+b^2}$.
-\item $|r_1-r_2| = 2a$ (модуль разности расстояний до фокусов постоянен).
-\item Эксцентриситет $e=c/a>1$.
-\item Директрисы $x=\pm a/e$.
-\item Асимптоты $y=\pm(b/a)x$.
+\item Foci $(\pm c,0)$, $c=\sqrt{a^2+b^2}$.
+\item $|r_1-r_2| = 2a$ (absolute difference of distances to foci is constant).
+\item Eccentricity $e=c/a>1$.
+\item Directrices $x=\pm a/e$.
+\item Asymptotes $y=\pm(b/a)x$.
 \end{itemize}
 
-\subsubsection{Парабола}
+\subsubsection{Parabola}
+\label{subsubsec:parabola}
 
 $y^2 = 2px$, $p>0$.
 \begin{itemize}
-\item Фокус $(p/2,0)$.
-\item Директриса $x=-p/2$.
-\item $r = d$ (расстояние до фокуса равно расстоянию до директрисы).
-\item Эксцентриситет $e=1$.
+\item Focus $(p/2,0)$.
+\item Directrix $x=-p/2$.
+\item $r = d$ (distance to focus equals distance to directrix).
+\item Eccentricity $e=1$.
 \end{itemize}
 
 \medskip
 
-\section{Билинейные и квадратичные формы. Сигнатура}
+\section{Bilinear and quadratic forms. Signature}
+\label{sec:bilinear-forms}
 
-\subsection{Закон инерции Сильвестра}
-Для симметричной $A\in\mathbb{R}^{n\times n}$ сигнатура $(p,q,r)$ --- числа положительных, отрицательных и нулевых собственных значений --- инвариантна относительно конгруэнтности $A\mapsto C^TAC$.
+\subsection{Sylvester's law of inertia}
+\label{subsec:sylvester-inertia}
 
-\subsection{Формула Якоби}
-Если все ведущие миноры $\Delta_k\neq0$, то существует верхнетреугольная $U$ с $U^TAU=\operatorname{diag}(\Delta_1,\Delta_2/\Delta_1,\dots,\Delta_n/\Delta_{n-1})$.
+For a symmetric $A\in\mathbb{R}^{n\times n}$ the signature $(p,q,r)$ --- the numbers of positive, negative, and zero eigenvalues --- is invariant under congruence $A\mapsto C^TAC$.
 
-\subsection{Одновременная диагонализация}
-Если $A\succ0$ и $B$ симметрична, то существует $C$ с $C^TAC=I$, $C^TBC=\operatorname{diag}(\mu_i)$. Числа $\mu_i$ --- корни $\det(B-\mu A)=0$, все вещественны.
+\subsection{Simultaneous diagonalization}
+\label{subsec:simultaneous-diagonalization}
+
+If $A\succ0$ and $B$ is symmetric, then there exists $C$ with $C^TAC=I$, $C^TBC=\operatorname{diag}(\mu_i)$. The numbers $\mu_i$ are the roots of $\det(B-\mu A)=0$, all real.
 
 \medskip
 
-\section{Определители}
+\section{Determinants}
+\label{sec:determinants}
 
-\subsection{Вандермонд}
-$\det(x_j^{i-1})=\prod_{i<j}(x_j-x_i)$. Обобщение: для монических многочленов $P_{i-1}$ степени $i-1$ определитель тот же.
+\subsection{Vandermonde}
+\label{subsec:vandermonde}
 
-\subsection{Блочные формулы}
-$\det\begin{pmatrix}A&B\\ C&D\end{pmatrix}=\det A\cdot\det(D-CA^{-1}B)$ (при обратимой $A$). Если $CD=DC$, то $\det\begin{pmatrix}A&B\\ C&D\end{pmatrix}=\det(AD-BC)$.
+$\det(x_j^{i-1})=\prod_{i<j}(x_j-x_i)$. Generalization: for monic polynomials $P_{i-1}$ of degree $i-1$ the determinant is the same.
 
-\subsection{Коши--Бине}
-Для $A\in M_{m\times n}$, $B\in M_{n\times m}$, $m\le n$:
+\subsection{Block matrix formulas}
+\label{subsec:block-determinants}
+
+$\det\begin{pmatrix}A&B\\ C&D\end{pmatrix}=\det A\cdot\det(D-CA^{-1}B)$ (when $A$ is invertible). If $CD=DC$, then $\det\begin{pmatrix}A&B\\ C&D\end{pmatrix}=\det(AD-BC)$.
+
+\subsection{Cauchy--Binet}
+\label{subsec:cauchy-binet}
+
+For $A\in M_{m\times n}$, $B\in M_{n\times m}$, $m\le n$:
 $$\det(AB)=\sum_{S,\,|S|=m}\det(A_{[m],S})\cdot\det(B_{S,[m]}).$$
-Следствие: $\det(A^TA)=\sum_S\det(A_{S})^2\ge0$.
+Corollary: $\det(A^TA)=\sum_S\det(A_{S})^2\ge0$.
 
-\subsection{Тождество Сильвестра}
-$\det(I_m+AB)=\det(I_n+BA)$. Частный случай: $\det(I+uv^T)=1+v^Tu$.
+\subsection{Sylvester's identity}
+\label{subsec:sylvester-identity}
 
-\subsection{Возмущение ранга один}
-$\det(A+uv^T)=\det(A)\cdot(1+v^TA^{-1}u)$. Для ранга $k$: $\det(A+UV^T)=\det(A)\cdot\det(I_k+V^TA^{-1}U)$.
+$\det(I_m+AB)=\det(I_n+BA)$. Special case: $\det(I+uv^T)=1+v^Tu$.
 
-\subsection{Определитель Коши}
+\subsection{Rank-one perturbation}
+\label{subsec:rank-one-perturbation}
+
+$\det(A+uv^T)=\det(A)\cdot(1+v^TA^{-1}u)$. For rank $k$: $\det(A+UV^T)=\det(A)\cdot\det(I_k+V^TA^{-1}U)$.
+
+\subsection{Cauchy determinant}
+\label{subsec:cauchy-determinant}
+
 $\det(1/(a_i+b_j))=\dfrac{\prod_{i<j}(a_i-a_j)(b_i-b_j)}{\prod_{i,j}(a_i+b_j)}$.
 
-\subsection{Циркулянт}
-$C=\operatorname{circ}(c_0,\dots,c_{n-1})$: $\det C=\prod_{k=0}^{n-1} p(\omega^k)$, где $p(x)=\sum c_k x^k$, $\omega=e^{2\pi i/n}$.
+\subsection{Circulant and the DFT matrix}
+\label{subsec:circulant}
+
+$C=\operatorname{circ}(c_0,\dots,c_{n-1})$ is circulant: each row is the previous row shifted right. $C$ is diagonalized by the DFT matrix $F$ with $F_{jk}=\frac1{\sqrt n}\omega^{jk}$, $\omega=e^{2\pi i/n}$: $F^*CF=\operatorname{diag}(p(\omega^0),\dots,p(\omega^{n-1}))$, $p(x)=\sum c_k x^k$. Hence $\det C=\prod p(\omega^k)$ and eigenvectors $v_k=(1,\omega^k,\dots,\omega^{k(n-1)})^T$.
+
+The DFT matrix $F$ is unitary ($F^*F=I$) and is essentially a scaled Vandermonde matrix of roots of unity. Convolution theorem: $C\cdot v$ corresponds to convolution of $(c_k)$ with $v$, and $F$ turns convolution into pointwise multiplication. Sums with roots of unity: $\sum_{k=0}^{n-1}\omega^{km}=n\cdot[n\mid m]$, $\sum_{k=0}^{n-1}\omega^{k^2}$ (Gauss sum) equals $\sqrt n$ or $i\sqrt n$ depending on $n\bmod4$.
 
 \medskip
 
-\section{Специальные классы матриц}
+\section{Special classes of matrices}
+\label{sec:special-matrices}
 
-\subsection{Нильпотентная матрица}
-$N^k=0$. Эквивалентно: $\sigma(N)=\{0\}$, $\chi_N(t)=t^n$. Жорданова форма --- блоки $J_{m_i}(0)$. $(I-N)^{-1}=I+N+\cdots+N^{n-1}$.
+\subsection{Nilpotent matrix}
+\label{subsec:nilpotent}
 
-\subsection{Идемпотент}
-$P^2=P$. Тогда $P$ диагонализуема, $V=\operatorname{im}P\oplus\ker P$, $\sigma(P)\subseteq\{0,1\}$. $\operatorname{rank}(P)=\operatorname{tr}(P)$. $I-P$ --- тоже идемпотент.
+$N^k=0$. Equivalent: $\sigma(N)=\{0\}$, $\chi_N(t)=t^n$. Jordan form consists of blocks $J_{m_i}(0)$. $(I-N)^{-1}=I+N+\cdots+N^{n-1}$.
 
-\subsection{Инволюция}
-$A^2=I$, char $\neq2$. Тогда $\sigma(A)\subseteq\{\pm1\}$, $A$ диагонализуема. $V=V_+\oplus V_-$, $V_\pm=\ker(A\mp I)$. Проекторы $P_\pm=(I\pm A)/2$.
+\subsection{Idempotent}
+\label{subsec:idempotent}
 
-\subsection{Коммутирующие матрицы}
-Если $AB=BA$, то: существует общий собственный вектор; семейство попарно коммутирующих матриц одновременно триангуляризуемо; если все диагонализуемы --- одновременно диагонализуемы.
+$P^2=P$. Then $P$ is diagonalizable, $V=\operatorname{im}P\oplus\ker P$, $\sigma(P)\subseteq\{0,1\}$. $\operatorname{rank}(P)=\operatorname{tr}(P)$. $I-P$ is also an idempotent.
 
-\subsection{Уравнение Сильвестра}
-$AX-XB=C$ имеет единственное решение $\iff$ $\sigma(A)\cap\sigma(B)=\emptyset$.
+\subsection{Involution}
+\label{subsec:involution}
 
-\subsection{Коммутатор}
-$\operatorname{tr}(AB-BA)=0$. При char$=0$ уравнение $AB-BA=I$ неразрешимо.
+$A^2=I$, char $\neq2$. Then $\sigma(A)\subseteq\{\pm1\}$, $A$ is diagonalizable. $V=V_+\oplus V_-$, $V_\pm=\ker(A\mp I)$. Projectors $P_\pm=(I\pm A)/2$.
+
+\subsection{Commuting matrices}
+\label{subsec:commuting}
+
+If $AB=BA$, then: there exists a common eigenvector; a family of pairwise commuting matrices is \textit{simultaneously triangularizable} (there exists $S$ such that $S^{-1}A_iS$ are all upper-triangular); if all are diagonalizable --- simultaneously diagonalizable.
+
+\subsection{Sylvester equation}
+\label{subsec:sylvester-equation}
+
+$AX-XB=C$ has a unique solution $\iff$ $\sigma(A)\cap\sigma(B)=\emptyset$.
+
+\subsection{Commutator}
+\label{subsec:commutator}
+
+$\operatorname{tr}(AB-BA)=0$. If $\operatorname{char}=0$, the equation $AB-BA=I$ has no solution.
 
 \medskip
 
-\section{Произведение Кронекера}
+\section{Kronecker product}
+\label{sec:kronecker}
 
 $(A\otimes B)(C\otimes D)=(AC)\otimes(BD)$. $(A\otimes B)^T=A^T\otimes B^T$, $(A\otimes B)^{-1}=A^{-1}\otimes B^{-1}$.
 
@@ -248,68 +385,96 @@ $\sigma(A\otimes B)=\{\lambda_i\mu_j\}$. $\operatorname{tr}(A\otimes B)=\operato
 
 $\operatorname{vec}(AXB)=(B^T\otimes A)\operatorname{vec}(X)$.
 
-$A\oplus B=A\otimes I_m+I_n\otimes B$ (кронекерова сумма). $\sigma(A\oplus B)=\{\lambda_i+\mu_j\}$.
+$A\oplus B=A\otimes I_m+I_n\otimes B$ (Kronecker sum). $\sigma(A\oplus B)=\{\lambda_i+\mu_j\}$.
 
 \medskip
 
-\section{Матрицы над $\mathbb{F}_p$}
+\section{Matrices over $\mathbb{F}_p$}
+\label{sec:matrices-over-fp}
 
-\subsection{Тождество Фробениуса}
-Для коммутирующих $A,B$ над полем char $p$: $(A+B)^{p^k}=A^{p^k}+B^{p^k}$.
+\subsection{Frobenius identity}
+\label{subsec:frobenius-identity}
 
-\subsection{Порядок $\operatorname{GL}_n(\mathbb{F}_q)$}
-$|\operatorname{GL}_n(\mathbb{F}_q)|=\prod_{k=0}^{n-1}(q^n-q^k)$. Число $k$-мерных подпространств: $\binom{n}{k}_q$.
+For commuting $A,B$ over a field of char $p$: $(A+B)^{p^k}=A^{p^k}+B^{p^k}$.
 
-\subsection{Теорема Шевалле--Уорнинга}
-$f_1,\dots,f_r\in\mathbb{F}_q[x_1,\dots,x_n]$, $\sum\deg f_i<n$. Число общих нулей в $\mathbb{F}_q^n$ делится на $p$. Если есть тривиальный ноль --- есть и нетривиальный.
+\subsection{Order of $\operatorname{GL}_n(\mathbb{F}_q)$}
+\label{subsec:order-gl}
 
-\subsection{Комбинаторный Nullstellensatz Алона}
-$f\in F[x_1,\dots,x_n]$, $\deg f=\sum t_i$, коэффициент при $\prod x_i^{t_i}$ ненулевой. Для $S_i\subseteq F$ с $|S_i|>t_i$ существует $s\in\prod S_i$ с $f(s)\neq0$.
+$|\operatorname{GL}_n(\mathbb{F}_q)|=\prod_{k=0}^{n-1}(q^n-q^k)$. Number of $k$-dimensional subspaces: $\binom{n}{k}_q$.
+
+\subsection{Chevalley--Warning theorem}
+\label{subsec:chevalley-warning-linalg}
+
+$f_1,\dots,f_r\in\mathbb{F}_q[x_1,\dots,x_n]$, $\sum\deg f_i<n$. The number of common zeros in $\mathbb{F}_q^n$ is divisible by $p$. If there is a trivial zero, there is a non-trivial one (see also \ref{subsec:chevalley-warning}).
+
+\subsection{Combinatorial Nullstellensatz (Alon)}
+\label{subsec:combinatorial-nullstellensatz}
+
+$f\in F[x_1,\dots,x_n]$, $\deg f=\sum t_i$, the coefficient of $\prod x_i^{t_i}$ is non-zero. For $S_i\subseteq F$ with $|S_i|>t_i$ there exists $s\in\prod S_i$ with $f(s)\neq0$ (see also \ref{subsec:combinatorial-nullstellensatz-poly}).
 
 \medskip
 
-\section{Матричная экспонента}
+\section{Matrix exponential}
+\label{sec:matrix-exponential}
 
-\subsection{Вычисление}
+\subsection{Computation}
+\label{subsec:exp-computation}
+
 $e^{tJ_m(\lambda)}=e^{t\lambda}\sum_{k=0}^{m-1}\frac{t^k}{k!}N_m^k$. $e^{tA}=S\,e^{tJ}\,S^{-1}$.
 
 $\sigma(e^A)=e^{\sigma(A)}$, $\det e^A=e^{\operatorname{tr}A}$.
 
 $AB=BA$ $\Rightarrow$ $e^{A+B}=e^A e^B$.
 
-\subsection{Оценки}
-$\|A^n\|\le C\cdot n^{m-1}\rho(A)^n$, $\|e^{tA}\|\le C(1+t^{m-1})e^{\alpha(A)t}$ ($t\ge0$). Формула Гельфанда: $\rho(A)=\lim\|A^n\|^{1/n}$.
+\subsection{Estimates}
+\label{subsec:exp-estimates}
+
+$\|A^n\|\le C\cdot n^{m-1}\rho(A)^n$, $\|e^{tA}\|\le C(1+t^{m-1})e^{\alpha(A)t}$ ($t\ge0$). Gelfand's formula: $\rho(A)=\lim\|A^n\|^{1/n}$.
 
 \medskip
 
-\section{Целочисленные матрицы (Smith normal form)}
+\section{Integer matrices (Smith normal form)}
+\label{sec:snf}
 
-\subsection{Нормальная форма Смита}
-Для $A\in M_{m\times n}(\mathbb{Z})$ ранга $r$ существуют унимодулярные $U,V$ с $UAV=\operatorname{diag}(d_1,\dots,d_r,0,\dots)$, $d_1\mid d_2\mid\cdots\mid d_r$. $\prod d_i=|\det A|$ (для квадратной).
+\subsection{Smith normal form}
+\label{subsec:snf}
 
-\subsection{Инвариантные факторы через миноры}
-$\Delta_k(A)=\gcd$ всех $k\times k$ миноров $A$. $d_k=\Delta_k/\Delta_{k-1}$.
+For $A\in M_{m\times n}(\mathbb{Z})$ of rank $r$ there exist unimodular $U,V$ ($U,V\in\operatorname{GL}_n(\mathbb{Z})$, i.e. $\det U,\det V=\pm1$) with $UAV=\operatorname{diag}(d_1,\dots,d_r,0,\dots)$, $d_1\mid d_2\mid\cdots\mid d_r$. $\prod d_i=|\det A|$ (for square $A$).
 
-\subsection{Структура коядра}
-$\mathbb{Z}^n/A\mathbb{Z}^n\cong\bigoplus\mathbb{Z}/d_i\oplus\mathbb{Z}^{n-r}$. Для невырожденной $A$: $|\mathbb{Z}^n/A\mathbb{Z}^n|=|\det A|$.
+\subsection{Invariant factors via minors}
+\label{subsec:invariant-factors}
+
+$\Delta_k(A)=\gcd$ of all $k\times k$ minors of $A$. $d_k=\Delta_k/\Delta_{k-1}$.
+
+\subsection{Structure of the cokernel}
+\label{subsec:cokernel-structure}
+
+$\mathbb{Z}^n/A\mathbb{Z}^n\cong\bigoplus\mathbb{Z}/d_i\oplus\mathbb{Z}^{n-r}$. For non-singular $A$: $|\mathbb{Z}^n/A\mathbb{Z}^n|=|\det A|$.
+
+\subsection{Connection to graphs}
+\label{subsec:snf-graphs}
+
+For a connected graph $G$ with $n$ vertices and $m$ edges, let $B$ be its $n\times m$ incidence matrix (entries $\pm1$, one per edge). The SNF of $B$ has $r=n-1$, $d_1=1$, and the remaining $d_2,\dots,d_{n-1}$ are the invariant factors of the cycle space. Moreover, the SNF of the Laplacian $L$ yields $\prod d_i = n\cdot t(G)$ where $t(G)$ is the number of spanning trees (\ref{subsec:kirchhoff}). The abelian sandpile (critical) group of $G$ is $\bigoplus_{i=2}^{n-1}\mathbb Z/d_i$.
 
 \medskip
 
-\section{Минимаксные характеризации и неравенства}
+\section{Minimax characterizations and eigenvalue inequalities}
+\label{sec:minimax}
 
-\subsection{Куранта--Фишера}
-Для эрмитовой $A$ с $\lambda_1\ge\cdots\ge\lambda_n$:
+\subsection{Courant--Fischer}
+\label{subsec:courant-fischer}
+
+For Hermitian $A$ with $\lambda_1\ge\cdots\ge\lambda_n$:
 $$\lambda_k=\max_{\dim V=k}\min_{x\in V,\|x\|=1}x^*Ax=\min_{\dim V=n-k+1}\max_{x\in V,\|x\|=1}x^*Ax.$$
-Для сингулярных чисел: $\sigma_k(A)=\max_{\dim V=k}\min_{x\in V,\|x\|=1}\|Ax\|$.
+For singular values: $\sigma_k(A)=\max_{\dim V=k}\min_{x\in V,\|x\|=1}\|Ax\|$.
 
-\subsection{Перемежение Коши}
-Для главной подматрицы $B$ размера $n-1$: $\lambda_1\ge\mu_1\ge\lambda_2\ge\mu_2\ge\cdots\ge\mu_{n-1}\ge\lambda_n$.
+\subsection{Cauchy interlacing}
+\label{subsec:cauchy-interlacing}
 
-\subsection{Неравенства Вейля}
-Для эрмитовых $A,B$: $\lambda_{i+j-1}(A+B)\le\lambda_i(A)+\lambda_j(B)$.
+For a principal submatrix $B$ of size $n-1$: $\lambda_1\ge\mu_1\ge\lambda_2\ge\mu_2\ge\cdots\ge\mu_{n-1}\ge\lambda_n$.
 
-\subsection{Неравенство Шура}
-$\sum|\lambda_i|^2\le\|A\|_F^2$. Равенство $\iff$ $A$ нормальна.
+\subsection{Weyl inequalities}
+\label{subsec:weyl}
 
-\subsection{Неравенство Минковского}
-Для $A,B\succeq0$: $\det(A+B)^{1/n}\ge\det(A)^{1/n}+\det(B)^{1/n}$.
+For Hermitian $A,B$: $\lambda_{i+j-1}(A+B)\le\lambda_i(A)+\lambda_j(B)$.
+

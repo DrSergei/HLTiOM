@@ -1,256 +1,309 @@
-\chapter{Комбинаторика}
-
-\section{Принцип Дирихле и экстремальный принцип}
-
-\subsection{Усиленный принцип Дирихле}
-$n$ объектов в $k$ ящиков $\Rightarrow$ есть ящик с $\ge\lceil n/k\rceil$ объектами. Усреднение: $\max a_i\ge S/n$, $\min a_i\le S/n$.
-
-\subsection{Экстремальный принцип}
-На конечном множестве конфигураций существуют минимизирующая и максимизирующая заданную функцию. Выбрать в классе плохих конфигурацию с минимальным/максимальным значением, локально варьировать $\to$ противоречие.
-
-\subsection{Теорема Эрдеша--Секереша}
-Последовательность из $N\ge (r-1)(s-1)+1$ различных чисел содержит возрастающую длины $r$ или убывающую длины $s$. Граница точна.
-
-\subsection{Теоремы Дилуорта и Мирски}
-В конечном poset: минимальное число цепей, покрывающих $P$, равно ширине $w(P)$ (Дилуорт). Минимальное число антицепей, покрывающих $P$, равно высоте $h(P)$ (Мирски). Следствие: $|P|\ge ab+1$ $\Rightarrow$ цепь длины $a+1$ или антицепь размера $b+1$.
-
-\subsection{Теорема Эрдеша--Ко--Радо}
-$\mathcal{F}\subseteq\binom{[n]}{k}$ --- пересекающееся семейство, $n\ge 2k$ $\Rightarrow$ $|\mathcal{F}|\le\binom{n-1}{k-1}$. Равенство на звезде (все $k$-множества, содержащие фиксированный элемент).
-
-\subsection{Теорема Шура}
-$N\ge S(r)$ $\Rightarrow$ любая $r$-раскраска $\{1,\dots,N\}$ содержит одноцветную $x+y=z$.
-
-\subsection{Теорема Рамсея (биномиальная оценка)}
-$R(s,t)\le R(s-1,t)+R(s,t-1)$, откуда $R(s,t)\le\binom{s+t-2}{s-1}$ и $R(s,s)\le 4^{s-1}$.
-
-\subsection{Неравенство Боллобаша}
-Пары $(A_i,B_i)$ с $A_i\cap B_i=\emptyset$ и $A_i\cap B_j\ne\emptyset$ при $i\ne j$: $\sum_i\binom{|A_i|+|B_i|}{|A_i|}^{-1}\le 1$.
+\chapter{Combinatorics}
+\label{ch:combinatorics}
 
 \medskip
 
-\section{Вероятностный метод}
-
-\subsection{Линейность ожидания}
-$\mathbb{E}[\sum X_i]=\sum\mathbb{E}[X_i]$ для любых (зависимых) интегрируемых $X_i$.
-
-\subsection{Метод первого момента}
-$X\ge 0$, $\mathbb{E}[X]<1$ $\Rightarrow$ $P(X=0)>0$ (существование).
-
-\subsection{Метод изменения/удаления (alteration)}
-Случайная конструкция $C$ почти хороша. Удаляем дефекты. Получаем чистую конструкцию размера $\ge\mathbb{E}[|C|]-\mathbb{E}[Y]$, где $Y$ --- число дефектов.
-
-\subsection{Локальная лемма Ловаса (LLL)}
-События $A_i$, $P(A_i)\le p$, каждое зависит от $\le d$ других, $ep(d+1)\le 1$ $\Rightarrow$ $P(\bigcap\overline{A_i})>0$.
-
-\subsection{Метод второго момента}
-$P(X=0)\le\frac{\mathrm{Var}(X)}{(\mathbb{E}[X])^2}$. Если $\mathrm{Var}(X)=o((\mathbb{E}[X])^2)$, то $X>0$ с вероятностью $\to 1$.
-
-\subsection{Случайная нижняя оценка чисел Рамсея}
-$R(k,k) > 2^{k/2}$ для $k\ge 3$. Улучшение удалением: $\frac{k}{e\sqrt{2}}2^{k/2}$.
-
-\subsection{Неравенство Чернова--Хеффдинга}
-$X_i\in[a_i,b_i]$ независимы, $S=\sum X_i$: $P(|S-\mathbb{E}[S]|\ge t)\le 2\exp(-2t^2/\sum(b_i-a_i)^2)$.
+\textbf{Notation.} $[n]=\{1,\dots,n\}$; $\binom{[n]}{k}$ --- $k$-subsets of $[n]$.
+$2^{[n]}$ --- power set; $\binom{n}{k}$ --- binomial coefficient.
+$|X|$ --- cardinality; $\mathbb{E}[X]$ --- expectation; $\mathrm{Var}(X)$ --- variance.
+$\mathcal{F}$ --- family of sets.
+$A+B=\{a+b:a\in A,b\in B\}$ --- sumset; $nA=A+\cdots+A$ ($n$ times).
 
 \medskip
 
-\section{Биективные аргументы и двойной счёт}
+\section{Pigeonhole principle and extremal principle}
+\label{sec:pigeonhole}
 
-\subsection{Двойной счёт (матрица инцидентности)}
-Для $R\subseteq X\times Y$: $|R|=\sum_x|\{y\}|=\sum_y|\{x\}|$. Следствия: $\sum\deg v=2|E|$, тождество Вандермонда, хоккейная клюшка.
+\subsection{Strengthened pigeonhole principle}
+\label{subsec:strengthened-pigeonhole}
 
-\subsection{Инволюция со сменой знака}
-$\iota:X\to X$ --- инволюция, меняющая знак вне неподвижных точек $\Rightarrow$ $|X^+|-|X^-|=|\mathrm{Fix}\cap X^+|-|\mathrm{Fix}\cap X^-|$.
+$n$ objects into $k$ boxes $\Rightarrow$ some box contains $\ge\lceil n/k\rceil$ objects. Averaging: $\max a_i\ge S/n$, $\min a_i\le S/n$.
 
-\subsection{Неравенство LYM и теорема Шпернера}
-$\mathcal{F}\subseteq 2^{[n]}$ --- антицепь $\Rightarrow$ $\sum_{F\in\mathcal{F}}1/\binom{n}{|F|}\le 1$. Следствие: $|\mathcal{F}|\le\binom{n}{\lfloor n/2\rfloor}$.
+\subsection{Extremal principle}
+\label{subsec:extremal-principle}
 
-\subsection{Лемма Бёрнсайда}
-Конечная группа $G$ действует на $X$ $\Rightarrow$ число орбит $=\frac{1}{|G|}\sum_{g\in G}|X^g|$.
+On a finite set of configurations there exist minimizing and maximizing a given function. Choose a configuration with minimal/maximal value in the ``bad'' class, locally vary $\to$ contradiction.
 
-\subsection{Теорема Холла (о паросочетаниях)}
-$A_1,\dots,A_n$ имеют СДР $\iff$ для всех $S\subseteq[n]$: $|\bigcup_{i\in S}A_i|\ge|S|$.
+\subsection{Erd\H{o}s--Szekeres theorem}
+\label{subsec:erdos-szekeres}
 
-\subsection{Формула Кэли и код Прюфера}
-Число помеченных деревьев на $n$ вершинах $=n^{n-2}$.
+A sequence of $N\ge (r-1)(s-1)+1$ distinct numbers contains an increasing subsequence of length $r$ or a decreasing subsequence of length $s$. The bound is sharp.
 
-\subsection{Циклическая лемма (Дворецкий--Моцкин)}
-В круговой последовательности из $a$ единиц и $b$ минус единиц с $a-b=k>0$ ровно $k$ сдвигов дают все частичные суммы строго положительными.
+\subsection{Dilworth and Mirsky theorems}
+\label{subsec:dilworth-mirsky}
 
-\subsection{Лемма Линдстрёма--Гесселя--Вьенно (LGV)}
-В ациклическом орграфе $\det[e(A_i,B_j)]=\sum_{\text{непересек. пути}}\operatorname{sgn}(\sigma)\prod w(P_i)$, где $e(A_i,B_j)$ --- сумма весов путей.
+A \textit{poset} is a set with a partial order $\le$. A \textit{chain} is a totally ordered subset; an \textit{antichain} is a set of pairwise incomparable elements. In a finite poset: the minimum number of chains covering $P$ equals the width $w(P)$ (Dilworth). The minimum number of antichains covering $P$ equals the height $h(P)$ (Mirsky). Consequence: $|P|\ge ab+1$ $\Rightarrow$ chain of length $a+1$ or antichain of size $b+1$.
 
-\medskip
+\subsection{Erd\H{o}s--Ko--Rado theorem}
+\label{subsec:erdos-ko-rado}
 
-\section{Линейно-алгебраическая комбинаторика}
+$\mathcal{F}\subseteq\binom{[n]}{k}$ is an intersecting family, $n\ge 2k$ $\Rightarrow$ $|\mathcal{F}|\le\binom{n-1}{k-1}$. Equality holds for a star (all $k$-subsets containing a fixed element).
 
-\subsection{Аргумент размерности}
-$v_1,\dots,v_m$ линейно независимы в $V$ размерности $n$ $\Rightarrow$ $m\le n$.
+\subsection{Ramsey theorem (binomial bound)}
+\label{subsec:ramsey}
 
-\subsection{Диагональный признак независимости}
-Если $f_i(x_j)\ne 0$ при $i=j$ и $=0$ при $i\ne j$, то $f_i$ линейно независимы.
-
-\subsection{Oddtown (нечётный город)}
-$A_i\subseteq[n]$, $|A_i|$ нечётны, $|A_i\cap A_j|$ чётны при $i\ne j$ $\Rightarrow$ $m\le n$.
-
-\subsection{Eventown (чётный город)}
-$|A_i|$ и $|A_i\cap A_j|$ чётны для всех $i,j$ $\Rightarrow$ $m\le 2^{\lfloor n/2\rfloor}$.
-
-\subsection{Неравенство Фишера}
-$A_i\subseteq[n]$, $|A_i\cap A_j|=\lambda\ge 1$ при $i\ne j$ $\Rightarrow$ $m\le n$.
-
-\subsection{Теорема Рэя-Чаудхури--Уилсона}
-$\mathcal{F}\subseteq\binom{[n]}{k}$, $|A_i\cap A_j|\in L$, $|L|=s$, $k\notin L$ $\Rightarrow$ $m\le\binom{n}{s}$.
-
-\subsection{Комбинаторный Nullstellensatz (Алон)}
-$f\in\mathbb{F}[x_1,\dots,x_n]$ степени $d=\sum t_i$, коэффициент при $\prod x_i^{t_i}\ne 0$. $S_i\subseteq\mathbb{F}$, $|S_i|>t_i$ $\Rightarrow$ $\exists s\in\prod S_i$ с $f(s)\ne 0$.
-
-\subsection{Множества двух расстояний (Блокхёйс)}
-$S\subset\mathbb{R}^n$ с ровно двумя значениями попарных расстояний $\Rightarrow$ $|S|\le\binom{n+2}{2}$.
+$R(s,t)\le R(s-1,t)+R(s,t-1)$, hence $R(s,t)\le\binom{s+t-2}{s-1}$ and $R(s,s)\le 4^{s-1}$.
 
 \medskip
 
-\section{Аддитивная комбинаторика}
+\section{Probabilistic method}
+\label{sec:probabilistic-method}
 
-\subsection{Теорема Коши--Дэвенпорта (Cauchy–Davenport)}
-Для непустых $A,B\subseteq\mathbb{Z}/p\mathbb{Z}$ ($p$ простое):
+\subsection{Linearity of expectation}
+\label{subsec:linearity-expectation}
+
+$\mathbb{E}[\sum X_i]=\sum\mathbb{E}[X_i]$ for any (dependent) integrable $X_i$.
+
+\subsection{First moment method}
+\label{subsec:first-moment}
+
+$X\ge 0$, $\mathbb{E}[X]<1$ $\Rightarrow$ $P(X=0)>0$ (existence).
+
+\subsection{Alteration method}
+\label{subsec:alteration}
+
+A random construction $C$ is almost good. Remove defects. Obtain a pure construction of size $\ge\mathbb{E}[|C|]-\mathbb{E}[Y]$, where $Y$ is the number of defects.
+
+\subsection{Lov\'asz Local Lemma (LLL)}
+\label{subsec:lll}
+
+Events $A_i$, $P(A_i)\le p$, each depends on at most $d$ others, $ep(d+1)\le 1$ $\Rightarrow$ $P(\bigcap\overline{A_i})>0$.
+
+\subsection{Second moment method}
+\label{subsec:second-moment}
+
+$P(X=0)\le\frac{\mathrm{Var}(X)}{(\mathbb{E}[X])^2}$. If $\mathrm{Var}(X)=o((\mathbb{E}[X])^2)$, then $X>0$ with probability $\to 1$.
+
+\subsection{Random lower bound for Ramsey numbers}
+\label{subsec:ramsey-random}
+
+$R(k,k) > 2^{k/2}$ for $k\ge 3$. Improved by alteration: $\frac{k}{e\sqrt{2}}2^{k/2}$.
+
+\subsection{Chernoff--Hoeffding inequality}
+\label{subsec:chernoff}
+
+$X_i\in[a_i,b_i]$ independent, $S=\sum X_i$: $P(|S-\mathbb{E}[S]|\ge t)\le 2\exp(-2t^2/\sum(b_i-a_i)^2)$.
+
+\medskip
+
+\section{Bijective arguments and double counting}
+\label{sec:double-counting}
+
+\subsection{Double counting (incidence matrix)}
+\label{subsec:double-counting}
+
+For $R\subseteq X\times Y$: $|R|=\sum_x|\{y\}|=\sum_y|\{x\}|$. Consequences: $\sum\deg v=2|E|$, Vandermonde's identity, hockey-stick identity.
+
+\subsection{LYM inequality and Sperner's theorem}
+\label{subsec:lym-sperner}
+
+$\mathcal{F}\subseteq 2^{[n]}$ is an antichain $\Rightarrow$ $\sum_{F\in\mathcal{F}}1/\binom{n}{|F|}\le 1$. Consequence: $|\mathcal{F}|\le\binom{n}{\lfloor n/2\rfloor}$.
+
+\subsection{Burnside's lemma}
+\label{subsec:burnside-combinatorics}
+
+A finite group $G$ acts on $X$ $\Rightarrow$ number of orbits $=\frac{1}{|G|}\sum_{g\in G}|X^g|$.
+
+\subsection{Hall's theorem (on matchings)}
+\label{subsec:hall}
+
+$A_1,\dots,A_n$ have an SDR $\iff$ for all $S\subseteq[n]$: $|\bigcup_{i\in S}A_i|\ge|S|$.
+
+\subsection{Cayley's formula and Pr\"ufer code}
+\label{subsec:cayley-formula}
+
+Number of labeled trees on $n$ vertices $=n^{n-2}$.
+
+\medskip
+
+\section{Linear algebra methods}
+\label{sec:linalg-combinatorics}
+
+\subsection{Dimensionality argument}
+\label{subsec:dimensionality}
+
+$v_1,\dots,v_m$ are linearly independent in $V$ of dimension $n$ $\Rightarrow$ $m\le n$.
+
+\subsection{Diagonal independence criterion}
+\label{subsec:diagonal-criterion}
+
+If $f_i(x_j)\ne 0$ at $i=j$ and $=0$ at $i\ne j$, then $f_i$ are linearly independent.
+
+\subsection{Oddtown}
+\label{subsec:oddtown}
+
+$A_i\subseteq[n]$, $|A_i|$ odd, $|A_i\cap A_j|$ even for $i\ne j$ $\Rightarrow$ $m\le n$.
+
+\subsection{Eventown}
+\label{subsec:eventown}
+
+$|A_i|$ and $|A_i\cap A_j|$ even for all $i,j$ $\Rightarrow$ $m\le 2^{\lfloor n/2\rfloor}$.
+
+\subsection{Fisher's inequality}
+\label{subsec:fisher}
+
+$A_i\subseteq[n]$, $|A_i\cap A_j|=\lambda\ge 1$ for $i\ne j$ $\Rightarrow$ $m\le n$.
+
+\subsection{Combinatorial Nullstellensatz (Alon)}
+\label{subsec:combinatorial-nullstellensatz-comb}
+
+$f\in\mathbb{F}[x_1,\dots,x_n]$ of degree $d=\sum t_i$, coefficient of $\prod x_i^{t_i}\ne 0$. $S_i\subseteq\mathbb{F}$, $|S_i|>t_i$ $\Rightarrow$ $\exists s\in\prod S_i$ with $f(s)\ne 0$ (see also \ref{subsec:combinatorial-nullstellensatz-poly}).
+
+\medskip
+
+\section{Additive combinatorics}
+\label{sec:additive-combinatorics}
+
+\subsection{Cauchy--Davenport theorem}
+\label{subsec:cauchy-davenport}
+
+For non-empty $A,B\subseteq\mathbb{Z}/p\mathbb{Z}$ ($p$ prime):
 $$|A+B|\ge\min(p,\,|A|+|B|-1).$$
 
-\textit{Когда использовать.} Нижние оценки сумм, существование решений $a+b=c$ в подмножествах $\mathbb{F}_p$.
+\textit{When to use.} Lower bounds on sumsets, existence of solutions $a+b=c$ in subsets of $\mathbb{F}_p$.
 
-\textit{Идея.} Индукция по $|A|$: сдвиг и удаление пересечения.
+\textit{Idea.} Induction on $|A|$: shift and delete intersection.
 
-\subsection{Неравенство треугольника Руцца (Ruzsa)}
-Для непустых $A,B,C\subseteq G$ (абелева группа):
+\subsection{Ruzsa triangle inequality}
+\label{subsec:ruzsa-triangle}
+
+For non-empty $A,B,C\subseteq G$ (abelian group):
 $$|A+C|\cdot|B|\le|A+B|\cdot|B+C|.$$
 
-\textit{Следствие.} $|A-A|\le\bigl(|A+A|/|A|\bigr)^2|A|$.
+\textit{Corollary.} $|A-A|\le\bigl(|A+A|/|A|\bigr)^2|A|$.
 
-\subsection{Лемма Петридиса}
-Для $A,B\subseteq G$ с $|A+B|\le K|A|$ существует непустое $X\subseteq A$ с $|X+B'|\le K|X|$ для любого $B'\subseteq B$, где $B'$ --- произвольное подмножество.
+\subsection{Petridis's lemma}
+\label{subsec:petridis}
 
-\subsection{Неравенство Пленнеке--Руже (Plünnecke–Ruzsa)}
-Если $|A+A|\le K|A|$, то $|nA-mA|\le K^{n+m}|A|$, где $nA = A+\cdots+A$ ($n$ раз).
+For $A,B\subseteq G$ with $|A+B|\le K|A|$ there exists non-empty $X\subseteq A$ with $|X+B'|\le K|X|$ for any $B'\subseteq B$, where $B'$ is an arbitrary subset.
 
-\textit{Когда использовать.} Оценки многократных сумм при малом удвоении множества.
+\subsection{Pl\"unnecke--Ruzsa inequality}
+\label{subsec:plunnecke-ruzsa}
 
-\subsection{Теорема Эрдёша--Гинзбурга--Зива (EGZ)}
-Среди любых $2n-1$ целых чисел найдутся $n$, сумма которых кратна $n$.
+If $|A+A|\le K|A|$, then $|nA-mA|\le K^{n+m}|A|$, where $nA = A+\cdots+A$ ($n$ times).
 
-\textit{Обобщение (Кемниц):} Среди $2n-1$ элементов любой абелевой группы порядка $n$ есть $n$ с суммой $0$.
+\textit{When to use.} Bounds on iterated sumsets under small doubling.
+
+\subsection{Erd\H{o}s--Ginzburg--Ziv (EGZ)}
+\label{subsec:egz-combinatorics}
+
+Among any $2n-1$ integers there exist $n$ whose sum is divisible by $n$.
+
+\textit{Generalization (Kemnitz).} Among $2n-1$ elements of any abelian group of order $n$ there are $n$ with sum $0$ (see also \ref{subsec:egz-poly}).
 
 \medskip
 
-\section{Производящие функции (OGF и EGF)}
+\section{Generating functions (OGF and EGF)}
+\label{sec:generating-functions}
 
-\subsection{Основные операции}
-OGF: $A(x)=\sum a_n x^n$: $AB$ --- свёртка, $x A$ --- сдвиг, $A/(1-x)$ --- частичные суммы.
-EGF: $\hat A(x)=\sum a_n x^n/n!$: произведение даёт биномиальную свёртку.
+\subsection{Basic operations}
+\label{subsec:gf-basic}
 
-\subsection{Фильтр по корням из единицы}
-$\sum_{n\equiv r\pmod m}a_n x^n=\frac1m\sum_{j=0}^{m-1}\omega^{-jr}A(\omega^j x)$ с $\omega=e^{2\pi i/m}$.
+OGF: $A(x)=\sum a_n x^n$: $AB$ gives convolution, $x A$ gives shift, $A/(1-x)$ gives partial sums.
+EGF: $\hat A(x)=\sum a_n x^n/n!$: product gives binomial convolution.
 
-\subsection{Линейные рекурренты с постоянными коэффициентами}
-$\sum c_i a_{n+i}=0$ $\Rightarrow$ $A(x)=P(x)/Q(x)$, где $Q(x)=c_k+\dots+c_0x^k=\prod(1-\alpha_j x)^{m_j}$. Тогда $a_n=\sum Q_j(n)\alpha_j^n$.
+\subsection{Roots of unity filter}
+\label{subsec:roots-unity-filter}
 
-\subsection{Числа Каталана}
+$\sum_{n\equiv r\pmod m}a_n x^n=\frac1m\sum_{j=0}^{m-1}\omega^{-jr}A(\omega^j x)$ with $\omega=e^{2\pi i/m}$.
+
+\subsection{Linear recurrences with constant coefficients}
+\label{subsec:linear-recurrence}
+
+$\sum c_i a_{n+i}=0$ $\Rightarrow$ $A(x)=P(x)/Q(x)$, where $Q(x)=c_k+\dots+c_0x^k=\prod(1-\alpha_j x)^{m_j}$. Then $a_n=\sum Q_j(n)\alpha_j^n$.
+
+\subsection{Catalan numbers}
+\label{subsec:catalan}
+
 $C_{n+1}=\sum C_k C_{n-k}$, $C_0=1$ $\Rightarrow$ $C(x)=1+x C(x)^2$, $C_n=\frac1{n+1}\binom{2n}{n}$.
 
-\subsection{Формула обращения Лагранжа}
+\subsection{Lagrange inversion formula}
+\label{subsec:lagrange-inversion}
+
 $w=x\phi(w)$, $\phi(0)\ne 0$ $\Rightarrow$ $[x^n]H(w)=\frac1n[t^{n-1}] H'(t)\phi(t)^n$.
 
-\subsection{Экспоненциальная формула}
-Помеченный класс $\mathcal{F}$ = неупорядоченное разбиение носителя на $\mathcal{C}$-блоки $\Rightarrow$ $\hat F(x)=\exp(\hat C(x))$.
+\medskip
 
-\subsection{Эйлерово произведение для разбиений}
-$P(q)=\sum p(n)q^n=\prod_{k\ge1}\frac1{1-q^k}$. С различными частями: $\prod(1+q^k)$. С нечётными: $\prod\frac1{1-q^{2k-1}}$.
+\section{Recurrence relations and closed forms}
+\label{sec:recurrences}
+
+\subsection{Closed form of linear recurrences}
+\label{subsec:closed-form-recurrence}
+
+$a_n=\sum c_i a_{n-i}$, roots $\lambda_i$ of multiplicity $m_i$ $\Rightarrow$ $a_n=\sum P_i(n)\lambda_i^n$, $\deg P_i\le m_i-1$. Non-homogeneous case: particular solution $n^s R(n)\mu^n$ with $s$ equal to the multiplicity of $\mu$ as a characteristic root.
+
+\subsection{Companion matrix and powers}
+\label{subsec:companion-matrix}
+
+$\mathbf v_n=C\mathbf v_{n-1}$, $C^n$ can be computed in $O(\log n)$ multiplications.
+
+\subsection{Derangements}
+\label{subsec:derangements}
+
+$D_n=n!\sum_{k=0}^n(-1)^k/k!$, $D_n=nD_{n-1}+(-1)^n$. EGF: $e^{-x}/(1-x)$.
+
+\subsection{Stirling numbers of the second kind}
+\label{subsec:stirling-2}
+
+$S(n,k)=kS(n-1,k)+S(n-1,k-1)$. $S(n,k)=\frac1{k!}\sum_{j=0}^k(-1)^j\binom{k}{j}(k-j)^n$. EGF: $(e^x-1)^k/k!$.
+
+\subsection{Fibonacci identities}
+\label{subsec:fibonacci}
+
+$F_{n-1}F_{n+1}-F_n^2=(-1)^n$, $F_{m+n}=F_mF_{n+1}+F_{m-1}F_n$. Consequence: $\gcd(F_m,F_n)=F_{\gcd(m,n)}$.
 
 \medskip
 
-\section{Рекуррентные соотношения и закрытые формы}
+\section{Combinatorial geometry}
+\label{sec:combinatorial-geometry}
 
-\subsection{Замкнутая форма линейной рекурренты}
-$a_n=\sum c_i a_{n-i}$, корни $\lambda_i$ кратности $m_i$ $\Rightarrow$ $a_n=\sum P_i(n)\lambda_i^n$, $\deg P_i\le m_i-1$. Неоднородный случай: частное решение $n^s R(n)\mu^n$ с $s$ --- кратность $\mu$ как корня характеристического.
+\subsection{Helly's theorem}
+\label{subsec:helly}
 
-\subsection{Сопровождающая матрица и степени}
-$\mathbf v_n=C\mathbf v_{n-1}$, $C^n$ вычисляется за $O(\log n)$ умножений.
+Convex sets $K_1,\dots,K_m\subseteq\mathbb{R}^d$, $m\ge d+1$. If any $d+1$ of them have a common point, then $\bigcap_{i=1}^m K_i\neq\varnothing$.
 
-\subsection{Числа беспорядков (derangements)}
-$D_n=n!\sum_{k=0}^n(-1)^k/k!$, $D_n=nD_{n-1}+(-1)^n$. ЭПФ: $e^{-x}/(1-x)$.
+\textit{When to use.} Problems about coverings, intersections of convex figures, point arrangements.
 
-\subsection{Числа Стирлинга 2-го рода}
-$S(n,k)=kS(n-1,k)+S(n-1,k-1)$. $S(n,k)=\frac1{k!}\sum_{j=0}^k(-1)^j\binom{k}{j}(k-j)^n$. ЭПФ: $(e^x-1)^k/k!$.
+\subsection{Sylvester--Gallai theorem}
+\label{subsec:sylvester-gallai}
 
-\subsection{Тождества Фибоначчи}
-$F_{n-1}F_{n+1}-F_n^2=(-1)^n$, $F_{m+n}=F_mF_{n+1}+F_{m-1}F_n$. Следствие: $\gcd(F_m,F_n)=F_{\gcd(m,n)}$.
+For a finite set of points in the plane not all on one line, there exists a line containing exactly two of them.
 
-\subsection{Теорема Акра--Бацци (Akra--Bazzi)}
-$T(n)=g(n)+\sum a_i T(b_i n+h_i(n))$, $\sum a_i b_i^p=1$ $\Rightarrow$ $T(n)=\Theta(n^p(1+\int_1^n g(u)/u^{p+1}du))$.
+\textit{Idea.} Consider the pair (point, line) with minimal distance; if the line has $\ge3$ points, another pair with smaller distance is found.
 
-\medskip
+\subsection{Minkowski's convex body theorem}
+\label{subsec:minkowski-convex}
 
-\section{Теория графов}
+$K\subset\mathbb{R}^n$ is a convex centrally symmetric ($K=-K$) body with $\operatorname{vol}(K)>2^n$. Then $K$ contains a non-zero integer point $z\in\mathbb{Z}^n\setminus\{0\}$.
 
-\subsection{Характеризации дерева}
-Для $G$ на $n$ вершинах эквивалентны: (1) дерево, (2) связен + $|E|=n-1$, (3) ацикличен + $|E|=n-1$.
-
-\subsection{Теорема Кирхгофа (matrix-tree)}
-$\tau(G)=\det\widetilde L_{ii}=\frac1n\lambda_2\cdots\lambda_n$, где $L=D-A$ --- лапласиан. Для $K_n$: $\tau=n^{n-2}$.
-
-\subsection{Эйлеров обход}
-Связный граф имеет эйлеров цикл $\iff$ все степени чётны. Путь: ровно 0 или 2 нечётных.
-
-\subsection{Спектры стандартных графов}
-$K_n$: $n-1$ (1), $-1$ ($n-1$). $K_{m,n}$: $\pm\sqrt{mn}$, $0$ ($m+n-2$). $C_n$: $2\cos(2\pi k/n)$. $P_n$: $2\cos(\pi k/(n+1))$.
-
-\subsection{Граница Хоффмана для $\alpha(G)$}
-$G$ --- $k$-регулярный на $n$ вершинах, $\lambda_n$ --- минимальное собственное значение $\Rightarrow$ $\alpha(G)\le\frac{-n\lambda_n}{k-\lambda_n}$.
-
-\subsection{Граница Уилфа для $\chi(G)$}
-$\chi(G)\le 1+\lambda_1(G)$.
-
-\subsection{Условия гамильтоновости (Дирак, Оре)}
-Дирак: $\delta\ge n/2$ $\Rightarrow$ гамильтонов. Оре: $\deg u+\deg v\ge n$ для любых несмежных $u,v$ $\Rightarrow$ гамильтонов.
-
-\subsection{Теорема Холла (для графов)}
-Двудольный граф $G=(X\cup Y,E)$ имеет паросочетание, насыщающее $X$ $\iff$ $|N(S)|\ge|S|$ для всех $S\subseteq X$.
+\textit{When to use.} Diophantine approximation, existence of solutions to systems of inequalities, quadratic forms.
 
 \medskip
 
-\section{Комбинаторная геометрия}
+\section{Inclusion--exclusion and M\"obius inversion}
+\label{sec:inclusion-exclusion}
 
-\subsection{Теорема Хелли (Helly)}
-Выпуклые множества $K_1,\dots,K_m\subseteq\mathbb{R}^d$, $m\ge d+1$. Если любые $d+1$ из них имеют общую точку, то $\bigcap_{i=1}^m K_i\neq\varnothing$.
+\subsection{Inclusion--exclusion principle (PIE)}
+\label{subsec:pie}
 
-\textit{Когда использовать.} Задачи о покрытиях, пересечениях выпуклых фигур, расположении точек.
+$|\bigcap\overline{A_i}|=\sum_{k=0}^n(-1)^k S_k$, where $S_k=\sum_{|I|=k}|\bigcap_{i\in I}A_i|$. Works for measures/probabilities.
 
-\subsection{Теорема Сильвестра--Галлаи (Sylvester–Gallai)}
-Для конечного множества точек на плоскости, не лежащих на одной прямой, существует прямая, содержащая ровно две из них.
+\subsection{Bonferroni inequalities}
+\label{subsec:bonferroni}
 
-\textit{Идея.} Рассмотреть пару (точка, прямая) с минимальным расстоянием; если на прямой $\ge3$ точек, находится другая пара с меньшим расстоянием.
+Even truncation $m=2r$: $|\bigcup A_i|\ge\sum_{k=1}^{2r}(-1)^{k+1}S_k$. Odd $m=2r+1$: $|\bigcup A_i|\le\sum_{k=1}^{2r+1}(-1)^{k+1}S_k$.
 
-\subsection{Теорема Минковского о выпуклом теле}
-$K\subset\mathbb{R}^n$ --- выпуклое центрально-симметричное ($K=-K$) тело с $\operatorname{vol}(K)>2^n$. Тогда $K$ содержит ненулевую целочисленную точку $z\in\mathbb{Z}^n\setminus\{0\}$.
+\subsection{M\"obius inversion}
+\label{subsec:mobius-inversion}
 
-\textit{Когда использовать.} Диофантовы приближения, существование решений систем неравенств, квадратичные формы.
+On a locally finite poset: $g(y)=\sum_{x\le y}f(x)$ $\iff$ $f(y)=\sum_{x\le y}\mu(x,y)g(x)$. For the Boolean lattice: $\mu(I,J)=(-1)^{|J\setminus I|}$. For the divisor lattice: $\mu(d,n)=\mu(n/d)$.
 
-\medskip
+\subsection{Euler's totient $\varphi$}
+\label{subsec:euler-totient}
 
-\section{Формула включений-исключений и обращение Мёбиуса}
+$\varphi(n)=n\prod_{p\mid n}(1-1/p)=\sum_{d\mid n}\mu(d)n/d$. M\"obius inversion: $\sum_{d\mid n}\varphi(d)=n$.
 
-\subsection{Формула включений-исключений (ФВИ)}
-$|\bigcap\overline{A_i}|=\sum_{k=0}^n(-1)^k S_k$, где $S_k=\sum_{|I|=k}|\bigcap_{i\in I}A_i|$. Работает для меры/вероятности.
+\subsection{Chromatic polynomial}
+\label{subsec:chromatic}
 
-\subsection{Неравенства Бонферрони}
-Чётное усечение $m=2r$: $|\bigcup A_i|\ge\sum_{k=1}^{2r}(-1)^{k+1}S_k$. Нечётное $m=2r+1$: $|\bigcup A_i|\le\sum_{k=1}^{2r+1}(-1)^{k+1}S_k$.
-
-\subsection{Обращение Мёбиуса}
-На локально конечном poset: $g(y)=\sum_{x\le y}f(x)$ $\iff$ $f(y)=\sum_{x\le y}\mu(x,y)g(x)$. Булева решётка: $\mu(I,J)=(-1)^{|J\setminus I|}$. Решётка делителей: $\mu(d,n)=\mu(n/d)$.
-
-\subsection{Функция Эйлера $\varphi$}
-$\varphi(n)=n\prod_{p\mid n}(1-1/p)=\sum_{d\mid n}\mu(d)n/d$. Обращение: $\sum_{d\mid n}\varphi(d)=n$.
-
-\subsection{Многочлены ладей (rook polynomials)}
-$B\subseteq[n]\times[n]$ --- запрет; $r_k(B)$ --- число расстановок $k$ ладей на $B$. $N(B)=\sum_{k=0}^n(-1)^k r_k(B)(n-k)!$ --- число перестановок без запретов.
-
-\subsection{Хроматический многочлен}
-$P(G,x)=\sum_{S\subseteq E}(-1)^{|S|}x^{c(V,S)}$, где $c(V,S)$ --- число компонент $(V,S)$. Рекурсия: $P(G,x)=P(G\setminus e,x)-P(G/e,x)$.
+$P(G,x)=\sum_{S\subseteq E}(-1)^{|S|}x^{c(V,S)}$ (inclusion–exclusion), where $c(V,S)$ is components of $(V,S)$. Recurrence: $P(G,x)=P(G\setminus e,x)-P(G/e,x)$.
