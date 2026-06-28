@@ -1,627 +1,204 @@
 \chapter{Многочлены, кольца и поля}
 
-
 \section{Результант и дискриминант}
 
-
-\subsection{Результант — определение и критерий общего корня}
-
+\subsection{Результант --- определение и критерий общего корня}
 
 \textit{Формулировка.} Для $f(x)=a_nx^n+\dots+a_0,\;g(x)=b_mx^m+\dots+b_0$ над целостным кольцом: $\operatorname{Res}(f,g)=\det\operatorname{Syl}(f,g)$.
 
 $$\operatorname{Res}(f,g)=0 \iff f,g\text{ имеют общий делитель степени}\ge 1\text{ в }\overline{K}[x].$$
 
-
-\textit{Когда использовать.} Проверка наличия общего корня двух многочленов по коэффициентам, без нахождения корней.
-
-
-\textit{Идея.} Матрица Сильвестра: $m$ строк со сдвигами коэффициентов $f$, затем $n$ строк со сдвигами $g$. Общий делитель $\Leftrightarrow$ нетривиальное ядро её транспонирования.
-
+\textit{Идея.} Матрица Сильвестра: $m$ строк со сдвигами коэффициентов $f$, затем $n$ строк со сдвигами $g$.
 
 \subsection{Результант через корни}
 
-
-\textit{Формулировка.} $f=a_n\prod(x-\alpha_i),\;g=b_m\prod(x-\beta_j)$:
-
+$f=a_n\prod(x-\alpha_i),\;g=b_m\prod(x-\beta_j)$:
 $$\operatorname{Res}(f,g)=a_n^m b_m^n\prod_{i,j}(\alpha_i-\beta_j)=a_n^m\prod_i g(\alpha_i)=(-1)^{nm}b_m^n\prod_j f(\beta_j).$$
 
-
-\textit{Свойства:}
-
-\begin{itemize}
-\item мультипликативность: $\operatorname{Res}(fg,h)=\operatorname{Res}(f,h)\operatorname{Res}(g,h)$;
-\item $\operatorname{Res}(g,f)=(-1)^{nm}\operatorname{Res}(f,g)$;
-\item $\operatorname{Res}(f(x+c),g(x+c))=\operatorname{Res}(f,g)$;
-\item $\operatorname{Res}(f,x-a)=f(a)$.
-\end{itemize}
-
-\textit{Когда использовать.} Построение многочленов с корнями $\alpha_i+\beta_j$ или $\alpha_i\beta_j$; вычисление произведений вида $\prod g(\alpha_i)$.
-
+\textit{Свойства:} мультипликативность; $\operatorname{Res}(g,f)=(-1)^{nm}\operatorname{Res}(f,g)$; $\operatorname{Res}(f,x-a)=f(a)$.
 
 \subsection{Дискриминант}
 
+$\Delta(f)=\frac{(-1)^{n(n-1)/2}}{a_n}\operatorname{Res}(f,f')=a_n^{2n-2}\prod_{i<j}(\alpha_i-\alpha_j)^2.$
 
-\textit{Формулировка.} $\Delta(f)=\frac{(-1)^{n(n-1)/2}}{a_n}\operatorname{Res}(f,f')=a_n^{2n-2}\prod_{i<j}(\alpha_i-\alpha_j)^2.$
-
-$\Delta(f)=0 \iff f$ имеет кратный корень.
-
-
-\textit{Свойства:} $\Delta(f(x+c))=\Delta(f)$; $\Delta(cf)=c^{2n-2}\Delta(f)$; для $f\in\mathbb{Z}[x]$ дискриминант целый.
-
-
-\textit{Когда использовать.} Проверка на кратные корни; арифметические ограничения в диофантовых задачах.
-
-
-\textit{Ограничение:} char поля не делит $n\cdot a_n$, иначе $f'$ вырождается.
-
-
-\subsection{Представление Безу}
-
-
-\textit{Формулировка.} $\exists\,u,v\in R[x]$ с $\deg u<m,\deg v<n$:
-
-$$\operatorname{Res}(f,g)=u(x)f(x)+v(x)g(x)\in(f,g)\cap R.$$
-
-
-\textit{Когда использовать.} Если $f,g\in\mathbb{Z}[x]$ имеют общий корень по модулю $p$, то $p\mid\operatorname{Res}(f,g)$.
-
+$\Delta(f)=0 \iff f$ имеет кратный корень. $\Delta(f(x+c))=\Delta(f)$, $\Delta(cf)=c^{2n-2}\Delta(f)$.
 
 \subsection{Дискриминант трёхчлена $x^n+ax+b$}
 
-
-\textit{Формула (char 0):}
-
 $$\Delta(x^n+ax+b)=(-1)^{n(n-1)/2}\bigl((1-n)^{n-1}a^n+n^n b^{n-1}\bigr).$$
-
-
-\textit{Проверка:} $n=2$: $a^2-4b$; $n=3$: $-(4a^3+27b^2)$; $n=4$: $-27a^4+256b^3$.
-
-
-\textit{Когда использовать.} Кубики $x^3+px+q$ (классический дискриминант $-(4p^3+27q^2)$). Кратный корень при $n^n b^{n-1}=(n-1)^{n-1}(-1)^n a^n$.
-
+Проверка: $n=2$: $a^2-4b$; $n=3$: $-(4a^3+27b^2)$.
 
 \subsection{Знак дискриминанта и число вещественных корней}
-
-
-\textit{Формулировка.} $f\in\mathbb{R}[x]$ степени $n$ без кратных корней. $s$ — число пар комплексно-сопряжённых корней. Тогда $\operatorname{sign}\Delta(f)=(-1)^s$.
-
-
-\textit{Частные случаи.} $n=2$: $\Delta>0$ — два вещественных. $n=3$: $\Delta>0$ — три вещественных; $\Delta<0$ — один вещественный.
-
-
-\textit{Когда использовать.} Быстрый счёт вещественных корней без цепочек Штурма.
-
+$f\in\mathbb{R}[x]$ степени $n$ без кратных корней. $s$ --- число пар комплексно-сопряжённых корней. Тогда $\operatorname{sign}\Delta(f)=(-1)^s$.
 
 \subsection{Композиция через результант}
+$\operatorname{Res}_y(f(y),g(x-y))$ --- многочлен от $x$ с корнями $\alpha_i+\beta_j$. $\operatorname{Res}_y(f(y),y^m g(x/y))$ --- многочлен с корнями $\alpha_i\beta_j$.
 
-
-\textit{Формулировка.} $\operatorname{Res}_y(f(y),g(x-y))$ — многочлен от $x$ с корнями $\alpha_i+\beta_j$, степени $nm$. $\operatorname{Res}_y(f(y),y^m g(x/y))$ — многочлен с корнями $\alpha_i\beta_j$.
-
-
-\textit{Когда использовать.} Построение многочлена с заданными суммами/произведениями корней.
-
-
-\subsection{Результант $x^n-1$ и $x^m-1$}
-
-
-\textit{Формулировка.} Общий делитель $x^d-1$ с $d=\gcd(m,n)$. $\operatorname{Res}(x^n-1,x^m-1)=0 \iff d>1$.
-
-
-\subsection{Дискриминант кругового многочлена $\Phi_n$}
-
-
-\textit{Формула ($n\ge 3$):}
-
-$$\operatorname{disc}(\Phi_n)=(-1)^{\varphi(n)/2}\,n^{\varphi(n)}\Big/\prod_{p\mid n}p^{\varphi(n)/(p-1)}.$$
-
-Для простого $p$: $\operatorname{disc}(\Phi_p)=(-1)^{(p-1)/2}p^{p-2}$.
-
-
-\subsection{Исключение переменной (elimination)}
-
-
-\textit{Формулировка.} Для $P,Q\in K[x,y]$ как многочленов от $y$: $R(x)=\operatorname{Res}_y(P,Q)\in K[x]$. Корни $R$ — это $x$-координаты общих нулей $P=Q=0$ (плюс фантомные при обнулении старших коэффициентов).
-
-
-\textit{Когда использовать.} Сведение системы двух уравнений от двух переменных к одному уравнению.
-
-
-\subsection{Формула Апостоля}
-
-
-Для $m<n$: $\operatorname{Res}(\Phi_m,\Phi_n)=\begin{cases}p^{\varphi(m)},& n/m=p^k,\\ 1,&\text{иначе}.\end{cases}$
-
-
-\subsection{Стикельбергер–Сван}
-
-
-Для бесквадратного монического $f\in\mathbb{F}_p[x]$ с $r$ неприводимыми множителями: при нечётном $p$: $r\equiv n\pmod 2 \iff \Delta(f)\in(\mathbb{F}_p^\times)^2$.
-
-
-\textit{Когда использовать.} Тест чётности числа неприводимых множителей через дискриминант (особенно для трёхчленов над $\mathbb{F}_2$).
-
+\subsection{Исключение переменной}
+Для $P,Q\in K[x,y]$ как многочленов от $y$: $R(x)=\operatorname{Res}_y(P,Q)\in K[x]$. Корни $R$ --- $x$-координаты общих нулей $P=Q=0$.
 
 \medskip
-
 
 \section{Формулы Виета, симметрические многочлены, тождества Ньютона}
 
-
 \subsection{Формулы Виета}
-
-
-\textit{Формулировка.} $f(x)=a_nx^n+\dots+a_0$ с корнями $\alpha_1,\dots,\alpha_n$:
-
+$f(x)=a_nx^n+\dots+a_0$ с корнями $\alpha_1,\dots,\alpha_n$:
 $$e_k(\alpha_1,\dots,\alpha_n)=(-1)^k\frac{a_{n-k}}{a_n}.$$
-
 В частности, $\sum\alpha_i=-a_{n-1}/a_n$, $\prod\alpha_i=(-1)^n a_0/a_n$.
 
-
-\textit{Когда использовать.} Связь корней с коэффициентами — базовый инструмент.
-
-
-\subsection{Тождества Ньютона–Жирара}
-
-
-\textit{Формулировка.} $p_k=\sum\alpha_i^k$ (степенные суммы). При $1\le k\le n$:
-
+\subsection{Тождества Ньютона--Жирара}
+$p_k=\sum\alpha_i^k$. При $1\le k\le n$:
 $$p_k=e_1 p_{k-1}-e_2 p_{k-2}+\dots+(-1)^{k-1}k\,e_k.$$
-
 При $k>n$: $p_k=e_1 p_{k-1}-\dots+(-1)^{n-1}e_n p_{k-n}$.
 
-
-\textit{Когда использовать.} Мост между степенными суммами и элементарными симметрическими. Когда явные корни недоступны.
-
-
-\textit{Ограничение:} char $0$ или $>n$.
-
-
 \subsection{Основная теорема о симметрических многочленах}
-
-
-\textit{Формулировка.} Любой симметрический многочлен $\Phi\in R[x_1,\dots,x_n]$ единственным образом выражается через $e_1,\dots,e_n$ (над любым кольцом). Над $\mathbb{Q}$ — также через $p_1,\dots,p_n$ или $h_1,\dots,h_n$.
-
-
-\subsection{Степенные суммы определяют мультимножество корней}
-
-
-\textit{Формулировка.} В характеристике $0$ (или $>n$) если $p_k(\alpha)=p_k(\beta)$ при $k=1,\dots,n$, то мультимножества $\{\alpha_i\}$ и $\{\beta_i\}$ совпадают.
-
-
-\textit{Когда использовать.} Сертификация нильпотентности матрицы через следы.
-
+Любой симметрический $\Phi\in R[x_1,\dots,x_n]$ единственным образом выражается через $e_1,\dots,e_n$.
 
 \subsection{Логарифмическая производная}
+$\dfrac{f'(x)}{f(x)}=\sum_i\dfrac1{x-\alpha_i}$.
+Следствие: $(n-1)(f')^2\ge n f f''$ при вещественных корнях.
 
-
-\textit{Формулировка.} $\dfrac{f'(x)}{f(x)}=\sum_i\dfrac1{x-\alpha_i}$, $\quad\sum_i\dfrac1{(x-\alpha_i)^2}=\left(\dfrac{f'}{f}\right)^2-\dfrac{f''}{f}$.
-
-$$(n-1)\left(\frac{f'}{f}\right)^2-n\cdot\frac{f''}{f}=\sum_{i<j}\left(\frac1{x-\alpha_i}-\frac1{x-\alpha_j}\right)^2\ge0$$
-
-при вещественных корнях и вещественном $x$.
-
-
-\textit{Когда использовать.} Оценки вида $(n-1)(f')^2\ge n f f''$ при вещественных корнях.
-
-
-\subsection{Дискриминант через Вандермонда}
-
-
-$$\Delta(f)=a_n^{2n-2}\prod_{i<j}(\alpha_i-\alpha_j)^2=a_n^{2n-2}\det(p_{i+j-2})_{i,j=1}^n.$$
-
-
-\subsection{Неравенства Ньютона}
-
-
-\textit{Формулировка.} Если все корни $f(x)=\prod(x+\alpha_i)$ вещественны, то $E_k=e_k/\binom{n}{k}$ удовлетворяют $E_k^2\ge E_{k-1}E_{k+1}$ (лог-вогнутость).
-
-
-\textit{Когда использовать.} Тест на вещественность всех корней через лог-вогнутость коэффициентов.
-
-
-\subsection{Неравенство Маклорена}
-
-
-\textit{Формулировка.} Для $\alpha_i>0$: $S_1\ge S_2^{1/2}\ge\dots\ge S_n^{1/n}$, где $S_k=e_k/\binom{n}{k}$.
-
+\subsection{Неравенства Ньютона и Маклорена}
+Если все корни $f(x)=\prod(x+\alpha_i)$ вещественны, то $E_k=e_k/\binom{n}{k}$ удовлетворяют $E_k^2\ge E_{k-1}E_{k+1}$ (лог-вогнутость).
+Для $\alpha_i>0$: $S_1\ge S_2^{1/2}\ge\dots\ge S_n^{1/n}$, где $S_k=e_k/\binom{n}{k}$.
 
 \subsection{Правило знаков Декарта}
-
-
-\textit{Формулировка.} Число положительных корней $f\in\mathbb{R}[x]$ (с учётом кратности) равно числу смен знака в последовательности ненулевых коэффициентов $V(f)$ либо меньше на чётное число. Для отрицательных — применить к $f(-x)$.
-
-
-\textit{Когда использовать.} Быстрая верхняя оценка числа вещественных корней.
-
-
-\subsection{Симметрическая редукция $(P(x)-P(y))/(x-y)$}
-
-
-\textit{Формулировка.} $\dfrac{P(x)-P(y)}{x-y}$ — симметрический многочлен от $x,y$, представим через $x+y$ и $xy$.
-
-
-\subsection{След степеней матрицы и нильпотентность}
-
-
-\textit{Формулировка.} Степенные суммы собственных значений $A$ — это $\operatorname{tr}(A^k)$. По Ньютону и Виета, $\operatorname{tr}(A),\dots,\operatorname{tr}(A^n)$ восстанавливают характеристический многочлен.
-
-$$\operatorname{tr}(A^k)=0\;(k=1,\dots,n)\iff A\text{ нильпотентна}.$$
-
+Число положительных корней $f\in\mathbb{R}[x]$ (с учётом кратности) равно числу смен знака в последовательности коэффициентов $V(f)$ либо меньше на чётное число.
 
 \subsection{Оценки на корни}
-
-
-\textit{Формулировки.}
-
 \begin{enumerate}
 \item \textit{Коши:} все корни $f$ в $|z|\le 1+\max_{k<n}|a_k/a_n|$.
 \item \textit{Лагранж:} все корни в $|z|\le\max(1,\sum_{k=0}^{n-1}|a_k/a_n|)$.
-\item \textit{Эненстрём–Какея:} если $0<a_0\le a_1\le\dots\le a_n$, то все корни в $|z|\le 1$.
+\item \textit{Эненстрём--Какея:} если $0<a_0\le a_1\le\dots\le a_n$, то все корни в $|z|\le 1$.
 \end{enumerate}
 
-\subsection{Неравенство Мюрхеда (мажоризация)}
-
-
-Для $x_i>0$ и $a\succeq b$: $\sum_{\sigma}\prod x_{\sigma(i)}^{a_i}\ge\sum_{\sigma}\prod x_{\sigma(i)}^{b_i}$.
-
-
-\subsection{Эрмит–Билер (перемежение корней)}
-
-
-$f(z)=p(z^2)+z\,q(z^2)\in\mathbb{R}[z]$ имеет все корни в левой полуплоскости $\Leftrightarrow$ $p,q$ имеют только простые отрицательные корни, и они перемежаются.
-
-
 \medskip
-
 
 \section{Многочлены над $\mathbb{F}_p$ и $\mathbb{F}_q$}
 
-
 \subsection{Эндоморфизм Фробениуса}
-
-
-\textit{Формулировка.} В характеристике $p$: $(x+y)^p=x^p+y^p$. Отображение $\varphi:a\mapsto a^p$ — кольцевой гомоморфизм. На $\mathbb{F}_q$ ($q=p^n$) — автоморфизм, порождающий $\operatorname{Gal}(\mathbb{F}_{p^n}/\mathbb{F}_p)$.
-
-
-\textit{Когда использовать.} Переход в характеристику $p$; орбиты корней под действием $\varphi$.
-
+В характеристике $p$: $(x+y)^p=x^p+y^p$. Отображение $\varphi:a\mapsto a^p$ --- кольцевой гомоморфизм. На $\mathbb{F}_q$ ($q=p^n$) --- автоморфизм, порождающий $\operatorname{Gal}(\mathbb{F}_{p^n}/\mathbb{F}_p)$.
 
 \subsection{Тождество $x^q-x=\prod_{a\in\mathbb{F}_q}(x-a)$}
-
-
-\textit{Формулировка.} $x^q-x=\prod_{a\in\mathbb{F}_q}(x-a)$, $x^{q-1}-1=\prod_{a\in\mathbb{F}_q^\times}(x-a)$. Подстановка $x=0$ даёт $\prod_{a\in\mathbb{F}_q^\times}a=-1$ (Вильсон).
-
-
-\textit{Когда использовать.} Выделение корней из $\mathbb{F}_q$ у многочлена $f$: $\gcd(f,x^q-x)=\prod_{a: f(a)=0}(x-a)$. Если $f(a)=0$ для всех $a\in\mathbb{F}_q$, то $(x^q-x)\mid f$.
-
+$x^q-x=\prod_{a\in\mathbb{F}_q}(x-a)$, $x^{q-1}-1=\prod_{a\in\mathbb{F}_q^\times}(x-a)$. Следствие: $\gcd(f,x^q-x)=\prod_{a: f(a)=0}(x-a)$.
 
 \subsection{Степенные суммы $\sum_{a\in\mathbb{F}_q}a^k$}
-
-
-\textit{Формула.} Для $k\ge 1$:
-
 $$\sum_{a\in\mathbb{F}_q}a^k=\begin{cases}-1,&(q-1)\mid k,\\0,&\text{иначе}.\end{cases}$$
 
-
-\textit{Когда использовать.} Ключевой ингредиент Шевалле–Варнинга. Для $f$ степени $<q-1$: $\sum_{a\in\mathbb{F}_q}f(a)=0$.
-
-
 \subsection{Принцип «слишком много корней»}
-
-
-\textit{Формулировка.} $f\in\mathbb{F}_q[x]$ степени $n$ имеет $\le n$ корней. Многомерная версия: если $f$ степени $d_i$ по $x_i$ обнуляется на $S_1\times\dots\times S_n$ с $|S_i|>d_i$, то $f\equiv0$.
-
+$f\in\mathbb{F}_q[x]$ степени $n$ имеет $\le n$ корней.
 
 \subsection{Цикличность $\mathbb{F}_q^\times$}
-
-
-\textit{Формулировка.} $\mathbb{F}_q^\times$ — циклическая порядка $q-1$. Уравнение $x^d=1$ имеет ровно $\gcd(d,q-1)$ решений.
-
-
-\subsection{Многочлен против функции}
-
-
-\textit{Формулировка.} Отображение «многочлен → функция $\mathbb{F}_q\to\mathbb{F}_q$» сюръективно, ядро — $(x^q-x)$. Каждую функцию задаёт ровно один многочлен степени $<q$.
-
+$\mathbb{F}_q^\times$ --- циклическая порядка $q-1$.
 
 \subsection{Универсальная факторизация $x^{q^n}-x$}
-
-
-\textit{Формулировка.}
-
 $$x^{q^n}-x=\prod_{d\mid n}\;\prod_{\substack{f\text{ нормир. неприв.}\\\deg f=d}} f(x).$$
-
-
 Число нормированных неприводимых степени $n$ над $\mathbb{F}_q$:
+$$N_q(n)=\frac1n\sum_{d\mid n}\mu(d)\,q^{n/d}>0.$$
 
-$$N_q(n)=\frac1n\sum_{d\mid n}\mu(d)\,q^{n/d}>0\quad(\forall n\ge1).$$
-
-
-\subsection{Шевалле–Варнинг (Chevalley–Warning)}
-
-
-\textit{Формулировка.} Пусть $f_1,\dots,f_r\in\mathbb{F}_q[x_1,\dots,x_n]$ и $\sum\deg f_i<n$. Тогда число общих нулей в $\mathbb{F}_q^n$ делится на $p=\operatorname{char}\mathbb{F}_q$.
-
-
-\textit{Следствие (Шевалле).} Если все $f_i$ однородны без свободного члена, то существует нетривиальный общий нуль.
-
-
-\textit{Когда использовать.} Доказательство существования нетривиального решения системы над $\mathbb{F}_q$.
-
+\subsection{Шевалле--Варнинг (Chevalley--Warning)}
+$f_1,\dots,f_r\in\mathbb{F}_q[x_1,\dots,x_n]$, $\sum\deg f_i<n$. Число общих нулей в $\mathbb{F}_q^n$ делится на $p$.
+Следствие: если все $f_i$ однородны без свободного члена, то существует нетривиальный общий нуль.
 
 \subsection{Комбинаторный Nullstellensatz (Алон)}
-
-
-\textit{Формулировка.} Пусть $F$ — поле, $S_i\subset F$ конечны, $f\in F[x_1,\dots,x_n]$, $\deg f\le\sum t_i$ при $t_i<|S_i|$. Если коэффициент $f$ при $\prod x_i^{t_i}$ ненулевой, то $f$ принимает ненулевое значение на $S_1\times\dots\times S_n$.
-
-
-\textit{Когда использовать.} Комбинаторные задачи на раскраски, суммы множеств (Коши–Давенпорт), покрытия.
-
+$F$ --- поле, $S_i\subset F$ конечны, $f\in F[x_1,\dots,x_n]$, $\deg f\le\sum t_i$ при $t_i<|S_i|$. Если коэффициент $f$ при $\prod x_i^{t_i}$ ненулевой, то $f$ принимает ненулевое значение на $S_1\times\dots\times S_n$.
 
 \subsection{Теорема Лукаса}
-
-
-\textit{Формулировка.} $\binom{n}{k}\equiv\prod\binom{n_i}{k_i}\pmod p$, где $n=\sum n_i p^i$, $k=\sum k_i p^i$ — $p$-ичные разложения. $p\nmid\binom{n}{k}\iff k_i\le n_i$ для всех $i$.
-
-
-\subsection{Лифтинг Гензеля (Hensel)}
-
-
-\textit{Формулировка.} $f\in\mathbb{Z}[x]$, $f(a)\equiv0\pmod p$, $f'(a)\not\equiv0\pmod p$. Тогда для любого $k\ge1$ существует единственный $\tilde a\pmod{p^k}$ с $\tilde a\equiv a\pmod p$ и $f(\tilde a)\equiv0\pmod{p^k}$.
-
-
-\textit{Когда использовать.} Поднятие решения сравнения с $\bmod p$ до $\bmod p^k$.
-
+$\binom{n}{k}\equiv\prod\binom{n_i}{k_i}\pmod p$, где $n=\sum n_i p^i$, $k=\sum k_i p^i$ --- $p$-ичные разложения. $p\nmid\binom{n}{k}\iff k_i\le n_i$ для всех $i$.
 
 \subsection{Выделение сепарабельной части}
-
-
 \begin{itemize}
 \item $\gcd(f,x^q-x)=\prod_{a\in\mathbb{F}_q,\,f(a)=0}(x-a)$.
 \item $\gcd(f,x^{q^d}-x)=\prod$ (неприводимых делителей $f$ степени, делящей $d$).
-\item $f/\gcd(f,f')$ — сепарабельная часть $f$.
+\item $f/\gcd(f,f')$ --- сепарабельная часть $f$.
 \end{itemize}
 
-\subsection{Эрдёш–Гинзбург–Зив}
-
-
-\textit{Формулировка.} Среди любых $2n-1$ целых найдутся $n$ с суммой, кратной $n$.
-
-
-\textit{Идея.} Сведение к $n=p$ через Шевалле–Варнинг.
-
-
-\subsection{Многочлен Артина–Шрейера $x^p-x-a$}
-
-
-\textit{Формулировка.} Над $\mathbb{F}_p$ при $a\ne0$ неприводим. Над $\mathbb{F}_q$ — неприводим $\Leftrightarrow$ $a$ не лежит в образе $\wp(t)=t^p-t$.
-
+\subsection{Эрдёш--Гинзбург--Зив}
+Среди любых $2n-1$ целых найдутся $n$ с суммой, кратной $n$.
 
 \medskip
-
 
 \section{Расширения полей}
 
-
 \subsection{Минимальный многочлен}
-
-
-\textit{Формулировка.} Для алгебраического $\alpha\in L/K$ существует единственный монический $m_\alpha\in K[x]$ наименьшей степени с $m_\alpha(\alpha)=0$. Свойства:
-
-\begin{itemize}
-\item $m_\alpha$ неприводим над $K$;
-\item $m_\alpha\mid f$ для любого $f(\alpha)=0$;
-\item $K[\alpha]=K(\alpha)$, $[K(\alpha):K]=\deg m_\alpha$;
-\item $\{1,\alpha,\dots,\alpha^{n-1}\}$ — базис.
-\end{itemize}
+Для алгебраического $\alpha\in L/K$ существует единственный монический $m_\alpha\in K[x]$ наименьшей степени с $m_\alpha(\alpha)=0$. Свойства: $m_\alpha$ неприводим над $K$; $K[\alpha]=K(\alpha)$, $[K(\alpha):K]=\deg m_\alpha$; $\{1,\alpha,\dots,\alpha^{n-1}\}$ --- базис.
 
 \subsection{Сопряжённые и симметрические функции}
+Пусть $m_\alpha=\prod_{i=1}^n(x-\alpha_i)$ (сепарабельный). Для любого $f\in K[x]$: $\sum f(\alpha_i)\in K$, $\prod f(\alpha_i)\in K$.
 
-
-\textit{Формулировка.} Пусть $m_\alpha=\prod_{i=1}^n(x-\alpha_i)$ (сепарабельный случай). Для любого $f\in K[x]$:
-
-$$\sum f(\alpha_i)\in K,\qquad\prod f(\alpha_i)\in K.$$
-
-Для $f\in\mathbb{Z}[x]$ и алгебраического целого $\alpha$ обе суммы целые.
-
-
-\subsection{Алгебраические целые: $\overline{\mathbb{Z}}\cap\mathbb{Q}=\mathbb{Z}$}
-
-
-\textit{Формулировка.} Если алгебраическое целое рационально, то оно целое.
-
-
-\textit{Когда использовать.} Доказательство иррациональности; оценка «целое + ограниченное $\Rightarrow$ нуль».
-
+\subsection{Алгебраические целые}
+Если алгебраическое целое рационально, то оно целое.
 
 \subsection{След и норма}
-
-
-\textit{Формулировка.} Для сепарабельного $L/K$ степени $n$ с вложениями $\sigma_i$:
-
+Для сепарабельного $L/K$ степени $n$ с вложениями $\sigma_i$:
 $$\operatorname{Tr}_{L/K}(\alpha)=\sum\sigma_i(\alpha),\quad \operatorname{N}_{L/K}(\alpha)=\prod\sigma_i(\alpha).$$
-
-Для $L=K(\alpha)$ с $m_\alpha=x^n+c_{n-1}x^{n-1}+\dots+c_0$:
-
-$$\operatorname{Tr}(\alpha)=-c_{n-1},\quad \operatorname{N}(\alpha)=(-1)^n c_0.$$
-
+Для $L=K(\alpha)$ с $m_\alpha=x^n+c_{n-1}x^{n-1}+\dots+c_0$: $\operatorname{Tr}(\alpha)=-c_{n-1}$, $\operatorname{N}(\alpha)=(-1)^n c_0$.
 Транзитивность: $\operatorname{Tr}_{M/K}=\operatorname{Tr}_{L/K}\circ\operatorname{Tr}_{M/L}$.
 
-
-\textit{Когда использовать.} Норма — мультипликативный инвариант для диофантовых уравнений (например, $a^2+b^2$ как норма в $\mathbb{Q}(i)$).
-
-
 \subsection{Структура $\mathbb{F}_q$}
-
-
-\textit{Формулировка.} Для $q=p^n$ существует единственное поле $\mathbb{F}_q$. $\mathbb{F}_q=\{a\in\overline{\mathbb{F}}_p:a^q=a\}$ — поле разложения $x^q-x$. $\mathbb{F}_q^\times$ — циклическая.
-
+Для $q=p^n$ существует единственное поле $\mathbb{F}_q$. $\mathbb{F}_q=\{a\in\overline{\mathbb{F}}_p:a^q=a\}$ --- поле разложения $x^q-x$. $\mathbb{F}_q^\times$ --- циклическая.
 
 \subsection{Круговой многочлен $\Phi_n$}
-
-
-\textit{Формулировка.}
-
 $$\Phi_n(x)=\prod_{\substack{1\le k\le n\\\gcd(k,n)=1}}(x-\zeta_n^k)\in\mathbb{Z}[x],\quad\deg\Phi_n=\varphi(n).$$
-
-$\Phi_n$ неприводим над $\mathbb{Q}$. $x^n-1=\prod_{d\mid n}\Phi_d(x)$, обращение Мёбиуса: $\Phi_n(x)=\prod_{d\mid n}(x^d-1)^{\mu(n/d)}$.
-
-
-\textit{Когда использовать.} Конструкция элементов порядка $n$ в поле; $p$-адические оценки $\Phi_n(a)$.
-
+$\Phi_n$ неприводим над $\mathbb{Q}$. $x^n-1=\prod_{d\mid n}\Phi_d(x)$, $\Phi_n(x)=\prod_{d\mid n}(x^d-1)^{\mu(n/d)}$.
 
 \subsection{Формула башни}
-
-
-$[L:K]=[L:F]\cdot[F:K]$. Следствие: $[K(\alpha):K]\mid[L:K]$ для $\alpha\in L$.
-
+$[L:K]=[L:F]\cdot[F:K]$.
 
 \subsection{Первообразный элемент}
-
-
 Конечное сепарабельное $L/K$ имеет вид $L=K(\theta)$. Для $K(\alpha,\beta)$ с бесконечным $K$ подходит $\theta=\alpha+c\beta$ почти для всех $c$.
 
-
 \subsection{Кронекер о корнях единицы}
-
-
-\textit{Формулировка.} Если $\alpha\ne0$ — алгебраическое целое и все его сопряжённые $|\alpha_i|\le1$, то $\alpha$ — корень единицы.
-
-
-\textit{Когда использовать.} Из ограничения модулей корней → корни единицы.
-
-
-\subsection{Несовместимость $(+)$ и $(\times)$ групп поля}
-
-
-$(\mathbb{F},+)$ и $(\mathbb{F}^\times,\cdot)$ не изоморфны ни для какого поля.
-
-
-\subsection{Неравенство Лиувилля}
-
-
-\textit{Формулировка.} Для алгебраического $\alpha$ степени $n\ge2$ существует $C(\alpha)>0$:
-
-$$\left|\alpha-\frac{p}{q}\right|\ge\frac{C(\alpha)}{q^n}.$$
-
-
-\textit{Когда использовать.} Приближение алгебраических чисел рациональными; оценка снизу $|m_\alpha(p/q)|$.
-
+Если $\alpha\ne0$ --- алгебраическое целое и все его сопряжённые $|\alpha_i|\le1$, то $\alpha$ --- корень единицы.
 
 \medskip
 
-
 \section{Факторизация и неприводимость}
 
-
 \subsection{Лемма Гаусса}
-
-
-\textit{Формулировка.} Произведение примитивных многочленов из $\mathbb{Z}[x]$ примитивно. $f$ неприводим над $\mathbb{Z}$ $\Leftrightarrow$ неприводим над $\mathbb{Q}$ (с точностью до константы).
-
+Произведение примитивных многочленов из $\mathbb{Z}[x]$ примитивно. $f$ неприводим над $\mathbb{Z}$ $\Leftrightarrow$ неприводим над $\mathbb{Q}$ (с точностью до константы).
 
 \subsection{Критерий Эйзенштейна}
-
-
-\textit{Формулировка.} $f=a_nx^n+\dots+a_0\in\mathbb{Z}[x]$, $p$ простое. Если $p\nmid a_n$, $p\mid a_i$ ($0\le i\le n-1$), $p^2\nmid a_0$, то $f$ неприводим над $\mathbb{Q}$.
-
-
-\textit{Трюки:} сдвиг $x\mapsto x+a$ (неприводимость сохраняется); реверс $\hat f(x)=x^n f(1/x)$.
-
-
-\textit{Когда использовать.} Стандартный стартовый критерий для многочленов с «хорошим хвостом».
-
+$f=a_nx^n+\dots+a_0\in\mathbb{Z}[x]$, $p$ простое. Если $p\nmid a_n$, $p\mid a_i$ ($0\le i\le n-1$), $p^2\nmid a_0$, то $f$ неприводим над $\mathbb{Q}$.
+\textit{Трюки:} сдвиг $x\mapsto x+a$; реверс $\hat f(x)=x^n f(1/x)$.
 
 \subsection{Обобщённый Эйзенштейн}
-
-
 Если $p\mid a_0,\dots,a_k$, $p\nmid a_{k+1}$, $p^2\nmid a_0$, то любой непостоянный множитель $f$ имеет степень $>k$.
 
-
 \subsection{Редукция по модулю $p$}
-
-
-\textit{Формулировка.} $f\in\mathbb{Z}[x]$, $p\nmid a_n$. Если $\bar f$ неприводим в $\mathbb{F}_p[x]$, то $f$ неприводим в $\mathbb{Z}[x]$. Обратное неверно ($x^4+1$ — контрпример).
-
-
-\textit{Когда использовать.} Сведение к конечному полю. Комбинация редукций по разным $p$ сужает возможные степени множителей.
-
+$f\in\mathbb{Z}[x]$, $p\nmid a_n$. Если $\bar f$ неприводим в $\mathbb{F}_p[x]$, то $f$ неприводим в $\mathbb{Z}[x]$. Обратное неверно ($x^4+1$ --- контрпример).
 
 \subsection{Оценка через корни (простой свободный член)}
-
-
-\textit{Формулировка.} $f=a_nx^n+\dots+a_0\in\mathbb{Z}[x]$, $|a_0|$ — простое, $|a_0|>|a_1|+\dots+|a_n|$. Тогда $f$ неприводим.
-
-
-\textit{Идея.} Все корни $|\alpha|>1$. Если $f=gh$, то $|g(0)|=1$ или $|h(0)|=1$, но произведение модулей корней этого множителя $>1$ → противоречие.
-
+$f=a_nx^n+\dots+a_0\in\mathbb{Z}[x]$, $|a_0|$ --- простое, $|a_0|>|a_1|+\dots+|a_n|$. Тогда $f$ неприводим.
 
 \subsection{Приём Шура ($\pm1$ в целых точках)}
-
-
-\textit{Формулировка.} Пусть $a_1,\dots,a_n$ различны. Тогда:
-
+Пусть $a_1,\dots,a_n$ различны. Тогда:
 \begin{itemize}
 \item при нечётном $n$: $\prod(x-a_i)+1$ неприводим;
 \item при любом $n$: $\prod(x-a_i)-1$ неприводим;
 \item $\prod(x-a_i)^2+1$ неприводим.
 \end{itemize}
 
-\textit{Идея.} $g(a_i)h(a_i)=\pm1$ → $g(a_i),h(a_i)\in\{\pm1\}$ → $g-h$ зануляется во всех $a_i$ → $g\equiv h$ → $f=g^2$ со степенью нечётной (противоречие в (а)).
-
-
 \subsection{Неприводимость $\Phi_p$ через сдвиг}
-
-
 $\Phi_p(x+1)=\frac{(x+1)^p-1}{x}=x^{p-1}+\binom{p}{1}x^{p-2}+\dots+\binom{p}{p-1}$. Применить Эйзенштейн с $p$.
 
-
 \subsection{Критерий Кона}
-
-
-\textit{Формулировка.} $b\ge2$, $p$ — простое, $p=\sum a_k b^k$ ($0\le a_k<b$). Тогда $f(x)=\sum a_k x^k$ неприводим.
-
+$b\ge2$, $p$ --- простое, $p=\sum a_k b^k$ ($0\le a_k<b$). Тогда $f(x)=\sum a_k x^k$ неприводим.
 
 \subsection{Критерий Перрона}
-
-
-\textit{Формулировка.} $f(x)=x^n+a_{n-1}x^{n-1}+\dots+a_0\in\mathbb{Z}[x]$ монический, $a_0\ne0$ и $|a_{n-1}|>1+|a_{n-2}|+\dots+|a_0|$. Тогда $f$ неприводим.
-
-
-\textit{Идея.} Ровно один корень $|\alpha_1|>1$, остальные $<1$ по модулю. Если множитель не содержит $\alpha_1$, его свободный член $<1$ по модулю → противоречие.
-
-
-\subsection{Неприводимость $f(x^2)$}
-
-
-\textit{Формулировка.} $f\in\mathbb{Z}[x]$ монический неприводимый, $|f(0)|$ — не полный квадрат. Тогда $f(x^2)$ неприводим.
-
+$f(x)=x^n+a_{n-1}x^{n-1}+\dots+a_0\in\mathbb{Z}[x]$ монический, $a_0\ne0$ и $|a_{n-1}|>1+|a_{n-2}|+\dots+|a_0|$. Тогда $f$ неприводим.
 
 \subsection{Принцип Дирихле на делителях значений}
-
-
-\textit{Формулировка.} $f\in\mathbb{Z}[x]$, $a_1<\dots<a_m$ различны, $f(a_i)=N\ne0$. Если $f=gh$, то $g(a_i)\mid N$. При $m>D\cdot\deg g$ (где $D$ — число делителей $N$) получаем $g\equiv\text{const}$.
-
+$f\in\mathbb{Z}[x]$, $a_1<\dots<a_m$ различны, $f(a_i)=N\ne0$. Если $f=gh$, то $g(a_i)\mid N$. При $m>D\cdot\deg g$ (где $D$ --- число делителей $N$) получаем $g\equiv\text{const}$.
 
 \subsection{Аргумент в UFD}
-
-
 Если $a^k=b^\ell$ в UFD $R$, то $a=u_1 c^{\ell/d}$, $b=u_2 c^{k/d}$, $d=\gcd(k,\ell)$.
 
-
 \subsection{Многоугольник Ньютона}
-
-
-\textit{Формулировка.} Для $f=\sum a_i x^i\in\mathbb{Z}_p[x]$ строится нижняя выпуклая оболочка точек $(i,v_p(a_i))$. Если многоугольник из одного отрезка с наклоном $-s/n$ и $\gcd(s,n)=1$, то $f$ неприводим над $\mathbb{Q}$.
-
-
-\textit{Связь с Эйзенштейном:} отрезок от $(0,1)$ до $(n,0)$ — наклон $-1/n$, $\gcd=1$.
-
+Для $f=\sum a_i x^i\in\mathbb{Z}_p[x]$ строится нижняя выпуклая оболочка точек $(i,v_p(a_i))$. Если многоугольник из одного отрезка с наклоном $-s/n$ и $\gcd(s,n)=1$, то $f$ неприводим над $\mathbb{Q}$.
 
 \subsection{Теорема Капелли}
+$f\in K[x]$ неприводим с корнем $\alpha$. Тогда $f(g(x))$ неприводим над $K$ $\Leftrightarrow$ $g(x)-\alpha$ неприводим над $K(\alpha)$.
 
-
-\textit{Формулировка.} $f\in K[x]$ неприводим с корнем $\alpha$. Тогда $f(g(x))$ неприводим над $K$ $\Leftrightarrow$ $g(x)-\alpha$ неприводим над $K(\alpha)$.
-
-
-\textit{Когда использовать.} Сведение композиции к проверке в большем поле.
+\subsection{Лифтинг Гензеля (Hensel)}
+$f\in\mathbb{Z}[x]$, $f(a)\equiv0\pmod p$, $f'(a)\not\equiv0\pmod p$. Тогда для любого $k\ge1$ существует единственный $\tilde a\pmod{p^k}$ с $\tilde a\equiv a\pmod p$ и $f(\tilde a)\equiv0\pmod{p^k}$.

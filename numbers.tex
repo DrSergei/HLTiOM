@@ -1,385 +1,192 @@
 \chapter{Теория чисел}
 
-\begin{quote}
-Сводка ключевых теорем, методов и формул из теории чисел для задач олимпиадного уровня.
-Объединено из четырёх источников: LTE, диофантовы трюки, квадратичные вычеты, порядок элемента и первообразные корни.
-\end{quote}
-
 \medskip
 
-\section{Раздел 1. LTE (Lifting The Exponent)}
+\section{LTE (Lifting The Exponent)}
 
 \subsection{LTE для нечётного p, разность}
 
 \textbf{Формула.} Пусть $p$ -- нечётное простое, $x,y\in\mathbb{Z}$, $n\ge 1$, $p\mid x-y$, $p\nmid xy$. Тогда
 $$v_p(x^n-y^n)=v_p(x-y)+v_p(n).$$
 
-\textbf{Когда применять.} Задачи вида <<доказать $p^k\mid a^n-b^n$>>, <<найти все $n$ с $p^k\mid a^n\pm b^n$>>.
-
-\textbf{Условия.} $p$ нечётное (иначе нужна отдельная формула), $p\mid x-y$, $p\nmid xy$.
-
-\textbf{Идея.} Индукция по $v_p(n)$. База $p\nmid n$: частное $(x^n-y^n)/(x-y)\equiv ny^{n-1}\not\equiv0\pmod p$. Шаг: $n=pm$, лемма $v_p\bigl((a^p-b^p)/(a-b)\bigr)=1$ при $p\mid a-b$.
+\textbf{Когда применять.} Задачи вида «доказать $p^k\mid a^n-b^n$», «найти все $n$ с $p^k\mid a^n\pm b^n$».
 
 \subsection{LTE для нечётного p, сумма}
 
 \textbf{Формула.} $p$ нечётное, $n$ нечётное, $p\mid x+y$, $p\nmid xy$. Тогда
 $$v_p(x^n+y^n)=v_p(x+y)+v_p(n).$$
 
-\textbf{Когда применять.} Как 1.1, но для суммы $x^n+y^n$.
-
-\textbf{Идея.} Сводится к 1.1 заменой $y\to -y$ при нечётном $n$.
-
 \subsection{LTE для $p=2$}
 
 \textbf{Формула.} $x,y$ нечётные, $n\ge 1$.
-
 \begin{itemize}
-\item \textbf{(a)} $n$ нечётно: $v_2(x^n-y^n)=v_2(x-y)$.
-\item \textbf{(b)} $n$ чётно: $v_2(x^n-y^n)=v_2(x-y)+v_2(x+y)+v_2(n)-1$.
-\item \textbf{(c)} $4\mid x-y$, любое $n$: $v_2(x^n-y^n)=v_2(x-y)+v_2(n)$ (следствие (b)).
+\item $n$ нечётно: $v_2(x^n-y^n)=v_2(x-y)$.
+\item $n$ чётно: $v_2(x^n-y^n)=v_2(x-y)+v_2(x+y)+v_2(n)-1$.
+\item Если $4\mid x-y$, то $v_2(x^n-y^n)=v_2(x-y)+v_2(n)$.
 \end{itemize}
-
 Для суммы: при нечётном $n$ $v_2(x^n+y^n)=v_2(x+y)$; при чётном $n$ $v_2(x^n+y^n)=1$.
-
-\textbf{Когда применять.} Задачи с делимостью на степень двойки разностей/сумм нечётных чисел.
 
 \subsection{Формула Лежандра}
 
-\textbf{Формула.} Для простого $p$ и $n\ge0$:
 $$v_p(n!)=\sum_{k\ge1}\left\lfloor\frac{n}{p^k}\right\rfloor=\frac{n-s_p(n)}{p-1},$$
-где $s_p(n)$ -- сумма цифр $n$ в системе по основанию $p$.
-
-\textbf{Когда применять.} Оценка роста факториалов, числа простых делителей биномиальных коэффициентов.
+где $s_p(n)$ -- сумма цифр $n$ в $p$-ичной системе.
 
 \subsection{Теорема Куммера}
 
-\textbf{Формула.} $v_p\binom{m+n}{n}$ равно числу переносов при сложении $m$ и $n$ в $p$-ичной системе. Эквивалентно:
+$v_p\binom{m+n}{n}$ равно числу переносов при сложении $m$ и $n$ в $p$-ичной системе. Эквивалентно:
 $$v_p\binom{m+n}{n}=\frac{s_p(m)+s_p(n)-s_p(m+n)}{p-1}.$$
-
-\textbf{Когда применять.} Оценка $v_p$ биномиальных коэффициентов.
 
 \subsection{Подъём порядка по модулю $p^k$}
 
-\textbf{Формула.} Пусть $p$ нечётное, $p\nmid a$, $d=\operatorname{ord}_p(a)$, $c=v_p(a^d-1)\ge1$. Для всех $k\ge1$:
+Пусть $p$ нечётное, $p\nmid a$, $d=\operatorname{ord}_p(a)$, $c=v_p(a^d-1)\ge1$. Для всех $k\ge1$:
 $$\operatorname{ord}_{p^k}(a)=d\cdot p^{\max(0,\,k-c)}.$$
-Для $p=2$ аналог: при $a\equiv1\pmod4$ имеем $\operatorname{ord}_{2^k}(a)=2^{\max(0,\,k-v_2(a-1))}$.
-
-\textbf{Когда применять.} Нахождение наименьшего $n$ с $p^k\mid a^n-1$, конструкции элементов больших порядков.
-
-\subsection{$v_p(\Phi_n(a))$ через круговые многочлены}
-
-\textbf{Формула.} $p$ нечётное, $p\nmid a$, $d=\operatorname{ord}_p(a)$. Тогда
-\begin{itemize}
-\item $v_p(\Phi_d(a))=v_p(a^d-1)\ge1$;
-\item $v_p(\Phi_{d\cdot p^k}(a))=1$ для $k\ge1$;
-\item $v_p(\Phi_n(a))=0$ для $n\ne d\cdot p^k$.
-\end{itemize}
-
-Сводное тождество: $v_p(a^n-1)=\sum_{m\mid n}v_p(\Phi_m(a))$.
-
-\textbf{Когда применять.} Мост к теореме Жигмонди, оценки $\Phi_n(a)$.
+Для $p=2$: при $a\equiv1\pmod4$ имеем $\operatorname{ord}_{2^k}(a)=2^{\max(0,\,k-v_2(a-1))}$.
 
 \subsection{Теорема Жигмонди (Zsigmondy)}
 
-\textbf{Формула.} $a>b\ge1$, $\gcd(a,b)=1$, $n\ge2$. У $a^n-b^n$ существует простой делитель, не делящий $a^k-b^k$ ни для одного $k<n$ (примитивный). Исключения:
+$a>b\ge1$, $\gcd(a,b)=1$, $n\ge2$. У $a^n-b^n$ существует простой делитель, не делящий $a^k-b^k$ ни для одного $k<n$ (примитивный). Исключения:
 \begin{itemize}
 \item $n=2$ и $a+b$ -- степень двойки;
 \item $(a,b,n)=(2,1,6)$.
 \end{itemize}
 
-\textbf{Когда применять.} Диофантовы задачи: доказательство $a^n-1\neq b^k$, оценки числа решений $a^n+1=c\cdot k^2$.
-
-\subsection{Общая LTE через порядок}
-
-\textbf{Формула.} $p$ нечётное, $p\nmid ab$, $d=\operatorname{ord}_p(ab^{-1})$. Тогда
-\begin{itemize}
-\item $p\mid a^n-b^n \iff d\mid n$;
-\item при $d\mid n$: $v_p(a^n-b^n)=v_p(a^d-b^d)+v_p(n/d)$.
-\end{itemize}
-
-\textbf{Когда применять.} Оценка $a^n-1$ при разных $p$ без приведения к виду $x\equiv y\pmod p$.
-
-\subsection{Закон Уолла для последовательностей Люка}
-
-\textbf{Формула.} $u_n$ -- последовательность Люка ($u_0=0$, $u_1=1$, $u_{n+1}=Pu_n-Qu_{n-1}$), $D=P^2-4Q$. Для нечётного $p\nmid QD$ с корневым индексом $\alpha=\min\{n\ge1:p\mid u_n\}$:
-\begin{itemize}
-\item $p\mid u_n \iff \alpha\mid n$;
-\item при $\alpha\mid n$: $v_p(u_n)=v_p(u_\alpha)+v_p(n/\alpha)$.
-\end{itemize}
-Для Фибоначчи: $v_5(F_n)=v_5(n)$.
-
-\textbf{Когда применять.} Задачи на делимость чисел Фибоначчи и Люка.
+Аналог для суммы: при $n\ge2$, $a>b\ge1$, $\gcd(a,b)=1$, $a^n+b^n$ имеет примитивный простой делитель, кроме случая $n=2$, $a+b$ -- степень двойки, или $(a,b,n)=(2,1,3)$.
 
 \medskip
 
-\section{Раздел 2. Диофантовы трюки: спуск, модули, оценки}
+\section{Диофантовы трюки: спуск, модули, оценки}
 
 \subsection{Бесконечный спуск (infinite descent)}
 
-\textbf{Идея.} Если из любого целочисленного решения строится решение со строго меньшей положительной мерой, то решений нет (иначе бесконечная цепь убывания).
+\textbf{Идея.} Если из любого целочисленного решения строится решение со строго меньшей положительной мерой, то решений нет.
 
-\textbf{Когда применять.} Уравнения вида $x^4+y^4=z^2$, $x^2+y^2=3z^2$, <<нет $n>1$ с $n\mid2^n-1$>>.
-
-\textbf{Важно.} Направление должно вести к меньшим числам. Для $x^2-2y^2=1$ спуск ломается -- там работает Пелль.
+\textbf{Когда применять.} Уравнения вида $x^4+y^4=z^2$, $x^2+y^2=3z^2$, «нет $n>1$ с $n\mid2^n-1$».
 
 \subsection{Препятствие по модулю $n$}
 
-\textbf{Идея.} Если уравнение $F=0$ не имеет решений по модулю $n$, то нет решений и в $\mathbb{Z}$.
-
-\textbf{Когда применять.} Быстрая проверка неразрешимости (квадраты mod 3,4,8; малая теорема Ферма).
-
-\textbf{Важно.} Обратное неверно: уравнение может быть разрешимо по всем модулям, но не в $\mathbb{Z}$ (пример Сельмера).
-
-\subsection{Квадраты по малым модулям}
+Если уравнение $F=0$ не имеет решений по модулю $n$, то нет решений и в $\mathbb{Z}$.
 
 \textbf{Полезные таблицы:}
-$$x^2\bmod3\in\{0,1\},\quad x^2\bmod4\in\{0,1\},\quad x^2\bmod8\in\{0,1,4\},\quad x^2\bmod9\in\{0,1,4,7\}.$$
-
-\textbf{Следствия:} $a^2+b^2\not\equiv3\pmod4$, сумма трёх квадратов не $\equiv7\pmod8$, $x^3\bmod9\in\{0,\pm1\}$.
+$$x^2\bmod3\in\{0,1\},\; x^2\bmod4\in\{0,1\},\; x^2\bmod8\in\{0,1,4\}.$$
+Следствия: $a^2+b^2\not\equiv3\pmod4$, сумма трёх квадратов не $\equiv7\pmod8$.
 
 \subsection{$p$-адический баланс}
-
-\textbf{Идея.} Если $A=B$ в $\mathbb{Z}$, то $v_p(A)=v_p(B)$ для каждого $p$. Нарушение -- препятствие. Комбинируется с формулой Лежандра.
+Если $A=B$ в $\mathbb{Z}$, то $v_p(A)=v_p(B)$ для каждого $p$. Комбинируется с формулой Лежандра.
 
 \subsection{Лемма Гензеля (Hensel)}
-
-\textbf{Формулировка.} Пусть $f\in\mathbb{Z}[x]$, $p$ простое. Если $f(a)\equiv0\pmod p$ и $f'(a)\not\equiv0\pmod p$, то для каждого $k\ge1$ существует единственный $a_k\in\mathbb{Z}/p^k$ с $a_k\equiv a\pmod p$ и $f(a_k)\equiv0\pmod{p^k}$.
-
-\textbf{Когда применять.} Подъём решений сравнений с простого модуля на $p^k$ (например, $x^2\equiv a\pmod{p^k}$).
-
-\textbf{Идея.} Шаг Ньютона: $a_{k+1}=a_k-f(a_k)/f'(a)\pmod{p^{k+1}}$.
+Пусть $f\in\mathbb{Z}[x]$, $p$ простое. Если $f(a)\equiv0\pmod p$ и $f'(a)\not\equiv0\pmod p$, то для каждого $k\ge1$ существует единственный $a_k\in\mathbb{Z}/p^k$ с $a_k\equiv a\pmod p$ и $f(a_k)\equiv0\pmod{p^k}$.
 
 \subsection{Китайская теорема об остатках (КТО)}
-
-\textbf{Формулировка.} $n_1,\dots,n_k$ попарно взаимно просты. Для любых $a_i$ существует $x$ с $x\equiv a_i\pmod{n_i}$, единственный по модулю $\prod n_i$.
-
-\textbf{Олимпиадная форма.} Жадное построение: на каждом шаге выбираем член из остаточного класса, ещё не запрещённого. Пока запрещённых классов меньше доступных -- выбор существует.
+$n_1,\dots,n_k$ попарно взаимно просты. Для любых $a_i$ существует $x$ с $x\equiv a_i\pmod{n_i}$, единственный по модулю $\prod n_i$.
 
 \subsection{Прыжок Виета (Vieta jumping)}
-
-\textbf{Идея.} Уравнение симметрично по $a,b$ и квадратично по $a$ при фиксированном $b$. Если $(a,b)$ -- решение, то второй корень $a'=-\alpha(b)-a$ -- тоже целое решение. Обычно $|a'|<|a|$, что даёт спуск.
-
-\textbf{Когда применять.} IMO 1988-6 ($ab+1\mid a^2+b^2$), тройки Маркова.
-
-\textbf{Важно.} Требуется квадратичность по одной переменной; положительность и целость $a'$ проверяются отдельно.
-
-\subsection{Лемма Туэ (Thue)}
-
-\textbf{Формулировка.} $m\ge2$, $\gcd(a,m)=1$. Существуют целые $x,y$, не оба нулевые, $|x|,|y|\le\sqrt{m}$, $ay\equiv x\pmod m$.
-
-\textbf{Когда применять.} Доказательство Ферма о сумме двух квадратов ($p=a^2+b^2$), представление простых формами $x^2+dy^2$.
-
-\textbf{Идея.} Принцип Дирихле: $(\lfloor\sqrt{m}\rfloor+1)^2>m$ пар $(i,j)$ дают две с одинаковым $i-aj\pmod m$.
+Уравнение симметрично по $a,b$ и квадратично по $a$ при фиксированном $b$. Если $(a,b)$ -- решение, то второй корень $a'$ -- тоже целое решение. Обычно $|a'|<|a|$, что даёт спуск.
 
 \subsection{Тождество Софи Жермен}
-
-\textbf{Формула.}
 $$a^4+4b^4=(a^2+2ab+2b^2)(a^2-2ab+2b^2).$$
 
-\textbf{Когда применять.} Факторизация $n^4+4$ и $n^4+4^n$ (при нечётном $n$: $4^n=4\cdot(2^m)^4$).
+\textbf{Когда применять.} Факторизация $n^4+4$ и $n^4+4^n$ (при нечётном $n$).
 
 \subsection{Препятствие по порядку элемента}
-
-\textbf{Идея.} Если $\gcd(a,p)=1$ и $d=\operatorname{ord}_p(a)$, то $a^n\equiv1\pmod p\iff d\mid n$. По малой теореме Ферма $d\mid p-1$.
-
-\textbf{Когда применять.} Задачи на делимость $p\mid f(n)$, где $f(n)$ -- выражение вида $a^n\pm1$.
-
-\subsection{Теорема Лежандра о трёх квадратах}
-
-\textbf{Формула.} $n$ представимо как $a^2+b^2+c^2$ тогда и только тогда, когда $n\neq4^s(8t+7)$.
+Если $\gcd(a,p)=1$ и $d=\operatorname{ord}_p(a)$, то $a^n\equiv1\pmod p\iff d\mid n$. По малой теореме Ферма $d\mid p-1$.
 
 \subsection{Серии Пелля}
-
-\textbf{Формула.} $D>0$ не квадрат. Все положительные решения $x^2-Dy^2=1$:
+$D>0$ не квадрат. Все положительные решения $x^2-Dy^2=1$:
 $$x_n+y_n\sqrt{D}=(x_1+y_1\sqrt{D})^n,$$
 где $(x_1,y_1)$ -- наименьшее положительное решение.
 
-\textbf{Когда применять.} Уравнения, сводящиеся к Пеллю (бесконечные серии решений).
-
 \medskip
 
-\section{Раздел 3. Квадратичные вычеты, символы Лежандра и Якоби}
+\section{Квадратичные вычеты}
 
 \subsection{Критерий Эйлера}
-
-\textbf{Формула.} Для нечётного простого $p$ и $p\nmid a$:
+Для нечётного простого $p$ и $p\nmid a$:
 $$a^{(p-1)/2}\equiv\left(\frac{a}{p}\right)\pmod p.$$
+Следствие: $\bigl(\frac{-1}{p}\bigr)=(-1)^{(p-1)/2}$.
 
-\textbf{Следствие.} $\bigl(\frac{-1}{p}\bigr)=(-1)^{(p-1)/2}$: $-1$ -- квадрат $\iff p\equiv1\pmod4$.
-
-\textbf{Когда применять.} Базовый инструмент для символа Лежандра.
-
-\subsection{Лемма Гаусса}
-
-\textbf{Формула.} $p\nmid a$. Берём $a,2a,\dots,\frac{p-1}{2}a$ по модулю $p$ в диапазоне $(-p/2,p/2)$. $\mu$ -- число отрицательных. Тогда
-$$\left(\frac{a}{p}\right)=(-1)^\mu.$$
-
-\textbf{Форма Эйзенштейна:} при нечётном $a$: $\bigl(\frac{a}{p}\bigr)=(-1)^{\sum\lfloor ka/p\rfloor}$.
-
-\subsection{Закон квадратичной взаимности и дополнения}
-
-\textbf{Формула.} Для различных нечётных простых $p,q$:
+\subsection{Закон квадратичной взаимности}
+Для различных нечётных простых $p,q$:
 $$\left(\frac{p}{q}\right)\left(\frac{q}{p}\right)=(-1)^{\frac{p-1}{2}\cdot\frac{q-1}{2}}.$$
-Символы отличаются знаком только при $p\equiv q\equiv3\pmod4$.
 
 \textbf{Дополнения:}
 $$\left(\frac{-1}{p}\right)=\begin{cases}+1,&p\equiv1\pmod4,\\-1,&p\equiv3\pmod4.\end{cases}$$
 $$\left(\frac{2}{p}\right)=\begin{cases}+1,&p\equiv\pm1\pmod8,\\-1,&p\equiv\pm3\pmod8.\end{cases}$$
 
 \subsection{Символ Якоби}
+Для нечётного $n=\prod p_i^{a_i}$: $\bigl(\frac{a}{n}\bigr)=\prod\bigl(\frac{a}{p_i}\bigr)^{a_i}$. Мультипликативен по обоим аргументам; работает тот же закон взаимности. Важно: $\bigl(\frac{a}{n}\bigr)=1$ не означает, что $a$ -- квадрат по модулю $n$.
 
-\textbf{Определение.} Для нечётного $n=\prod p_i^{a_i}$: $\bigl(\frac{a}{n}\bigr)=\prod\bigl(\frac{a}{p_i}\bigr)^{a_i}$.
-
-\textbf{Свойства:} мультипликативность по обоим аргументам; тот же закон взаимности и дополнения (с заменой $p$ на $n$).
-
-\textbf{Важно.} $\bigl(\frac{a}{n}\bigr)=1$ \textbf{не означает}, что $a$ -- квадрат по модулю $n$. Обратное верно.
-
-\textbf{Польза.} Вычисляется алгоритмом, аналогичным Евклиду, без разложения $n$ на множители.
-
-\subsection{Структура квадратов в $(\mathbb{Z}/p^k)^\times$ (подъём Гензеля)}
-
-\textbf{Формула.} $p$ нечётное, $\gcd(a,p)=1$:
-$$a\text{ -- квадрат в }(\mathbb{Z}/p^k)^\times \iff \left(\frac{a}{p}\right)=+1.$$
-Подгруппа квадратов имеет индекс 2.
-
-Для $p=2$ сложнее: при $k\ge3$ нечётное $a$ -- квадрат по модулю $2^k$ тогда и только тогда, когда $a\equiv1\pmod8$. Индекс подгруппы квадратов равен 4.
+\subsection{Структура квадратов в $(\mathbb{Z}/p^k)^\times$}
+$p$ нечётное, $\gcd(a,p)=1$: $a$ -- квадрат в $(\mathbb{Z}/p^k)^\times$ $\iff$ $\bigl(\frac{a}{p}\bigr)=+1$.
+Для $p=2$ ($k\ge3$): нечётное $a$ -- квадрат по модулю $2^k$ $\iff$ $a\equiv1\pmod8$.
 
 \subsection{Сумма символов Лежандра}
-
-\textbf{Линейный случай.} При $p\nmid a$: $\sum_{x=0}^{p-1}\bigl(\frac{ax+b}{p}\bigr)=0$.
-
-\textbf{Квадратичный случай.} $f(x)=ax^2+bx+c$, $p\nmid a$, $D=b^2-4ac$:
+При $p\nmid a$: $\sum_{x=0}^{p-1}\bigl(\frac{ax+b}{p}\bigr)=0$.
+Для $f(x)=ax^2+bx+c$, $p\nmid a$, $D=b^2-4ac$:
 $$\sum_{x=0}^{p-1}\left(\frac{f(x)}{p}\right)=\begin{cases}
 -\bigl(\frac{a}{p}\bigr), & p\nmid D,\\
 (p-1)\bigl(\frac{a}{p}\bigr), & p\mid D.
 \end{cases}$$
 
-\subsection{Квадратичная сумма Гаусса}
-
-\textbf{Формула.} $g(p)=\sum_{a=0}^{p-1}\zeta^{a^2}=\sum_{a=1}^{p-1}\bigl(\frac{a}{p}\bigr)\zeta^a+1$, где $\zeta=e^{2\pi i/p}$.
-$$|g(p)|^2=p,\qquad g(p)^2=\left(\frac{-1}{p}\right)p,\qquad
-g(p)=\begin{cases}\sqrt{p},&p\equiv1\pmod4,\\ i\sqrt{p},&p\equiv3\pmod4.\end{cases}$$
-
-\subsection{Неравенство Полиа--Виноградова}
-
-\textbf{Формула.} Для нетривиального характера $\chi$ по модулю $q$:
-$$\left|\sum_{n=M+1}^{M+N}\chi(n)\right|<\sqrt{q}\log q.$$
-Для символа Лежандра по модулю $p$: $|\sum\bigl(\frac{n}{p}\bigr)|<\sqrt{p}\log p$.
-
-\textbf{Следствие.} Наименьший квадратичный невычет по модулю $p$ есть $O(\sqrt{p}\log p)$.
-
 \subsection{Формула Вильсона для $(\frac{p-1}{2})!$}
-
-\textbf{Формула.} Для нечётного простого $p$:
+Для нечётного простого $p$:
 $$\bigl(\tfrac{p-1}{2}\bigr)!^2\equiv(-1)^{(p+1)/2}\pmod p.$$
-При $p\equiv1\pmod4$: $\bigl(\tfrac{p-1}{2}\bigr)!^2\equiv-1$ -- явный квадратный корень из $-1$.
-
-\subsection{Граница Хассе (для эллиптических кривых)}
-
-\textbf{Формула.} $f$ -- кубический многочлен без кратных корней в $\overline{\mathbb{F}_p}$:
-$$\left|\sum_{x=0}^{p-1}\left(\frac{f(x)}{p}\right)\right|\le2\sqrt{p}.$$
-Эквивалентно: $\#E(\mathbb{F}_p)=p+1-\sum\bigl(\frac{f(x)}{p}\bigr)$ удовлетворяет $|\#E(\mathbb{F}_p)-(p+1)|\le2\sqrt{p}$.
-
-\textbf{Обобщение (Вейль).} Для $f$ степени $d\ge4$ без кратных корней: $|\sum\bigl(\frac{f(x)}{p}\bigr)|\le(d-1)\sqrt{p}$.
 
 \medskip
 
-\section{Раздел 4. Порядок элемента, первообразные корни}
+\section{Порядок элемента, первообразные корни}
 
 \subsection{Свойства порядка}
-
-\textbf{Формула.} $\gcd(a,n)=1$, $d=\operatorname{ord}_n(a)$.
-
+$\gcd(a,n)=1$, $d=\operatorname{ord}_n(a)$.
 \begin{enumerate}
 \item $a^k\equiv1\pmod n \iff d\mid k$.
-\item $d\mid\varphi(n)$, $d\mid\lambda(n)$.
+\item $d\mid\varphi(n)$.
 \item $\operatorname{ord}_n(a^k)=d/\gcd(d,k)$.
-\item Если $\gcd(\operatorname{ord}_n a,\operatorname{ord}_n b)=1$, то $\operatorname{ord}_n(ab)=\operatorname{ord}_n(a)\cdot\operatorname{ord}_n(b)$ (в абелевой группе).
-\item В абелевой группе существует элемент порядка $\operatorname{lcm}(\operatorname{ord}_n a,\operatorname{ord}_n b)$.
+\item Если $\gcd(\operatorname{ord}_n a,\operatorname{ord}_n b)=1$, то $\operatorname{ord}_n(ab)=\operatorname{ord}_n(a)\cdot\operatorname{ord}_n(b)$.
+\item В абелевой группе $\exists$ элемент порядка $\operatorname{lcm}(\operatorname{ord}_n a,\operatorname{ord}_n b)$.
 \end{enumerate}
 
-\subsection{Существование первообразного корня по простому модулю}
+\subsection{Существование первообразного корня}
+Для любого простого $p$ группа $(\mathbb{Z}/p)^\times$ циклична. Число первообразных корней mod $p$ равно $\varphi(p-1)$.
+\textbf{Тест:} $g$ -- первообразный корень $\iff$ $g^{(p-1)/q}\not\equiv1\pmod p$ для каждого простого $q\mid p-1$.
 
-\textbf{Формула.} Для любого простого $p$ группа $(\mathbb{Z}/p)^\times$ циклична. Число элементов точного порядка $d$ (для $d\mid p-1$) равно $\varphi(d)$. Число первообразных корней mod $p$ равно $\varphi(p-1)$.
-
-\textbf{Тест.} $g$ -- первообразный корень $\iff g^{(p-1)/q}\not\equiv1\pmod p$ для каждого простого $q\mid p-1$.
-
-\subsection{Структура $(\mathbb{Z}/n)^\times$ и критерий цикличности}
-
-\textbf{Формула.} $(\mathbb{Z}/n)^\times$ циклична $\iff n\in\{1,2,4,p^k,2p^k\}$ ($p$ -- нечётное простое).
-
-\textbf{Разложение:}
-$$(\mathbb{Z}/n)^\times\cong\prod(\mathbb{Z}/p_i^{a_i})^\times.$$
+\subsection{Структура $(\mathbb{Z}/n)^\times$}
+$(\mathbb{Z}/n)^\times$ циклична $\iff$ $n\in\{1,2,4,p^k,2p^k\}$ ($p$ -- нечётное простое).
 Для нечётного $p$: $(\mathbb{Z}/p^k)^\times\cong\mathbb{Z}/p^{k-1}(p-1)$.
-Для $p=2$, $k\ge3$: $(\mathbb{Z}/2^k)^\times\cong\mathbb{Z}/2\times\mathbb{Z}/2^{k-2}$ с порождающими $-1$ и $5$.
+Для $p=2$, $k\ge3$: $(\mathbb{Z}/2^k)^\times\cong\mathbb{Z}/2\times\mathbb{Z}/2^{k-2}$.
 
 \subsection{Приём наименьшего простого делителя}
-
-\textbf{Формула.} $n\ge2$, $p$ -- наименьший простой делитель $n$, $\gcd(a,n)=1$.
+$n\ge2$, $p$ -- наименьший простой делитель $n$, $\gcd(a,n)=1$.
 \begin{itemize}
-\item Если $n\mid a^n-1$, то $\operatorname{ord}_p(a)=1$ ($a\equiv1\pmod p$).
-\item Если $n$ нечётно и $n\mid a^n+1$, то $\operatorname{ord}_p(a)=2$ ($a\equiv-1\pmod p$).
+\item Если $n\mid a^n-1$, то $a\equiv1\pmod p$.
+\item Если $n$ нечётно и $n\mid a^n+1$, то $a\equiv-1\pmod p$.
 \end{itemize}
-
-\textbf{Идея.} $\operatorname{ord}_p(a)\mid\gcd(n,p-1)$. Каждый простой делитель этого НОД меньше $p$ -- противоречие с минимальностью $p$, кроме случая НОД$=1$.
-
-\textbf{Когда применять.} IMO 1990-3 ($n^2\mid2^n+1$), задача <<нет $n>1$ с $n\mid2^n-1$>>.
+\textbf{Когда применять.} IMO 1990-3 ($n^2\mid2^n+1$), задача «нет $n>1$ с $n\mid2^n-1$».
 
 \subsection{Функция Кармайкла}
-
-\textbf{Формула.}
 $$\lambda(p^k)=\begin{cases}p^{k-1}(p-1), & p\text{ нечётное или }p^k\in\{2,4\},\\ 2^{k-2}, & p=2,\ k\ge3,\end{cases}$$
 $$\lambda(n)=\operatorname{lcm}\bigl(\lambda(p_1^{a_1}),\dots,\lambda(p_r^{a_r})\bigr).$$
-В $(\mathbb{Z}/n)^\times$ всегда есть элемент порядка $\lambda(n)$. Равенство $\lambda(n)=\varphi(n)$ выполнено $\iff(\mathbb{Z}/n)^\times$ циклична.
-
-\subsection{Поднятие первообразного корня с $p$ на $p^k$}
-
-\textbf{Формула.} $p$ нечётное, $g$ -- первообразный корень mod $p$.
-\begin{itemize}
-\item Если $g^{p-1}\not\equiv1\pmod{p^2}$, то $g$ -- первообразный корень mod $p^k$ для всех $k\ge1$.
-\item Если $g^{p-1}\equiv1\pmod{p^2}$, то $g+p$ -- первообразный корень mod $p^k$.
-\end{itemize}
+В $(\mathbb{Z}/n)^\times$ всегда есть элемент порядка $\lambda(n)$.
 
 \subsection{Простые делители циклотомического многочлена}
-
-\textbf{Формула.} $p\nmid a$. Если $p\mid\Phi_n(a)$, то либо $\operatorname{ord}_p(a)=n$ ($\implies p\equiv1\pmod n$), либо $p\mid n$. Обратно: если $\operatorname{ord}_p(a)=n$, то $p\mid\Phi_n(a)$.
+$p\nmid a$. Если $p\mid\Phi_n(a)$, то либо $\operatorname{ord}_p(a)=n$ ($\implies p\equiv1\pmod n$), либо $p\mid n$.
 
 \subsection{Бесконечность простых $\equiv1\pmod n$}
-
-\textbf{Формула.} Для любого $n\ge1$ существует бесконечно много простых $p\equiv1\pmod n$.
-
-\textbf{Идея.} Построить $M = n\cdot(\text{уже найденные простые})$, взять простой делитель $\Phi_n(M)$ -- он $\equiv1\pmod n$ и отличен от всех предыдущих.
+Для любого $n\ge1$ существует бесконечно много простых $p\equiv1\pmod n$. Идея: взять простой делитель $\Phi_n(M)$.
 
 \subsection{Индекс и критерий $k$-й степени}
-
-\textbf{Формула.} $p$ нечётное, $g$ -- первообразный корень mod $p$. Отображение $\operatorname{ind}_g:(\mathbb{Z}/p)^\times\to\mathbb{Z}/(p-1)$ -- изоморфизм.
-
-$$\operatorname{ord}_p(a)=\frac{p-1}{\gcd(p-1,\operatorname{ind}_g a)}.$$
-$a$ является $k$-й степенью $\iff\gcd(k,p-1)\mid\operatorname{ind}_g a \iff a^{(p-1)/\gcd(k,p-1)}\equiv1\pmod p$.
-
+$p$ нечётное, $g$ -- первообразный корень mod $p$. Отображение $\operatorname{ind}_g:(\mathbb{Z}/p)^\times\to\mathbb{Z}/(p-1)$ -- изоморфизм.
+$a$ является $k$-й степенью $\iff$ $a^{(p-1)/\gcd(k,p-1)}\equiv1\pmod p$.
 Число $k$-х степеней в $(\mathbb{Z}/p)^\times$ равно $(p-1)/\gcd(k,p-1)$.
 
 \subsection{Степенные суммы по модулю простого}
-
-\textbf{Формула.} Для простого $p$ и $m\ge0$:
+Для простого $p$ и $m\ge0$:
 $$\sum_{a=1}^{p-1}a^m\equiv\begin{cases}
 -1\pmod p, & m\ge1\text{ и }(p-1)\mid m,\\
-0\pmod p, & m\ge1\text{ и }(p-1)\nmid m,\\
--1\pmod p, & m=0.
+0\pmod p, & \text{иначе}.
 \end{cases}$$
 
 \subsection{Обобщённая теорема Вильсона}
-
-\textbf{Формула.} Для $n\ge2$:
 $$\prod_{\substack{1\le a\le n\\\gcd(a,n)=1}}a\equiv\begin{cases}
 -1\pmod n, & n\in\{2,4,p^k,2p^k\},\\
 +1\pmod n, & \text{иначе}.
 \end{cases}$$
-
-\medskip
-
-\begin{quote}
-\textbf{Примечание по проверке.} Все формулы и теоремы проверены; исключения и границы применимости указаны в соответствующих пунктах.
-\end{quote}
-
-
