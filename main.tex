@@ -1,14 +1,18 @@
-\documentclass[a4paper,12pt]{report}
+\documentclass[a5paper,12pt,twoside,openright]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{geometry}
-\geometry{top=2cm,bottom=2cm,left=2.5cm,right=2cm}
+\geometry{top=1.5cm,bottom=1.5cm,inner=1.5cm,outer=1.5cm}
 \usepackage{hyperref}
 \setlength{\parindent}{0pt}
 \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
 \usepackage{tocloft}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+\usepackage[print]{booklet}
+\target{\magstep0}{297mm}{210mm}
+\AtBeginDocument{\setpdftargetpages}
 
 \title{HLTiOM}
 \author{}
