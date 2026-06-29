@@ -26,6 +26,28 @@ $O(\cdot),o(\cdot),\sim$ --- asymptotic notation.
 
 \medskip
 
+\subsection{Limsup and liminf}
+\label{subsec:limsup-liminf}
+
+$\displaystyle\limsup_{n\to\infty} a_n = \lim_{n\to\infty}\sup_{k\ge n} a_k$, $\displaystyle\liminf_{n\to\infty} a_n = \lim_{n\to\infty}\inf_{k\ge n} a_k$.
+\begin{itemize}
+  \item $\limsup (a_n+b_n)\le\limsup a_n+\limsup b_n$;
+  \item $\limsup (a_n b_n)\le(\limsup a_n)(\limsup b_n)$ if $a_n,b_n\ge0$;
+  \item $\liminf a_n\le\limsup a_n$, with equality $\iff$ $\lim a_n$ exists;
+  \item for bounded sequences, the set of subsequential limits equals $[\liminf a_n,\limsup a_n]$.
+\end{itemize}
+
+\medskip
+
+\subsection{Toeplitz transformation}
+\label{subsec:toeplitz}
+
+\textit{Statement.} $a_{nk}\ge0$, $\sum_{k=1}^n a_{nk}=1$, $\lim_{n\to\infty}a_{nk}=0$ for each $k$. If $x_n\to L$, then $\sum_{k=1}^n a_{nk}x_k\to L$.
+
+\textit{When to use.} Weighted means and generalized Ces\`aro summability. Includes ordinary Ces\`aro ($a_{nk}=1/n$) and many other averaging schemes.
+
+\medskip
+
 \section{Mean value theorems, Taylor, L'H\^opital}
 \label{sec:mvt-taylor}
 
@@ -220,6 +242,15 @@ $f(xy)=f(x)f(y)$ on $\mathbb{R}_{>0}$, $f>0$ & $f(x)=x^c$ \\
 \label{subsec:contraction-power}
 
 \textit{Statement.} If $T^n$ is a contraction for some $n\ge1$, then $T$ has a unique fixed point ($T$ itself need not be a contraction).
+
+\medskip
+
+\subsection{Picard--Lindel\"of theorem}
+\label{subsec:picard}
+
+\textit{Statement.} $y' = f(x,y)$, $y(x_0)=y_0$, $f$ continuous and locally Lipschitz in $y$. The Picard operator $(Ty)(x) = y_0 + \int_{x_0}^x f(t,y(t))\,dt$ is a contraction on $C[x_0-h,x_0+h]$ for small $h$. Hence a unique local solution exists.
+
+\textit{When to use.} Existence and uniqueness of solutions to ODEs; iterative construction (Picard iteration) with explicit error estimates via the Banach theorem (\ref{sec:banach}).
 
 \medskip
 

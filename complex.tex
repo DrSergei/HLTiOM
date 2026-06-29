@@ -16,9 +16,37 @@ An \textit{annulus} is a region $r<|z-a|<R$.
 \section{Cauchy--Riemann equations}
 \label{sec:cauchy-riemann}
 
-$f=u+iv$ is holomorphic (complex differentiable) on $U$ $\iff$ $u,v$ are $C^1$ and satisfy
+\subsection{Cartesian form}
+\label{subsec:cr-cartesian}
+
+$f=u+iv$ is holomorphic on $U$ $\iff$ $u,v\in C^1$ and
 $$u_x=v_y,\quad u_y=-v_x.$$
-Equivalently $\partial_{\overline z}f=0$. A holomorphic function is infinitely differentiable and analytic.
+Equivalently $\partial_{\overline z}f=0$.
+
+\medskip
+
+\subsection{Polar form}
+\label{subsec:cr-polar}
+
+In polar coordinates $z=re^{i\theta}$, write $f=u(r,\theta)+iv(r,\theta)$. The CR equations become
+$$u_r=\frac1r\,v_\theta,\qquad v_r=-\frac1r\,u_\theta.$$
+
+\medskip
+
+\subsection{Harmonic functions}
+\label{subsec:harmonic}
+
+Holomorphic $f=u+iv$ $\Rightarrow$ $\Delta u=u_{xx}+u_{yy}=0$, $\Delta v=0$; $u$ and $v$ are harmonic. On a simply connected domain, every harmonic $u$ admits a harmonic conjugate $v$ such that $u+iv$ is holomorphic:
+$$v(x,y)=\int_{(x_0,y_0)}^{(x,y)} (-u_y\,dx+u_x\,dy).$$
+
+\medskip
+
+\subsection{Wirtinger calculus}
+\label{subsec:wirtinger}
+
+$$\partial_z=\tfrac12(\partial_x-i\partial_y),\qquad
+\partial_{\bar z}=\tfrac12(\partial_x+i\partial_y).$$
+$f$ is holomorphic $\iff$ $\partial_{\bar z}f=0$; then $f'(z)=\partial_z f$. Also $\Delta=4\,\partial_z\partial_{\bar z}$.
 
 \medskip
 
@@ -74,7 +102,6 @@ $f\not\equiv0$ holomorphic, $f(a)=0$ $\Rightarrow$ $f(z)=(z-a)^m g(z)$, $g(a)\ne
 \subsection{Classification of isolated singularities}
 \label{subsec:singularities-class}
 
-\noindent
 \begin{itemize}
 \item \textit{Removable:} Laurent series has no negative terms; $\lim_{z\to a}f(z)$ finite.
 \item \textit{Pole:} finite negative part; $\lim_{z\to a}f(z)=\infty$.

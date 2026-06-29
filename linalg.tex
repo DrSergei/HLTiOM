@@ -17,7 +17,7 @@ $\mathbb{F}_q$ --- finite field of order $q=p^n$.
 
 \medskip
 
-\section{Characteristic and minimal polynomial. Cayley--Hamilton}
+\section{Characteristic and minimal polynomial, Cayley--Hamilton}
 \label{sec:cayley-hamilton}
 
 \subsection{Cayley--Hamilton theorem}
@@ -335,9 +335,17 @@ $\det(1/(a_i+b_j))=\dfrac{\prod_{i<j}(a_i-a_j)(b_i-b_j)}{\prod_{i,j}(a_i+b_j)}$.
 \subsection{Circulant and the DFT matrix}
 \label{subsec:circulant}
 
-$C=\operatorname{circ}(c_0,\dots,c_{n-1})$ is circulant: each row is the previous row shifted right. $C$ is diagonalized by the DFT matrix $F$ with $F_{jk}=\frac1{\sqrt n}\omega^{jk}$, $\omega=e^{2\pi i/n}$: $F^*CF=\operatorname{diag}(p(\omega^0),\dots,p(\omega^{n-1}))$, $p(x)=\sum c_k x^k$. Hence $\det C=\prod p(\omega^k)$ and eigenvectors $v_k=(1,\omega^k,\dots,\omega^{k(n-1)})^T$.
+$C=\operatorname{circ}(c_0,\dots,c_{n-1})$ is circulant: each row is the previous row shifted right. With $\omega=e^{2\pi i/n}$, $C$ is diagonalized by the DFT matrix:
+$$F_{jk}=\frac1{\sqrt n}\omega^{jk},\qquad j,k=0,\dots,n-1.$$
+Then $F^*CF=\operatorname{diag}(p(\omega^0),\dots,p(\omega^{n-1}))$, $p(x)=\sum c_k x^k$. Hence $\det C=\prod p(\omega^k)$, eigenvectors $v_k=(1,\omega^k,\dots,\omega^{k(n-1)})^T$.
 
-The DFT matrix $F$ is unitary ($F^*F=I$) and is essentially a scaled Vandermonde matrix of roots of unity. Convolution theorem: $C\cdot v$ corresponds to convolution of $(c_k)$ with $v$, and $F$ turns convolution into pointwise multiplication. Sums with roots of unity: $\sum_{k=0}^{n-1}\omega^{km}=n\cdot[n\mid m]$, $\sum_{k=0}^{n-1}\omega^{k^2}$ (Gauss sum) equals $\sqrt n$ or $i\sqrt n$ depending on $n\bmod4$.
+\textit{DFT matrix properties.} $F$ is unitary: $F^{-1}=F^*$ with $(F^{-1})_{jk}=\frac1{\sqrt n}\omega^{-jk}=\overline{F_{jk}}$.
+Also $F^4=I$ (the DFT is a fourth root of the identity), so $\det(F)^4=1$ and thus $\det F\in\{\pm1,\pm i\}$.
+The unnormalized DFT matrix $\widetilde F_{jk}=\omega^{jk}$ (no $1/\sqrt n$ factor) satisfies $\widetilde F^{-1}=\frac1n\widetilde F^*$ and $|\det\widetilde F|=n^{n/2}$.
+
+$F$ is a scaled Vandermonde matrix of roots of unity. Convolution theorem: $C\cdot v$ corresponds to convolution of $(c_k)$ with $v$; $F$ turns convolution into pointwise multiplication.
+
+\textit{Root-of-unity sums.} $\sum_{k=0}^{n-1}\omega^{km}=n\cdot[n\mid m]$. Gauss sum: $\sum_{k=0}^{n-1}\omega^{k^2}$ equals $\sqrt n$ or $i\sqrt n$ depending on $n\bmod4$.
 
 \medskip
 
@@ -379,13 +387,55 @@ $\operatorname{tr}(AB-BA)=0$. If $\operatorname{char}=0$, the equation $AB-BA=I$
 \section{Kronecker product}
 \label{sec:kronecker}
 
-$(A\otimes B)(C\otimes D)=(AC)\otimes(BD)$. $(A\otimes B)^T=A^T\otimes B^T$, $(A\otimes B)^{-1}=A^{-1}\otimes B^{-1}$.
+\subsection{Definition}
+\label{subsec:kronecker-def}
 
-$\sigma(A\otimes B)=\{\lambda_i\mu_j\}$. $\operatorname{tr}(A\otimes B)=\operatorname{tr}(A)\operatorname{tr}(B)$. $\det(A\otimes B)=(\det A)^m(\det B)^n$.
+For $A\in M_{m\times n}$, $B\in M_{p\times q}$ the Kronecker product $A\otimes B$ is the $mp\times nq$ block matrix
+$$A\otimes B = \begin{pmatrix}
+a_{11}B & \cdots & a_{1n}B\\
+\vdots & \ddots & \vdots\\
+a_{m1}B & \cdots & a_{mn}B
+\end{pmatrix}.$$
 
-$\operatorname{vec}(AXB)=(B^T\otimes A)\operatorname{vec}(X)$.
+\medskip
 
-$A\oplus B=A\otimes I_m+I_n\otimes B$ (Kronecker sum). $\sigma(A\oplus B)=\{\lambda_i+\mu_j\}$.
+\subsection{Basic algebraic properties}
+\label{subsec:kronecker-algebra}
+
+\begin{itemize}
+\item \textit{Distributivity:} $(A+B)\otimes C = A\otimes C + B\otimes C$, $A\otimes(B+C)=A\otimes B+A\otimes C$.
+\item \textit{Associativity:} $A\otimes(B\otimes C) = (A\otimes B)\otimes C$.
+\item \textit{Homogeneity:} $(\alpha A)\otimes B = A\otimes(\alpha B) = \alpha(A\otimes B)$.
+\item \textit{Mixed-product:} $(A\otimes B)(C\otimes D) = (AC)\otimes(BD)$, whenever the ordinary products are defined.
+\item \textit{Transpose:} $(A\otimes B)^T = A^T\otimes B^T$, $(A\otimes B)^* = A^*\otimes B^*$.
+\item \textit{Inverse:} $(A\otimes B)^{-1} = A^{-1}\otimes B^{-1}$ for invertible $A,B$.
+\item \textit{Powers:} $(A\otimes B)^k = A^k\otimes B^k$ ($k\ge0$); $e^{A\otimes B}=e^A\otimes e^B$.
+\end{itemize}
+
+\medskip
+
+\subsection{Trace, determinant, rank, spectrum}
+\label{subsec:kronecker-invariants}
+
+For square $A\in M_m$, $B\in M_n$:
+\begin{itemize}
+\item $\operatorname{tr}(A\otimes B) = \operatorname{tr}(A)\,\operatorname{tr}(B)$.
+\item $\det(A\otimes B) = (\det A)^n (\det B)^m$.
+\item $\operatorname{rank}(A\otimes B) = \operatorname{rank}(A)\,\operatorname{rank}(B)$.
+\item $\sigma(A\otimes B) = \{\lambda_i\mu_j : \lambda_i\in\sigma(A),\,\mu_j\in\sigma(B)\}$.
+\end{itemize}
+
+\medskip
+
+\subsection{Vectorization and Kronecker sum}
+\label{subsec:kronecker-vec}
+
+$\operatorname{vec}(AXB) = (B^T\otimes A)\operatorname{vec}(X)$.
+
+Kronecker sum: $A\oplus B = A\otimes I_n + I_m\otimes B$ for $A\in M_m$, $B\in M_n$.
+Then $\sigma(A\oplus B)=\{\lambda_i+\mu_j\}$ and $e^{A\oplus B}=e^A\otimes e^B$.
+Sylvester equation $AX+XB=C$ (\ref{subsec:sylvester-equation}) rewrites as
+$(I\otimes A + B^T\otimes I)\operatorname{vec}X = \operatorname{vec}C$.
 
 \medskip
 
